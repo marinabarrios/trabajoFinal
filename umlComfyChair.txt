@@ -1,0 +1,58 @@
+class ComfyChair{
+  +crearConferencia()
+  +crearUsuario()
+}
+class Conferencias{
+  nombreConferencia: String
+  fechaInicio: Date
+  fechaFin: Date
+  oganizadores: List
+  comite: List  
+  +crearSesion()
+}
+class Sesiones{
+  tema: String
+  tipoSesion: String
+  deadlineRecepdion: Date
+  usuarioNotificacion: String
+}
+class Articulos{
+  titulo: String
+  archivoAdjunto: String
+  autores: List
+  archivoFuentes: String
+  fechaEntrega: Date
+  rechazado: Boolean
+  fechaRechazado: Date
+}
+class Revisiones{
+  revisor: String
+  comentario: String
+  calificacion: Integer
+}
+class Usuarios{
+  nombreUsuario: String
+  afiliacion: String
+  email: String
+  contrasenia: String
+}
+class Chairs{
+
+}
+class Revisores{
+  +revisarArchivo()
+  +realizarBid()
+}
+class Autores{
+  +enviarArticulo()
+}
+ComfyChair --> "*" Conferencias
+ComfyChair --> "*" Usuarios
+Conferencias --> "*" Sesiones
+Articulos --> "*" Revisiones
+Sesiones --> "*" Articulos
+Usuarios --> "*" Articulos
+Usuarios <|-- Chairs
+Usuarios <|-- Autores
+Usuarios <|-- Revisores
+@enduml
