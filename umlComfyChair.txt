@@ -1,6 +1,7 @@
+@startuml
 class ComfyChair{
   +crearConferencia()
-  +crearUsuario()
+  +registrarUsuario()
 }
 class Conferencias{
   nombreConferencia: String
@@ -17,7 +18,8 @@ class Sesiones{
   usuarioNotificacion: String
 }
 class Articulos{
-  titulo: String
+  tituloArticulo: String
+  tipoArticulo: String
   archivoAdjunto: String
   autores: List
   archivoFuentes: String
@@ -37,14 +39,20 @@ class Usuarios{
   contrasenia: String
 }
 class Chairs{
-
+  conferenciasOrganizadas: List
+  +asignarRevisores(articulos, revisoresDisponibles)
+  +seleccionarArticulos(articulos, revisoresDisponibles)
 }
 class Revisores{
-  +revisarArchivo()
-  +realizarBid()
+  intereses: List
+  revisiones: List
+  +revisarArticulo(articulos, texto, puntaje)
+  +expresarInteres(articulos, tipoInteres)
 }
 class Autores{
-  +enviarArticulo()
+  articulesEnviados: List
+  +enviarArticulo(tituloArticulo, tipoArticulo, archivoAdjunto, autores, 
+   archivoFuentes, fechaEntrega)
 }
 ComfyChair --> "*" Conferencias
 ComfyChair --> "*" Usuarios
