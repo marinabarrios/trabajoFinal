@@ -1,15 +1,19 @@
 @startuml
 class ComfyChair{
-  +crearConferencia()
-  +registrarUsuario()
+  +registrarUsuario(nombreUsuario,afiliacion,email,Contrasenia;)
+  +listUsuarios()
+  +crearConferencia(nombreConferencia,fechaInicio,fechaFin)
+  +listConferencias()
 }
 class Conferencias{
   nombreConferencia: String
   fechaInicio: Date
   fechaFin: Date
   oganizadores: List
-  comite: List  
+  comite: List
+  autores: List
   +crearSesion()
+  +definirRoles()
 }
 class Sesiones{
   tema: String
