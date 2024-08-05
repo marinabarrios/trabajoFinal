@@ -15,10 +15,16 @@ class Sesiones{
   tema: String
   tipoSesion: String
   deadlineRecepdion: Date
+  articulos: List
+  estadoSesion: String
+  tipoDeEvaluacion: String
+  +recibirArticulo()
+  +cambiarTipoDeEvaluacion(tipoDeEvaluacion)
 }
 class Articulos{
   tituloArticulo: String
   tipoArticulo: String
+  abstract: String
   archivoAdjunto: String
   autores: List
   archivoFuentes: String
@@ -32,7 +38,11 @@ class Revisiones{
   comentario: String
   calificacion: Integer
 }
-class Usuarios{
+class Bidding{
+  revisor: String
+  interes: String
+}
+abstract class Usuarios{
   nombreUsuario: String
   afiliacion: String
   email: String
@@ -46,21 +56,62 @@ class Chairs{
 class Revisores{
   intereses: List
   revisiones: List
-  +revisarArticulo(articulos, texto, puntaje)
+  +validarArticulo(articulos, texto, puntaje)
   +expresarInteres(articulos, tipoInteres)
+  +modificarInteres()
+  +realizarEvaluacion()
 }
 class Autores{
   articulesEnviados: List
-  +enviarArticulo(tituloArticulo, tipoArticulo, archivoAdjunto, autores, 
+  +enviarArticulo(tituloArticulo, tipoArticulo, archivoAdjunto, autores,
    archivoFuentes, fechaEntrega)
+  +modificarArtculo()
 }
-ComfyChair --> "*" Conferencias
-ComfyChair --> "*" Usuarios
-Conferencias --> "*" Sesiones
-Articulos --> "*" Revisiones
-Sesiones --> "*" Articulos
-Usuarios --> "*" Articulos
+abstract class EstadoSesion{
+  nombreEstadoSesion: String
+  +iniciarEstadoSesion()
+  +finalizarEstadoSesion()
+  +accionesPermitidas()
+}
+class EstadoRecepcion{
+  +enviarArticulos()
+  +modificarArticulos()
+}
+class EstadoBidding{
+  +enviarBids()
+  +modificarBids()
+}
+class EstadoRevision{
+  +gestionarRevisiones()
+}
+class EstadoSeleccion{
+  +aplicarMetodoSeleccion()
+}
+class Estrategia{
+  +seleccionarTipoDeEvaluacion()
+}
+class porcentajeDeAceptados{
+  +seleccionarTipoDeEvaluacion()
+}
+class puntajeMinimo{
+  +seleccionarTipoDeEvaluacion()
+}
+ComfyChair *-- "*" Conferencias
+ComfyChair *-- "*" Usuarios
+Conferencias *-- "*" Sesiones
+Articulos *-- "*" Revisiones
+Articulos *-- "*" Bidding
+Sesiones *-- "*" Articulos
+Usuarios --> Sesiones
 Usuarios <|-- Chairs
 Usuarios <|-- Autores
 Usuarios <|-- Revisores
+Sesiones o--> EstadoSesion
+EstadoSesion <|-- EstadoRecepcion
+EstadoSesion <|-- EstadoBidding
+EstadoSesion <|-- EstadoRevision
+EstadoSesion <|-- EstadoSeleccion
+Sesiones *-- Estrategia
+Estrategia<|-- porcentajeDeAceptados
+Estrategia<|-- puntajeMinimo
 @enduml
