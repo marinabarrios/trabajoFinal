@@ -1,28 +1,34 @@
 @startuml
 class ComfyChair{
-  +registrarUsuario(nombreUsuario,afiliacion,email,Contrasenia;)
+  +registrarUsuario(tipo,nombreUsuario,afiliacion,email,contrasenia)
   +listUsuarios()
-  +crearConferencia(nombreConferencia,fechaInicio,fechaFin)
+  +listChairs()
+  +listRevisores()
+  +listAutores()
+  +crearConferencia(nombreConferencia,fechaInicio,fechaFin,oganizadores,comite,autores)
   +listConferencias()
 }
 class Conferencias{
   nombreConferencia: String
   fechaInicio: Date
   fechaFin: Date
-  oganizadores: List
-  comite: List
-  autores: List
-  +crearSesion()
-  +definirRoles()
+  oganizadores: usuarios
+  comite: usuarios
+  autores: usuarios
+  +nombreConferencia()
+  +crearSesion(tema,tipoSesion,deadlineRecepdion,estadoSesion)
+  +listSesiones()
 }
 class Sesiones{
   tema: String
   tipoSesion: String
   deadlineRecepdion: Date
-  articulos: List
   estadoSesion: String
+  articulos: articulos
   tipoDeEvaluacion: String
-  +recibirArticulo()
+  +recibirArticulo(articulo)
+  +validarArticulo(articulo)
+  +realizarNotificacion(autor,mensaje)
   +cambiarTipoDeEvaluacion(tipoDeEvaluacion)
 }
 class Articulos{
@@ -30,12 +36,10 @@ class Articulos{
   tipoArticulo: String
   abstract: String
   archivoAdjunto: String
-  autores: List
+  autores: usuarios
   archivoFuentes: String
-  usuarioNotificacion: String
+  autorNotificacion: usuario
   fechaEntrega: Date
-  rechazado: Boolean
-  fechaRechazado: Date
 }
 class Revisiones{
   revisor: String
@@ -51,6 +55,7 @@ abstract class Usuarios{
   afiliacion: String
   email: String
   contrasenia: String
+  +nombreUsuario()
 }
 class Chairs{
   conferenciasOrganizadas: List
@@ -66,10 +71,16 @@ class Revisores{
   +realizarEvaluacion()
 }
 class Autores{
-  articulesEnviados: List
-  +enviarArticulo(tituloArticulo, tipoArticulo, archivoAdjunto, autores,
-   archivoFuentes, fechaEntrega)
-  +modificarArtculo()
+  articulosEnviados: String
+  notificaciones: String
+  +nombreUsuario()
+  +crearArticulo(id,tituloArticulo,tipoArticulo,abstract,archivoAdjunto,autoresArticulo,archivoFuentes,autorNotificacion,fechaEntrega)
+  +enviarArticulo(sesion,articulo)
+  +listArticulosCreados()
+  +agregarNotificacion(mensaje)
+  +obtenerNotificaciones()
+  +modificarArticulo()
+  
 }
 abstract class EstadoSesion{
   nombreEstadoSesion: String
