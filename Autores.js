@@ -37,9 +37,6 @@ class Autores extends Usuarios{
         return this._notificaciones;
     }
 
-    modificarArticulo(){
-
-    }
     /*enviarArticulo(articleData) {
         const articleManager = new ArticleManager();
         articleManager.addArticle(articleData);

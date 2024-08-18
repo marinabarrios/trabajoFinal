@@ -4,14 +4,6 @@ const path = require('path');
 class GestorDeArticulos {
     constructor(rutaArchivo) {
         this.rutaArchivo = rutaArchivo || path.join(__dirname, 'articulos.json');
-
-        // Eliminar el archivo si existe al inicio
-        if (fs.existsSync(this.rutaArchivo)) {
-            fs.unlinkSync(this.rutaArchivo);
-            console.log('Archivo '+this.rutaArchivo+' eliminado.');
-        } else {
-            console.log('Archivo '+this.rutaArchivo+' no existe, nada que eliminar.');
-        }
     }
     
     // Se convierte un artículo en un objeto simple que no contiene referencias circulares
@@ -47,9 +39,18 @@ class GestorDeArticulos {
 
     // Agrega un nuevo artículo
     agregarArticulo(articulo) {
-        const articulos = this.leerArticulos();
+        const articulos = this.leerArticulos();        
+        // Verifica si ya existe un artículo con el mismo id
+        const existeArticulo = articulos.some(a => a.id === articulo._id);
+        
+        if (existeArticulo) {
+            console.log('El artículo con ID '+ articulo._id +' ya existe y no se agregará.');
+            return false;
+        }
+
         articulos.push(articulo);
         this.guardarArticulos(articulos);
+        return true;
     }
 
     // Recuperar un artículo por su ID

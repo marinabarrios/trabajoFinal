@@ -9,6 +9,15 @@ class Articulos{
         this._archivoFuentes = archivoFuentes;
         this._autorNotificacion = autorNotificacion;
         this._fechaEntrega = fechaEntrega;
+        this._interesRevisores = [];
+    }    
+
+    agregarInteres(revisor, tipoInteres) {
+        this._interesRevisores.push({ revisor, tipoInteres });
+    }
+
+    mostrarRevisorInteres(){
+        return this._interesRevisores;
     }
 }
 module.exports = Articulos;
