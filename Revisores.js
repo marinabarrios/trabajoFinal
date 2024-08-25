@@ -11,24 +11,34 @@ class Revisores extends Usuarios{
         return this._nombreUsuario;
     }
 
-    expresarInteres(articulo, tipoInteres){
-        const gestor = new GestorDeArticulos(); console.log('ARTICULO',articulo);
-        const articuloId = gestor.obtenerArticuloPorId(articulo._id);
+    expresarInteres(sesion, articulo, tipoInteres){
+        const gestor = new GestorDeArticulos();
+        const articuloId = gestor.obtenerArticuloPorId(sesion._tema, articulo._id);
 
-        if (!articuloId) {
-            throw new Error("El artículo no existe.");
-        }
-
-        if (tipoInteres !== 'interesado' && tipoInteres !== 'no interesado' && tipoInteres !== 'quizas') {
-            throw new Error("El tipo de interés debe ser 'interesado' o 'no interesado' o 'quizás'.");
-        }
-
-        this._intereses.push({ articulo, tipoInteres });
-        articulo.agregarInteres(this, tipoInteres);
-    }
-
-    modificarInteres(){
-
+        if(sesion._estadoSesion === 'bidding') {
+            if (!articuloId) {
+                //throw new Error("El artículo no existe.");
+                console.log("El artículo no existe.");
+            }
+    
+            if (tipoInteres !== 'interesado' && tipoInteres !== 'no interesado' && tipoInteres !== 'quizas') {
+                throw new Error("El tipo de interés debe ser 'interesado' o 'no interesado' o 'quizás'.");
+            }
+    
+            // Verificar si ya existe un interés para el artículo
+            const interesExistente = this._intereses.find(interes => interes.articulo === articulo._id);
+            if (interesExistente) {
+                // Si ya existe un interés, modificarlo
+                interesExistente.tipoInteres = tipoInteres;
+            } else {
+                // Si no existe, agregar el nuevo interés
+                this._intereses.push({ revisor: this._nombreUsuario, articulo: articulo._id, tipoInteres: tipoInteres });
+            }
+    
+            articulo.agregarInteres(this, tipoInteres);
+        } else {
+            console.log(`No puede expresar su interés ya que la Sesión se encuentra en el estado de: ${sesion._estadoSesion}.`);
+        }      
     }
 
     realizarEvaluacion(){

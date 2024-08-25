@@ -32,6 +32,7 @@ class Sesiones{
   +realizarNotificacion(autor,mensaje)
   +verArticulos()
   +cambiarTipoDeEvaluacion(tipoDeEvaluacion)
+  +modificarEstadoSesion(estadoSesion)
 }
 class Articulos{
   tituloArticulo: String
@@ -65,6 +66,7 @@ class Chairs{
   conferenciasOrganizadas: List
   +asignarRevisores(articulos, revisoresDisponibles)
   +seleccionarArticulos(articulos, revisoresDisponibles)
+  +cambiarEstadoSesion(estadoSesion)
 }
 class Revisores{
   intereses: (articulo,tipoInteres)

@@ -1,5 +1,4 @@
 const Articulos = require("./Articulos");
-const Sesiones = require("./Sesiones");
 const Usuarios = require("./Usuarios");
 
 class Autores extends Usuarios{
@@ -15,14 +14,18 @@ class Autores extends Usuarios{
 
     crearArticulo(id, tituloArticulo, tipoArticulo, abstract = null, archivoAdjunto, autoresArticulo, archivoFuentes = null, autorNotificacion, fechaEntrega){
         const nuevoArticulo = new Articulos (id, tituloArticulo, tipoArticulo, abstract, archivoAdjunto, autoresArticulo, archivoFuentes, autorNotificacion, fechaEntrega);
+        //Cuando se crea el articulo se crea en el estado enProceso, eso quiere decir que aun no esta aceptado ni rechazado//
+        nuevoArticulo._estadoArticulo = 'enProceso';
         this._articulosCreados.push(nuevoArticulo);
         return nuevoArticulo;
     }
 
     // Método para enviar artículos
-    enviarArticulo(sesion, articulo) {        
+    enviarArticulo(sesion, articulo) { 
+        //le paso a la sesion el estado del articulo// 
+        articulo._estadoArticulo = 'enProceso';
         sesion.recibirArticulo(articulo);
-        console.log('El archivo fue enviado');
+        console.log(`El artículo con ID ${articulo._id} fue enviado a la Sesion.`);
     }
 
     listArticulosCreados(){
@@ -36,31 +39,5 @@ class Autores extends Usuarios{
     obtenerNotificaciones() {
         return this._notificaciones;
     }
-
-    /*enviarArticulo(articleData) {
-        const articleManager = new ArticleManager();
-        articleManager.addArticle(articleData);
-    }*/
-
-    /* MANEJO DE LOS ARTICULOS */
-    /*// Uso del ArticleManager para recuperar y eliminar artículos
-const articleManager = new ArticleManager();
-
-// Recuperar un artículo
-const articleId = 1;
-const article = articleManager.getArticleById(articleId);
-if (article) {
-    console.log("Artículo encontrado:", article);
-} else {
-    console.log("Artículo no encontrado.");
-}
-
-// Eliminar un artículo
-const deleted = articleManager.deleteArticleById(articleId);
-if (deleted) {
-    console.log(`Artículo con ID ${articleId} eliminado.`);
-} else {
-    console.log(`Artículo con ID ${articleId} no encontrado.`);
-}*/
 }
 module.exports = Autores;

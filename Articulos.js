@@ -10,14 +10,23 @@ class Articulos{
         this._autorNotificacion = autorNotificacion;
         this._fechaEntrega = fechaEntrega;
         this._interesRevisores = [];
-    }    
-
+    }  
+    
     agregarInteres(revisor, tipoInteres) {
-        this._interesRevisores.push({ revisor, tipoInteres });
+        // Buscar si el revisor ya ha expresado interés previamente
+        const interesExistente = this._interesRevisores.find(interes => interes.revisor === revisor._nombreUsuario);
+
+        if (interesExistente) {
+            // Si ya existe un interés del mismo revisor, modificar el tipo de interés
+            interesExistente.tipoInteres = tipoInteres;
+        } else {
+            // Si no existe, agregar el nuevo interés
+            this._interesRevisores.push({ revisor: revisor._nombreUsuario , articulo: this._id, tipoInteres: tipoInteres });
+        }
     }
 
     mostrarRevisorInteres(){
         return this._interesRevisores;
-    }
+    }    
 }
 module.exports = Articulos;
