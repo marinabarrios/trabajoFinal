@@ -14,7 +14,7 @@ class Chairs extends Usuarios{
     }
     
     cambiarEstadoSesion(sesion,estadoSesion){
-        return sesion.modimodificarEstadoSesion(estadoSesion);
+        return sesion.modificarEstadoSesion(estadoSesion);
     }
 
     asignarRevisores(sesion){

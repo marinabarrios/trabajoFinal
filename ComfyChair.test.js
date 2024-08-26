@@ -88,10 +88,10 @@ test("La sesión recibe un artículo Regular creado", () => {
     const todosLosChairs = empresa.listChairs();
     const todosLosRevisores = empresa.listRevisores();
     const todosLosAutores = empresa.listAutores();
-    const conferenciaInformatica = empresa.crearConferencia('Conferencia Informática', '2024-07-28', '2024-07-31',
+    const conferenciaInformatica = empresa.crearConferencia('Conferencia Informática', '2024-10-28', '2024-10-31',
                                                             todosLosChairs, todosLosRevisores,todosLosAutores);
     const sesionInteligencia = conferenciaInformatica.crearSesion('Inteligencia Artificial', 'regular',
-                                                                  '2024-08-18', 'recepcion');
+                                                                  '2024-08-28', 'recepcion');
     const futureOfProjectManagement = jose.crearArticulo(1, 'An investigation into the Impact of Artificial Intelligence on the Future of Project Management',
     'regular', 'The purpose of the study is to investigate the impact of Artificial Intelligence.',
     'https://ieeexplore.ieee.org/document/9430234',[jose, matias], null, matias, new Date()
@@ -102,7 +102,7 @@ test("La sesión recibe un artículo Regular creado", () => {
     expect(articulos).toContain(futureOfProjectManagement);
 });
 
-test("La sesión sólo admite artículos regulares, por eso no recibe un Posters", () => {
+test("La sesión sólo admite artículos regulares, por eso no recibe un Poster", () => {
     const jose = empresa.registrarUsuario('autor','José Gonzalez', 'UNNE', 'jose_gonzalez@gmail.com', '123456');
     const matias = empresa.registrarUsuario('autor','Matias Lei', 'UNAM', 'matias_lei@gmail.com', '123456');
     const leo = empresa.registrarUsuario('autor','Leonardo Rey', 'UNAM', 'leonardo_rey@gmail.com', '123456');
@@ -113,7 +113,7 @@ test("La sesión sólo admite artículos regulares, por eso no recibe un Posters
     const todosLosAutores = empresa.listAutores();
     const conferenciaInformatica = empresa.crearConferencia('Conferencia Informática', '2024-07-28', '2024-07-31',
                                                             todosLosChairs, todosLosRevisores,todosLosAutores);
-    const sesionInteligencia = conferenciaInformatica.crearSesion('Inteligencia Artificial', 'posters',
+    const sesionInteligencia = conferenciaInformatica.crearSesion('Inteligencia Artificial', 'poster',
                                                                   '2024-08-18', 'recepcion');
     const futureOfProjectManagement = leo.crearArticulo(2, 'An investigation into the Impact of Artificial Intelligence on the Future of Project Management',
     'regular', 'The purpose of the study is to investigate the impact of Artificial Intelligence.',

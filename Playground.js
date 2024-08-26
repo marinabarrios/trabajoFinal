@@ -38,11 +38,11 @@ const conferenciaRobotica = empresa.crearConferencia('Conferencia Robótica', '2
 
 /** CREO LA SESION */
 const sesionInteligencia = conferenciaInformatica.crearSesion('Inteligencia Artificial', 'regular',
-                                                              '2024-08-28', 'recepcion');
+                                                              '2024-08-24', 'recepcion');
 const sesionInfraestructura = conferenciaInformatica.crearSesion('Infraestructura', 'workshop',
-                                                                 '2024-08-28', 'recepcion');
+                                                                 '2024-08-24', 'recepcion');
 const sesionSeguridad = conferenciaInformatica.crearSesion('Seguridad Infórmatica', 'poster',
-                                                           '2024-08-28', 'recepcion');
+                                                           '2024-08-24', 'recepcion');
 //console.log('todasLasSesiones',conferenciaInformatica.listSesiones());
 
 /** UN AUTOR CREA UN ARTICULO PARA LA SESION INTELIGENCIA */
@@ -169,6 +169,9 @@ const mostrarIntereses1 = maria.mostrarIntereses();
 const mostrarRevisorIntereses1 = futureOfProjectManagement.mostrarRevisorInteres();
 //console.log('mostrarRevisorIntereses1',mostrarRevisorIntereses1);
 
+/** EL CHAIR CAMBIA EL ESTADO DE LA SESION DE BIDDING A ASIGNACION */
+juan.cambiarEstadoSesion(sesionInteligencia,'asignacion');
+console.log('sesionInteligencia',sesionInteligencia);
 /** VER BIDDS */
 const verBidds = juan.verBidds(futureOfProjectManagement);
 console.log('verBidds',verBidds);
