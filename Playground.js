@@ -38,11 +38,11 @@ const conferenciaRobotica = empresa.crearConferencia('Conferencia Robótica', '2
 
 /** CREO LA SESION */
 const sesionInteligencia = conferenciaInformatica.crearSesion('Inteligencia Artificial', 'regular',
-                                                              '2024-08-24', 'recepcion');
+                                                              '2024-08-27', 'recepcion');
 const sesionInfraestructura = conferenciaInformatica.crearSesion('Infraestructura', 'workshop',
-                                                                 '2024-08-24', 'recepcion');
+                                                                 '2024-08-27', 'recepcion');
 const sesionSeguridad = conferenciaInformatica.crearSesion('Seguridad Infórmatica', 'poster',
-                                                           '2024-08-24', 'recepcion');
+                                                           '2024-08-27', 'recepcion');
 //console.log('todasLasSesiones',conferenciaInformatica.listSesiones());
 
 /** UN AUTOR CREA UN ARTICULO PARA LA SESION INTELIGENCIA */
@@ -136,46 +136,46 @@ const notificacionesMateo = mateo.obtenerNotificaciones();
 //console.log('sesionInteligencia',sesionInteligencia);
 
 /** VERIFICO EL ESTADO DE LA SESION */
-const estadoDeLaSesion = sesionInteligencia.verificarDeadlineRecepcion();
+//const estadoDeLaSesion = sesionInteligencia.verificarDeadlineRecepcion();
 //console.log('estadoDeLaSesion',estadoDeLaSesion);
 
 /** OBTENER TODOS LOS ARTICULOS DE LA SESION */
-const todosLosArticulosValidadosInteligencia = sesionInteligencia.obtenerArticulos();
+//const todosLosArticulosValidadosInteligencia = sesionInteligencia.obtenerArticulos();
 //console.log ('todosLosArticulosQuePasaronLaValidacionParSesionInteligencia',todosLosArticulosValidadosInteligencia);
-const todosLosArticulosValidadosInfraestructura = sesionInfraestructura.obtenerArticulos();
+//const todosLosArticulosValidadosInfraestructura = sesionInfraestructura.obtenerArticulos();
 //console.log ('todosLosArticulosQuePasaronLaValidacionParSesionInfraestructura',todosLosArticulosValidadosInfraestructura);
-const todosLosArticulosValidadosSeguridad = sesionSeguridad.obtenerArticulos();
+//const todosLosArticulosValidadosSeguridad = sesionSeguridad.obtenerArticulos();
 //console.log ('todosLosArticulosQuePasaronLaValidacionParSesionSeguridad',todosLosArticulosValidadosSeguridad);
 
 /** ESTAMOS EN PROCESO DE BIDDING */
-const verTodosLosArticulosAprobadosSesionInteligencia = sesionInteligencia.verArticulos();
+//const verTodosLosArticulosAprobadosSesionInteligencia = sesionInteligencia.verArticulos();
 //console.log('verTodosLosArticulosAprobadosSesionInteligencia',verTodosLosArticulosAprobadosSesionInteligencia);
-const verTodosLosArticulosAprobadosSesionInfraestructura = sesionInfraestructura.verArticulos();
+//const verTodosLosArticulosAprobadosSesionInfraestructura = sesionInfraestructura.verArticulos();
 //console.log('verTodosLosArticulosAprobadosSesionInfraestructura',verTodosLosArticulosAprobadosSesionInfraestructura);
-const verTodosLosArticulosAprobadosSesionSeguridad = sesionSeguridad.verArticulos();
+//const verTodosLosArticulosAprobadosSesionSeguridad = sesionSeguridad.verArticulos();
 //console.log('verTodosLosArticulosAprobadosSesionSeguridad',verTodosLosArticulosAprobadosSesionSeguridad);
 
 /** UN REVISOR EXPRESA SU INTERES */
-maria.expresarInteres(sesionInteligencia, futureOfProjectManagement,'interesado');
-const mostrarIntereses = maria.mostrarIntereses();
+//maria.expresarInteres(sesionInteligencia, futureOfProjectManagement,'interesado');
+//const mostrarIntereses = maria.mostrarIntereses();
 //console.log('mostrarInteresesDelRevisor',mostrarIntereses);//mostrarRevisorInteres
-const mostrarRevisorIntereses = futureOfProjectManagement.mostrarRevisorInteres();
+//const mostrarRevisorIntereses = futureOfProjectManagement.mostrarRevisorInteres();
 //console.log('mostrarRevisorInteresesDelArticulo',mostrarRevisorIntereses);
 
 /** CAMBIO EL INTERES DE UN REVISOR */
-maria.expresarInteres(sesionInteligencia,futureOfProjectManagement,'quizas');
-const mostrarIntereses1 = maria.mostrarIntereses();
+//maria.expresarInteres(sesionInteligencia,futureOfProjectManagement,'quizas');
+//const mostrarIntereses1 = maria.mostrarIntereses();
 //console.log('mostrarIntereses1',mostrarIntereses1);
-const mostrarRevisorIntereses1 = futureOfProjectManagement.mostrarRevisorInteres();
+//const mostrarRevisorIntereses1 = futureOfProjectManagement.mostrarRevisorInteres();
 //console.log('mostrarRevisorIntereses1',mostrarRevisorIntereses1);
 
 /** EL CHAIR CAMBIA EL ESTADO DE LA SESION DE BIDDING A ASIGNACION */
-juan.cambiarEstadoSesion(sesionInteligencia,'asignacion');
-console.log('sesionInteligencia',sesionInteligencia);
+//juan.cambiarEstadoSesion(sesionInteligencia,'asignacion');
+//console.log('sesionInteligencia',sesionInteligencia);
 /** VER BIDDS */
-const verBidds = juan.verBidds(futureOfProjectManagement);
-console.log('verBidds',verBidds);
+//const verBidds = juan.verBidds(futureOfProjectManagement);
+//console.log('verBidds',verBidds);
 /** ASIGNAR REVISORES */
-const todosLosArticulos = juan.asignarRevisores(sesionInteligencia);
+//const todosLosArticulos = juan.asignarRevisores(empresa,sesionInteligencia);
 //console.log('verBidds',verBidds);
 empresa;
