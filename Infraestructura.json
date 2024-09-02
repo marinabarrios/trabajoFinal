@@ -1,0 +1,45 @@
+[
+  {
+    "id": 1,
+    "tituloArticulo": "An investigation into the Impact of Artificial Intelligence on the Infrastructure",
+    "tipoArticulo": "regular",
+    "abstract": "The purpose of the study is to investigate the impact of Artificial Infrastructure",
+    "archivoAdjunto": "https://ieeexplore.ieee.org/document/9430234",
+    "autoresArticulo": [
+      "José Gonzalez",
+      "Matias Lei"
+    ],
+    "archivoFuentes": null,
+    "autorNotificacion": "Matias Lei",
+    "fechaEntrega": "2024-08-27T00:39:11.082Z",
+    "estadoArticulo": "enProceso"
+  },
+  {
+    "id": 2,
+    "tituloArticulo": "Creative AI in Project of Infrastructure",
+    "tipoArticulo": "poster",
+    "abstract": null,
+    "archivoAdjunto": "https://ieeexplore.ieee.org/document/10425234",
+    "autoresArticulo": [
+      "Leonardo Rey"
+    ],
+    "archivoFuentes": "https://ieeexplore.ieee.org/document/10425234",
+    "autorNotificacion": "Leonardo Rey",
+    "fechaEntrega": "2024-08-27T00:39:11.082Z",
+    "estadoArticulo": "enProceso"
+  },
+  {
+    "id": 4,
+    "tituloArticulo": "Evaluation of the inclusivity of the problem in infrastructure",
+    "tipoArticulo": "poster",
+    "abstract": null,
+    "archivoAdjunto": "https://ieeexplore.ieee.org/document/10467463",
+    "autoresArticulo": [
+      "Mateo Rey"
+    ],
+    "archivoFuentes": "https://ieeexplore.ieee.org/document/10467463",
+    "autorNotificacion": "Mateo Rey",
+    "fechaEntrega": "2024-08-27T00:39:11.082Z",
+    "estadoArticulo": "enProceso"
+  }
+]

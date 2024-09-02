@@ -1,0 +1,44 @@
+[
+  {
+    "id": 2,
+    "tituloArticulo": "Creative AI in Project of Securance",
+    "tipoArticulo": "poster",
+    "abstract": null,
+    "archivoAdjunto": "https://ieeexplore.ieee.org/document/10425234",
+    "autoresArticulo": [
+      "Leonardo Rey"
+    ],
+    "archivoFuentes": "https://ieeexplore.ieee.org/document/10425234",
+    "autorNotificacion": "Leonardo Rey",
+    "fechaEntrega": "2024-08-27T00:39:11.082Z",
+    "estadoArticulo": "enProceso"
+  },
+  {
+    "id": 3,
+    "tituloArticulo": "Artificial Intelligence in Computer Security",
+    "tipoArticulo": "poster",
+    "abstract": null,
+    "archivoAdjunto": "https://ieeexplore.ieee.org/document/10479688",
+    "autoresArticulo": [
+      "Mariana Lei"
+    ],
+    "archivoFuentes": "https://ieeexplore.ieee.org/document/10479688",
+    "autorNotificacion": "Mariana Lei",
+    "fechaEntrega": "2024-08-27T00:39:11.082Z",
+    "estadoArticulo": "enProceso"
+  },
+  {
+    "id": 4,
+    "tituloArticulo": "Evaluation of the inclusivity of artificial intelligence software and Computer Security",
+    "tipoArticulo": "poster",
+    "abstract": null,
+    "archivoAdjunto": "https://ieeexplore.ieee.org/document/10467463",
+    "autoresArticulo": [
+      "Mateo Rey"
+    ],
+    "archivoFuentes": "https://ieeexplore.ieee.org/document/10467463",
+    "autorNotificacion": "Mateo Rey",
+    "fechaEntrega": "2024-08-27T00:39:11.082Z",
+    "estadoArticulo": "enProceso"
+  }
+]

@@ -1,0 +1,45 @@
+[
+  {
+    "id": 1,
+    "tituloArticulo": "An investigation into the Impact of Artificial Intelligence on the Future of Project Management",
+    "tipoArticulo": "regular",
+    "abstract": "The purpose of the study is to investigate the impact of Artificial Intelligence",
+    "archivoAdjunto": "https://ieeexplore.ieee.org/document/9430234",
+    "autoresArticulo": [
+      "José Gonzalez",
+      "Matias Lei"
+    ],
+    "archivoFuentes": null,
+    "autorNotificacion": "Matias Lei",
+    "fechaEntrega": "2024-08-27T00:39:11.082Z",
+    "estadoArticulo": "enProceso"
+  },
+  {
+    "id": 3,
+    "tituloArticulo": "Artificial Intelligence in the Innovation Management Systems",
+    "tipoArticulo": "regular",
+    "abstract": "In this paper the management of innovation processes and projects is studied, which is the basis for analyzing of factors affecting the complexity of the management process.",
+    "archivoAdjunto": "https://ieeexplore.ieee.org/document/10479688",
+    "autoresArticulo": [
+      "Mariana Lei"
+    ],
+    "archivoFuentes": null,
+    "autorNotificacion": "Mariana Lei",
+    "fechaEntrega": "2024-08-27T00:39:11.082Z",
+    "estadoArticulo": "enProceso"
+  },
+  {
+    "id": 4,
+    "tituloArticulo": "Evaluating the Inclusiveness of Artificial Intelligence Software",
+    "tipoArticulo": "regular",
+    "abstract": "The escalating integration of Artificial Intelligence (AI) in various domains, especially Project Management (PM).",
+    "archivoAdjunto": "https://ieeexplore.ieee.org/document/10467463",
+    "autoresArticulo": [
+      "Mateo Rey"
+    ],
+    "archivoFuentes": null,
+    "autorNotificacion": "Mateo Rey",
+    "fechaEntrega": "2024-08-27T00:39:11.082Z",
+    "estadoArticulo": "enProceso"
+  }
+]
