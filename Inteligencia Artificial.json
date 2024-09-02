@@ -41,5 +41,61 @@
     "autorNotificacion": "Mateo Rey",
     "fechaEntrega": "2024-08-27T00:39:11.082Z",
     "estadoArticulo": "enProceso"
+  },
+  {
+    "id": 5,
+    "tituloArticulo": "Evaluating the Artificial Intelligence Software",
+    "tipoArticulo": "regular",
+    "abstract": "The escalating integration of Artificial Intelligence (AI) in various domains, especially Project Management (PM).",
+    "archivoAdjunto": "https://ieeexplore.ieee.org/document/10467463",
+    "autoresArticulo": [
+      "Matias Lei"
+    ],
+    "archivoFuentes": null,
+    "autorNotificacion": "Matias Lei",
+    "fechaEntrega": "2024-09-02T20:47:44.850Z",
+    "estadoArticulo": "enProceso"
+  },
+  {
+    "id": 6,
+    "tituloArticulo": "Escalating the Artificial Intelligence Software",
+    "tipoArticulo": "regular",
+    "abstract": "The escalating integration of Artificial Intelligence (AI) in various domains, especially Project Management (PM).",
+    "archivoAdjunto": "https://ieeexplore.ieee.org/document/10467463",
+    "autoresArticulo": [
+      "Julian Cotto"
+    ],
+    "archivoFuentes": null,
+    "autorNotificacion": "Julian Cotto",
+    "fechaEntrega": "2024-09-02T20:47:44.850Z",
+    "estadoArticulo": "enProceso"
+  },
+  {
+    "id": 7,
+    "tituloArticulo": "Integration the Artificial Intelligence Software",
+    "tipoArticulo": "regular",
+    "abstract": "The escalating integration of Artificial Intelligence (AI) in various domains, especially Project Management (PM).",
+    "archivoAdjunto": "https://ieeexplore.ieee.org/document/10467463",
+    "autoresArticulo": [
+      "Graciela Meza"
+    ],
+    "archivoFuentes": null,
+    "autorNotificacion": "Graciela Meza",
+    "fechaEntrega": "2024-09-02T20:47:44.850Z",
+    "estadoArticulo": "enProceso"
+  },
+  {
+    "id": 2,
+    "tituloArticulo": "Creative AI in Software Project Management",
+    "tipoArticulo": "regular",
+    "abstract": "Software project management (SPM), which comprises planning, supervising, and keeping track of software projects...",
+    "archivoAdjunto": "https://ieeexplore.ieee.org/document/10425234",
+    "autoresArticulo": [
+      "Leonardo Rey"
+    ],
+    "archivoFuentes": null,
+    "autorNotificacion": "Leonardo Rey",
+    "fechaEntrega": "2024-09-02T20:47:44.850Z",
+    "estadoArticulo": "enProceso"
   }
 ]

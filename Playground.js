@@ -7,6 +7,8 @@ const matias = empresa.registrarUsuario('autor','Matias Lei', 'UNAM', 'matias_le
 const leo = empresa.registrarUsuario('autor','Leonardo Rey', 'UNAM', 'leonardo_rey@gmail.com', '123456');
 const mariana = empresa.registrarUsuario('autor','Mariana Lei', 'UNAM', 'mariana_lei@gmail.com', '123456');
 const mateo = empresa.registrarUsuario('autor','Mateo Rey', 'UNAM', 'mateo_rey@gmail.com', '123456');
+const julian = empresa.registrarUsuario('autor','Julian Cotto', 'UBA', 'julian_cotto@gmail.com', '123456');
+const graciela = empresa.registrarUsuario('autor','Graciela Meza', 'UBA', 'graciela_meza@gmail.com', '123456');
 const maria = empresa.registrarUsuario('revisor','Maria Gonzalez', 'UNNE', 'maria_gonzalez@gmail.com', '123456');
 const juana = empresa.registrarUsuario('revisor','Juana Gómez', 'UNLP', 'juana_gomez@gmail.com', '123456');
 const mara = empresa.registrarUsuario('revisor','Mara Gonzalez', 'UNNE', 'mara_gonzalez@gmail.com', '123456');
@@ -18,7 +20,7 @@ const sonia = empresa.registrarUsuario('revisor','Sonia Ruiz', 'UNLP', 'sonia_ru
 const pedro = empresa.registrarUsuario('revisor','Pedro Jimenez', 'UNLP', 'pedro_jimenez@gmail.com', '123456');
 const daniel = empresa.registrarUsuario('revisor','Daniel Martinez', 'UNNE', 'daniel_martinez@gmail.com', '123456');
 const luis = empresa.registrarUsuario('revisor','Luis Iglesias', 'UNLP', 'luis_iglesias@gmail.com', '123456');
-//const juanr = empresa.registrarUsuario('revisor','Juan Rodriguez', 'UNLP', 'juan_rodriguez@gmail.com', '123456');
+//const juanr = empresa.registrarUsuario('revisor','Juan Rodriguez', 'UNLP', 'juan_rodriguez@gmail.com', '123456');*/
 const todosLosUsuarios = empresa.listUsuarios();
 const todosLosChairs = empresa.listChairs();
 const todosLosRevisores = empresa.listRevisores();
@@ -38,16 +40,16 @@ const conferenciaRobotica = empresa.crearConferencia('Conferencia Robótica', '2
 
 /** CREO LA SESION */
 const sesionInteligencia = conferenciaInformatica.crearSesion('Inteligencia Artificial', 'regular',
-                                                              '2024-08-25', 'recepcion');
+                                                              '2024-09-01', 'recepcion');
 const sesionInfraestructura = conferenciaInformatica.crearSesion('Infraestructura', 'workshop',
-                                                                 '2024-08-25', 'recepcion');
+                                                                 '2024-09-01', 'recepcion');
 const sesionSeguridad = conferenciaInformatica.crearSesion('Seguridad Infórmatica', 'poster',
-                                                           '2024-08-25', 'recepcion');
+                                                           '2024-09-01', 'recepcion');
 //console.log('todasLasSesiones',conferenciaInformatica.listSesiones());
 
 /********************************************************************************** */
 
-/****************** RECEPCION **************** */
+/************************** RECEPCION *************************** */
 /** UN AUTOR CREA UN ARTICULO PARA LA SESION INTELIGENCIA */
 /*const futureOfProjectManagement = jose.crearArticulo(1, 'An investigation into the Impact of Artificial Intelligence on the Future of Project Management',
                                                      'regular', 'The purpose of the study is to investigate the impact of Artificial Intelligence',
@@ -69,7 +71,26 @@ const inclusiveness = mateo.crearArticulo(4, 'Evaluating the Inclusiveness of Ar
                                           'https://ieeexplore.ieee.org/document/10467463',
                                            [mateo], null, mateo, new Date()
                                          );
-//console.log('listArticulosCreados',jose.listArticulosCreados());
+const evaluating = matias.crearArticulo(5, 'Evaluating the Artificial Intelligence Software',
+                                          'regular', 'The escalating integration of Artificial Intelligence (AI) in various domains, especially Project Management (PM).',
+                                          'https://ieeexplore.ieee.org/document/10467463',
+                                           [matias], null, matias, new Date()
+                                         );
+const creativeIA2 = leo.crearArticulo(2, 'Creative AI in Software Project Management',
+                                                     'regular', 'Software project management (SPM), which comprises planning, supervising, and keeping track of software projects...',
+                                                     'https://ieeexplore.ieee.org/document/10425234',
+                                                     [leo], null, leo, new Date()
+                                                    );
+const escalating = julian.crearArticulo(6, 'Escalating the Artificial Intelligence Software',
+                                          'regular', 'The escalating integration of Artificial Intelligence (AI) in various domains, especially Project Management (PM).',
+                                          'https://ieeexplore.ieee.org/document/10467463',
+                                           [julian], null, julian, new Date()
+                                         );
+const integration = graciela.crearArticulo(7, 'Integration the Artificial Intelligence Software',
+                                          'regular', 'The escalating integration of Artificial Intelligence (AI) in various domains, especially Project Management (PM).',
+                                          'https://ieeexplore.ieee.org/document/10467463',
+                                           [graciela], null, graciela, new Date()
+                                         );
 
 /** UN AUTOR CREA UN ARTICULO PARA LA SESION INFRAESTRUCTURA */
 /*const articuloInfraestructura1 = jose.crearArticulo(1, 'An investigation into the Impact of Artificial Intelligence on the Infrastructure',
@@ -91,6 +112,7 @@ const articuloInfraestructura4 = mateo.crearArticulo(4, 'Evaluation of the inclu
                                                     [mateo], 'https://ieeexplore.ieee.org/document/10467463',
                                                     mateo, new Date()
                                                     );
+
 /** UN AUTOR CREA UN ARTICULO PARA LA SESION SEGURIDAD */
 /*const articuloSeguridad1 = jose.crearArticulo(1, 'An investigation into the Impact of Artificial Intelligence on the Securance',
                                               'regular', null,
@@ -109,16 +131,23 @@ const articuloSeguridad4 = mateo.crearArticulo(4, 'Evaluation of the inclusivity
                                                 'poster', null, 'https://ieeexplore.ieee.org/document/10467463',
                                                 [mateo], 'https://ieeexplore.ieee.org/document/10467463', mateo, new Date()
                                                );
+
 /** EL AUTOR ENVIA EL ARTICULO A LA SESION INTELIGENCIA*/
 /*jose.enviarArticulo(sesionInteligencia, futureOfProjectManagement);//pasa la validacion
 leo.enviarArticulo(sesionInteligencia, creativeIA);//no pasa la validacion
 mariana.enviarArticulo(sesionInteligencia, innovationManagement);//pasa la validacion
 mateo.enviarArticulo(sesionInteligencia, inclusiveness);//pasa la validacion
+matias.enviarArticulo(sesionInteligencia, evaluating);//pasa la validacion
+julian.enviarArticulo(sesionInteligencia, escalating);//pasa la validacion
+graciela.enviarArticulo(sesionInteligencia, integration);//pasa la validacion
+leo.enviarArticulo(sesionInteligencia, creativeIA2);//pasa la validacion
+
 /** EL AUTOR ENVIA EL ARTICULO A LA SESION INFRAESTRUCTURA*/
 /*jose.enviarArticulo(sesionInfraestructura, articuloInfraestructura1);//pasa la validacion
 leo.enviarArticulo(sesionInfraestructura, articuloInfraestructura2);//pasa la validacion
 mariana.enviarArticulo(sesionInfraestructura, articuloInfraestructura3);//no pasa la validacion
 mateo.enviarArticulo(sesionInfraestructura, articuloInfraestructura4);//pasa la validacion
+
 /** EL AUTOR ENVIA EL ARTICULO A LA SESION SEGURIDAD*/
 /*jose.enviarArticulo(sesionSeguridad, articuloSeguridad1);//no pasa la validacion
 leo.enviarArticulo(sesionSeguridad, articuloSeguridad2);//pasa la validacion
@@ -137,8 +166,7 @@ console.log('notificacionesMateo',notificacionesMateo);
 
 /*********************************************************************************************** */
 
-/****************** BIDDING **************** */
-
+/******************************* BIDDING ****************************** */
 /** VERIFICO EL ESTADO DE LA SESION */
 const estadoDeLaSesionInt = sesionInteligencia.verificarDeadlineRecepcion();
 const estadoDeLaSesionInf = sesionInfraestructura.verificarDeadlineRecepcion();
@@ -151,7 +179,7 @@ const verTodosLosArticulosAprobadosSesionInfraestructura = sesionInfraestructura
 //console.log('verTodosLosArticulosAprobadosSesionInfraestructura',verTodosLosArticulosAprobadosSesionInfraestructura);
 const verTodosLosArticulosAprobadosSesionSeguridad = sesionSeguridad.verArticulos();
 //console.log('verTodosLosArticulosAprobadosSesionSeguridad',verTodosLosArticulosAprobadosSesionSeguridad);
-//console.log('VERART1',verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1));
+
 /** UN REVISOR EXPRESA SU INTERES */
 maria.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'interesado');
 maria.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 3), 'no interesado');
@@ -163,9 +191,9 @@ maria.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguri
 maria.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 3), 'no interesado');
 maria.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 4), 'quizas');
 
-juana.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'no interesado');
-juana.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 3), 'no interesado');
-juana.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4), 'quizas');
+juana.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 2), 'no interesado');
+juana.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 5), 'no interesado');
+juana.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 6), 'quizas');
 juana.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 1), 'no interesado');
 juana.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 2), 'interesado');
 juana.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 4), 'quizas');
@@ -174,7 +202,9 @@ juana.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguri
 juana.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 4), 'quizas');
 
 mara.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'quizas');
-mara.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4), 'quizas');
+mara.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4), 'interesado');
+mara.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 6), 'no interesado');
+mara.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 7), 'quizas');
 mara.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 1), 'quizas');
 mara.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 2), 'interesado');
 mara.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 4), 'quizas');
@@ -183,6 +213,8 @@ mara.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSegurid
 
 juanG.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'interesado');
 juanG.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4), 'quizas');
+juanG.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 6), 'interesado');
+juanG.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 7), 'no interesado');
 juanG.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 1), 'quizas');
 juanG.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 2), 'interesado');
 juanG.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 3), 'no interesado');
@@ -190,13 +222,17 @@ juanG.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguri
 
 raul.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 3), 'interesado');
 raul.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4), 'quizas');
+raul.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 2), 'quizas');
+raul.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 5), 'no interesado');
 raul.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 1), 'quizas');
 raul.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 4), 'interesado');
 raul.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 2), 'no interesado');
 raul.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 4), 'quizas');
 
 oscar.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'interesado');
-oscar.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4), 'quizas');
+oscar.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 2), 'quizas');
+oscar.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 5), 'no interesado');
+oscar.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 6), 'quizas');
 oscar.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 1), 'interesado');
 oscar.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 4), 'quizas');
 oscar.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 2), 'interesado');
@@ -204,13 +240,20 @@ oscar.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguri
 
 ines.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'interesado');
 ines.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 3), 'no interesado');
+ines.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4), 'quizas')
+ines.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 5), 'interesado')
+ines.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 7), 'no interesado')
 ines.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 4), 'quizas');
 
+sonia.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 3), 'interesado');
 sonia.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4), 'quizas');
+sonia.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 6), 'quizas');
 sonia.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 1), 'interesado');
 sonia.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 2), 'no interesado');
 
-pedro.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 2), 'interesado');
+pedro.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'interesado');
+pedro.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 2), 'no interesado');
+pedro.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 4), 'interesado');
 pedro.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 2), 'quizas');
 pedro.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 4), 'no interesado');
 
@@ -221,8 +264,8 @@ daniel.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesio
 daniel.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 2), 'interesado');
 daniel.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 4), 'quizas');
 
-luis.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'no interesado');
-luis.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 3), 'interesado');
+luis.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 2), 'no interesado');
+luis.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 7), 'interesado');
 luis.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 1), 'quizas');
 luis.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 4), 'quizas');
 luis.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 2), 'quizas');
@@ -230,14 +273,13 @@ luis.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSegurid
 luis.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 4), 'quizas');
 
 /** PUEDO CONOCER LOS INTERESES DE CADA REVISOR */
-const mostrarIntereses = maria.mostrarIntereses();
+//const mostrarIntereses = maria.mostrarIntereses();
 //console.log('mostrarInteresesDelRevisor',mostrarIntereses);
-/** PUEDO CONOCER LOS INTERESES POR CADA ARTICULO */
-
 
 /** CAMBIO EL INTERES DE UN REVISOR */
-maria.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'quizas');
-const mostrarIntereses1 = maria.mostrarIntereses();
+//maria.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'quizas');
+//const mostrarIntereses1 = maria.mostrarIntereses();
+
 /** VERIFICO LOS INTERESES DE CADA REVISOR A CADA ARTICULO */
 const mostrarRevisorIntereses1 = verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1).mostrarRevisorInteres();
 const mostrarRevisorIntereses3 = verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 3).mostrarRevisorInteres();

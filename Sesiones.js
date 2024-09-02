@@ -62,9 +62,9 @@ class Sesiones{
         }
 
         // Validar otros requisitos como abstract y autores
-        if (articulo._tipoArticulo === 'regular' && (!articulo._tituloArticulo || !articulo._archivoAdjunto || !articulo._abstract || articulo._abstract.length > 300)) {
+        if (articulo._tipoArticulo === 'regular' && (!articulo._tituloArticulo || !articulo._archivoAdjunto || !articulo._abstract || articulo._abstract.length >= 300)) {
             //debería informarle al autor que tiene errores
-            const mensaje = 'Falta Abstract o tiene mas de 300 caracteres o Falta Título o Archivo Adjunto. Se rechaza el artículo';
+            const mensaje = 'Falta Abstract o no tiene menos de 300 caracteres o Falta Título o Archivo Adjunto. Se rechaza el artículo';
             this.realizarNotificacion(articulo._autorNotificacion, mensaje);
             return false;
         }
