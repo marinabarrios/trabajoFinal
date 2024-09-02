@@ -18,81 +18,114 @@ class Chairs extends Usuarios{
         return sesion.modificarEstadoSesion(estadoSesion);
     }
 
-    asignarRevisores(empresa, sesion){
-        if ( sesion._estadoSesion === 'asignacion'){
+    asignarRevisores(sesion, intereses, revisores){
+        if (sesion._estadoSesion === 'asignacion') {
             const maxRevisionesPorArticulo = 3;
-            //Traigo todos los articulos grabados en el archivo de la sesión//
-            const todosLosArticulos = sesion.verArticulos();
-            const todosLosRevisores = empresa.listRevisores();
-            const todosLosIntereses = articulo.mostrarRevisorInteres();
-
-            const revisionesAsignadas = new Map();
-            todosLosRevisores.forEach(revisor => revisionesAsignadas.set(revisor, 0));
-
-            todosLosArticulos.forEach(articulo => {
-                const interesados = [];
-                const quizas = [];
-                const sinInteres = [];
-                const noInteresado = [];
-                // Convierte el artículo plano en una instancia de Articulos
-                const articuloo = this.fromPlainObject(articulo);
-                console.log('alrticulosss',articuloo);
-                const todosLosIntereses = articuloo.mostrarRevisorInteres();
-                console.log('interesessss',todosLosIntereses);
-            // Clasificar revisores según su interés
-            intereses.forEach(({ revisor, interes }) => {
-                if (interes === 'interesado') interesados.push(revisor);
-                else if (interes === 'quizas') quizas.push(revisor);
-                else if (interes === 'noInteresado') noInteresado.push(revisor);
-                else sinInteres.push(revisor);
+    
+            //Obtengo un array aplanado con todos los intereses más la falta de interés
+            const interesesCompleto = this.obtenerIntereses(sesion, intereses, revisores);
+            console.log('interesesCompleto',interesesCompleto);
+            //Contador de revisiones asignadas por cada revisor
+            const contadorRevisiones = {};
+    
+            //Inicializo el contador de revisiones para cada revisor
+            revisores.forEach(revisor => {
+                contadorRevisiones[revisor._nombreUsuario] = 0;
             });
     
-            // Ordenar los revisores por número de revisiones asignadas (menos revisiones primero)
-            interesados.sort((a, b) => revisionesAsignadas.get(a) - revisionesAsignadas.get(b));
-            quizas.sort((a, b) => revisionesAsignadas.get(a) - revisionesAsignadas.get(b));
-            sinInteres.sort((a, b) => revisionesAsignadas.get(a) - revisionesAsignadas.get(b));
-            noInteresado.sort((a, b) => revisionesAsignadas.get(a) - revisionesAsignadas.get(b));
+            //Clasifico intereses por artículo
+            const asignaciones = {}; //Almaceno los revisores asignados por artículo
     
-            // Asignar revisores al artículo en el orden de prioridad
-            const revisoresAsignados = [];
-            const listasDeInteres = [interesados, quizas, sinInteres, noInteresado];
+            interesesCompleto.forEach(interes => {
+                const { articulo, revisor, tipoInteres } = interes;
     
-            for (let lista of listasDeInteres) {
-                for (let revisor of lista) {
-                    if (revisoresAsignados.length < maxRevisionesPorArticulo && revisionesAsignadas.get(revisor) < maxRevisionesPorArticulo) {
-                        revisoresAsignados.push(revisor);
-                        revisionesAsignadas.set(revisor, revisionesAsignadas.get(revisor) + 1);
-                    }
+                if (!asignaciones[articulo]) {
+                    asignaciones[articulo] = {
+                        interesados: [],
+                        quizas: [],
+                        sinInteres: [],
+                        noInteresado: []
+                    };
                 }
-                if (revisoresAsignados.length >= maxRevisionesPorArticulo) break;
-            }
+                
+                //Clasifico revisores según su interés
+                if (tipoInteres === 'interesado') asignaciones[articulo].interesados.push(interes);
+                else if (tipoInteres === 'quizas') asignaciones[articulo].quizas.push(interes);
+                else if (tipoInteres === 'no interesado') asignaciones[articulo].noInteresado.push(interes);
+                else asignaciones[articulo].sinInteres.push(interes);
+            });
     
-            // Si no se logró asignar 3 revisores, lanzar un error o manejarlo según la lógica necesaria
-            if (revisoresAsignados.length < maxRevisionesPorArticulo) {
-                throw new Error(`No se pudo asignar suficientes revisores para el artículo con ID ${articulo._id}`);
-            }
+            //Asigno revisores a cada artículo
+            Object.keys(asignaciones).forEach(articulo => {
+                const { interesados, quizas, sinInteres, noInteresado } = asignaciones[articulo];
+                const revisoresAsignados = [];
+                let revisionesRestantes = maxRevisionesPorArticulo;
     
-            // Finalmente, asigna los revisores al artículo
-            articulo.asignarRevisores(revisoresAsignados);
-        });
-        } else {
-            console.log('No se puede asignar. El estado de la Sesión es: '+sesion._estadoSesion);
-        }
+                //Función auxiliar para ordenar revisores dentro de cada grupo
+                const ordenarPorMenosRevisiones = (grupo) => {
+                    return grupo.sort((a, b) => contadorRevisiones[a.revisor] - contadorRevisiones[b.revisor]);
+                };
+    
+                //Ordeno cada grupo por el número de revisiones asignadas
+                const interesadosOrdenados = ordenarPorMenosRevisiones(interesados);
+                const quizasOrdenados = ordenarPorMenosRevisiones(quizas);
+                const sinInteresOrdenados = ordenarPorMenosRevisiones(sinInteres);
+                const noInteresadoOrdenados = ordenarPorMenosRevisiones(noInteresado);
+    
+                //Función auxiliar para asignar revisores por grupo de interés
+                const asignarDelGrupo = (grupo) => {
+                    for (const interes of grupo) {
+                        if (revisionesRestantes > 0) { //Solo asignar si aún hay espacio para revisiones
+                            revisoresAsignados.push(interes.revisor);
+                            contadorRevisiones[interes.revisor]++;
+                            revisionesRestantes--;
+                        } else {
+                            break;
+                        }
+                    }
+                };
+    
+                //Asigno revisores según la prioridad de interés
+                asignarDelGrupo(interesadosOrdenados);
+                if (revisionesRestantes > 0) asignarDelGrupo(quizasOrdenados);
+                if (revisionesRestantes > 0) asignarDelGrupo(sinInteresOrdenados);
+                if (revisionesRestantes > 0) asignarDelGrupo(noInteresadoOrdenados);
+    
+                //Guardo la asignación de revisores para el artículo
+                sesion.guardarAsignacion(articulo, revisoresAsignados);
+    
+                //Ingreso las revisiones de cada revisor asignado
+               /* revisoresAsignados.forEach(revisor => {
+                    const revision = this.obtenerRevisionDelRevisor(articulo, revisor);
+                    sesion.guardarRevision(articulo, revisor, revision);
+                });*/
+            });
+        }    
     }
 
-    static desdeObjetoPlano(obj) {
-        return new Articulos(
-            obj._id,
-            obj._tituloArticulo,
-            obj._tipoArticulo,
-            obj._abstract,
-            obj._archivoAdjunto,
-            obj._autoresArticulo.map(autor => new Usuarios(_nombreUsuario)), 
-            obj._archivoFuentes,
-            new Usuarios(obj._autorNotificacion), 
-            new Date(obj._fechaEntrega),
-            obj.estadoArticulo
-        );
+    obtenerIntereses(sesion,intereses,revisores){
+        //Obtengo una lista de todos los IDs de los artículos de la sesion.
+        const articulosIds = [...new Set(sesion.verArticulos().map(articulo => articulo._id))];
+        
+        //Creo una estructura de datos que agrupe intereses por revisor.
+        const interesesPorRevisor = revisores.map(revisor => {
+            //Busco los intereses existentes del revisor.
+            const interesesExistentes = intereses.filter(interes => interes.revisor === revisor._nombreUsuario);
+            
+            //Creo una lista de artículos con su tipo de interés.
+            const interesesCompleto = articulosIds.map(id => {
+                const interes = interesesExistentes.find(interes => interes.articulo === id);
+                return {
+                articulo: id,
+                revisor: revisor._nombreUsuario,
+                tipoInteres: interes ? interes.tipoInteres : null // null si no existe interés registrado
+                };
+            });                
+            return interesesCompleto;
+        });
+        // Aplano el array de arrays en un solo array.
+        const interesesAplanados = interesesPorRevisor.flat();
+        return interesesAplanados;
     }
 }
 module.exports = Chairs;

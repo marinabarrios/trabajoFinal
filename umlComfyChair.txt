@@ -29,22 +29,23 @@ class Sesiones{
   +recibirArticulo(articulo)
   +obtenerArticulos()
   +validarArticulo(articulo)
+  +verificarDeadlineRecepcion()
   +realizarNotificacion(autor,mensaje)
-  +verArticulos()
-  +cambiarTipoDeEvaluacion(tipoDeEvaluacion)
-  +modificarEstadoSesion(estadoSesion)
+  +simplificarArticulo(articulo)
+  +desdeObjetoPlano(datosArticulo)
 }
 class Articulos{
+  id
   tituloArticulo: String
   tipoArticulo: String
   abstract: String
   archivoAdjunto: String
-  autores: usuarios
+  autoresArticulo: nombreUsuario
   archivoFuentes: String
-  autorNotificacion: usuario
+  autorNotificacion: nombreUsuario
   fechaEntrega: Date
-  interesRevisores: (revisor,tipoInteres)
-  +agregarInteres(revisor,tipoInteres)
+  +agregarInteres(revisor,tipoInteres,temaSesion)
+  +mostrarRevisorInteres()
 }
 class Revisiones{
   revisor: String
@@ -63,16 +64,17 @@ abstract class Usuarios{
   +nombreUsuario()
 }
 class Chairs{
-  conferenciasOrganizadas: List
-  +asignarRevisores(articulos, revisoresDisponibles)
-  +seleccionarArticulos(articulos, revisoresDisponibles)
-  +cambiarEstadoSesion(estadoSesion)
+  +verBidds(articulo)
+  +cambiarEstadoSesion(sesion,estadoSesion)
+  +asignarRevisores(empresa,sesion)
+  +obtenerIntereses(sesion,intereses,revisores)
 }
 class Revisores{
-  intereses: (articulo,tipoInteres)
-  +expresarInteres(articulo, tipoInteres)
-  +modificarInteres()
+  intereses: (nombreUsuario,articuloId,tipoInteres)
+  +expresarInteres(sesion,articulo,tipoInteres)
+  +mostrarInteres()
   +realizarEvaluacion()
+  +desdeObjetoPlano(datosArticulo)
 }
 class Autores{
   articulosCreados: String
@@ -83,26 +85,6 @@ class Autores{
   +listArticulosCreados()
   +agregarNotificacion(mensaje)
   +obtenerNotificaciones()
-}
-abstract class EstadoSesion{
-  nombreEstadoSesion: String
-  +iniciarEstadoSesion()
-  +finalizarEstadoSesion()
-  +accionesPermitidas()
-}
-class EstadoRecepcion{
-  +enviarArticulos()
-  +modificarArticulos()
-}
-class EstadoBidding{
-  +enviarBids()
-  +modificarBids()
-}
-class EstadoRevision{
-  +gestionarRevisiones()
-}
-class EstadoSeleccion{
-  +aplicarMetodoSeleccion()
 }
 class Estrategia{
   +seleccionarTipoDeEvaluacion()
@@ -123,11 +105,6 @@ Usuarios --> Sesiones
 Usuarios <|-- Chairs
 Usuarios <|-- Autores
 Usuarios <|-- Revisores
-Sesiones o--> EstadoSesion
-EstadoSesion <|-- EstadoRecepcion
-EstadoSesion <|-- EstadoBidding
-EstadoSesion <|-- EstadoRevision
-EstadoSesion <|-- EstadoSeleccion
 Sesiones *-- Estrategia
 Estrategia<|-- porcentajeDeAceptados
 Estrategia<|-- puntajeMinimo

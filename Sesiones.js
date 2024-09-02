@@ -1,4 +1,6 @@
 const GestorDeArticulos = require("./GestorDeArticulos");
+const Articulos = require("./Articulos");
+const Autores = require("./Autores");
 
 class Sesiones{
     constructor(tema, tipoSesion, deadlineRecepcion, estadoSesion, tipoDeEvaluacion = null) {
@@ -8,6 +10,7 @@ class Sesiones{
         this._estadoSesion = estadoSesion;
         this._tipoDeEvaluacion = tipoDeEvaluacion;
         this._articulos = [];
+        this._asignaciones = [];
     }
 
     recibirArticulo(articulo) {
@@ -106,8 +109,35 @@ class Sesiones{
 
     verArticulos(){
         const gestor = new GestorDeArticulos();
-        const articulosAlmacenados = gestor.leerArticulos(this._tema);
-        return articulosAlmacenados;
+        const articulosAlmacenados =gestor.leerArticulos(this._tema);
+        const articulosDeLaSesion = this.desdeObjetoPlano(articulosAlmacenados);
+        return articulosDeLaSesion;
+    }
+
+    guardarAsignacion(articuloId, revisoresAsignados) {
+        if (!this._asignaciones[articuloId]) {
+          // Inicializa el array de revisores asignados si no existe para el artículo dado
+          this._asignaciones[articuloId] = [];
+        }
+    
+        // Agrega los revisores asignados para el artículo
+        this._asignaciones[articuloId] = revisoresAsignados;
+    
+        console.log(`Asignación guardada para el artículo ${articuloId} de la Sesion ${this._tema}:`, revisoresAsignados);
+      }
+    
+      // Método para obtener las asignaciones de un artículo
+      obtenerAsignaciones(articuloId) {
+        return this._asignaciones[articuloId] || [];
+      }
+    
+      // Método para ver todos los artículos con sus asignaciones
+      verAsignaciones() {
+        return this._asignaciones;
+      }
+
+    recuperarArticulo(){
+        
     }
 
     simplificarArticulo(articulo) {
@@ -123,6 +153,37 @@ class Sesiones{
             fechaEntrega: articulo._fechaEntrega,
             estadoArticulo: articulo._estadoArticulo
         };
+    }
+
+    desdeObjetoPlano(obj) {
+        const armoArticulo = [];
+        const articulosCreados = [];
+        obj.forEach(articulo => {           
+            armoArticulo._id = articulo.id;
+            armoArticulo._tituloArticulo = articulo.tituloArticulo;
+            armoArticulo._abstract = articulo.abstract;
+            armoArticulo._archivoAdjunto = articulo.archivoAdjunto;
+            armoArticulo._autoresArticulo = articulo.autoresArticulo.map(nombre => new Autores(nombre, '', '', ''));
+            armoArticulo._archivoFuentes = articulo.archivoFuentes;
+            armoArticulo._autorNotificacion = new Autores(articulo.autorNotificacion, '', '', '');
+            armoArticulo._fechaEntrega = articulo.fechaEntrega;
+            armoArticulo._estadoArticulo = articulo.estadoArticulo;
+
+            const artObj = new Articulos(
+                armoArticulo._id,
+                armoArticulo._tituloArticulo,
+                armoArticulo._tipoArticulo,
+                armoArticulo._abstract,
+                armoArticulo._archivoAdjunto,
+                armoArticulo._autoresArticulo, 
+                armoArticulo._archivoFuentes,
+                armoArticulo._autorNotificacion, 
+                armoArticulo._fechaEntrega,
+                armoArticulo._estadoArticulo
+            );
+            articulosCreados.push(artObj);
+        });
+        return articulosCreados;
     }
 }
 module.exports = Sesiones;

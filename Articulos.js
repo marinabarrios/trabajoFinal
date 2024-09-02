@@ -12,7 +12,7 @@ class Articulos{
         this._interesRevisores = [];
     }  
     
-    agregarInteres(revisor, tipoInteres) {
+    agregarInteres(revisor, tipoInteres, temaSesion) {
         // Buscar si el revisor ya ha expresado interés previamente
         const interesExistente = this._interesRevisores.find(interes => interes.revisor === revisor._nombreUsuario);
 
@@ -21,7 +21,7 @@ class Articulos{
             interesExistente.tipoInteres = tipoInteres;
         } else {
             // Si no existe, agregar el nuevo interés
-            this._interesRevisores.push({ revisor: revisor._nombreUsuario , articulo: this._id, tipoInteres: tipoInteres });
+            this._interesRevisores.push({ revisor: revisor._nombreUsuario, articulo: this._id, tipoInteres: tipoInteres, sesion: temaSesion});
         }
     }
 

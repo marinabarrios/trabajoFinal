@@ -38,15 +38,18 @@ const conferenciaRobotica = empresa.crearConferencia('Conferencia Robótica', '2
 
 /** CREO LA SESION */
 const sesionInteligencia = conferenciaInformatica.crearSesion('Inteligencia Artificial', 'regular',
-                                                              '2024-08-27', 'recepcion');
+                                                              '2024-08-25', 'recepcion');
 const sesionInfraestructura = conferenciaInformatica.crearSesion('Infraestructura', 'workshop',
-                                                                 '2024-08-27', 'recepcion');
+                                                                 '2024-08-25', 'recepcion');
 const sesionSeguridad = conferenciaInformatica.crearSesion('Seguridad Infórmatica', 'poster',
-                                                           '2024-08-27', 'recepcion');
+                                                           '2024-08-25', 'recepcion');
 //console.log('todasLasSesiones',conferenciaInformatica.listSesiones());
 
+/********************************************************************************** */
+
+/****************** RECEPCION **************** */
 /** UN AUTOR CREA UN ARTICULO PARA LA SESION INTELIGENCIA */
-const futureOfProjectManagement = jose.crearArticulo(1, 'An investigation into the Impact of Artificial Intelligence on the Future of Project Management',
+/*const futureOfProjectManagement = jose.crearArticulo(1, 'An investigation into the Impact of Artificial Intelligence on the Future of Project Management',
                                                      'regular', 'The purpose of the study is to investigate the impact of Artificial Intelligence',
                                                      'https://ieeexplore.ieee.org/document/9430234',
                                                      [jose, matias], null, matias, new Date()
@@ -69,7 +72,7 @@ const inclusiveness = mateo.crearArticulo(4, 'Evaluating the Inclusiveness of Ar
 //console.log('listArticulosCreados',jose.listArticulosCreados());
 
 /** UN AUTOR CREA UN ARTICULO PARA LA SESION INFRAESTRUCTURA */
-const articuloInfraestructura1 = jose.crearArticulo(1, 'An investigation into the Impact of Artificial Intelligence on the Infrastructure',
+/*const articuloInfraestructura1 = jose.crearArticulo(1, 'An investigation into the Impact of Artificial Intelligence on the Infrastructure',
                                                     'regular', 'The purpose of the study is to investigate the impact of Artificial Infrastructure',
                                                     'https://ieeexplore.ieee.org/document/9430234',
                                                     [jose, matias], null, matias, new Date()
@@ -89,7 +92,7 @@ const articuloInfraestructura4 = mateo.crearArticulo(4, 'Evaluation of the inclu
                                                     mateo, new Date()
                                                     );
 /** UN AUTOR CREA UN ARTICULO PARA LA SESION SEGURIDAD */
-const articuloSeguridad1 = jose.crearArticulo(1, 'An investigation into the Impact of Artificial Intelligence on the Securance',
+/*const articuloSeguridad1 = jose.crearArticulo(1, 'An investigation into the Impact of Artificial Intelligence on the Securance',
                                               'regular', null,
                                               'https://ieeexplore.ieee.org/document/9430234',
                                                [jose, matias], 'https://ieeexplore.ieee.org/document/9430234', matias, new Date()
@@ -107,75 +110,160 @@ const articuloSeguridad4 = mateo.crearArticulo(4, 'Evaluation of the inclusivity
                                                 [mateo], 'https://ieeexplore.ieee.org/document/10467463', mateo, new Date()
                                                );
 /** EL AUTOR ENVIA EL ARTICULO A LA SESION INTELIGENCIA*/
-jose.enviarArticulo(sesionInteligencia, futureOfProjectManagement);//pasa la validacion
+/*jose.enviarArticulo(sesionInteligencia, futureOfProjectManagement);//pasa la validacion
 leo.enviarArticulo(sesionInteligencia, creativeIA);//no pasa la validacion
 mariana.enviarArticulo(sesionInteligencia, innovationManagement);//pasa la validacion
 mateo.enviarArticulo(sesionInteligencia, inclusiveness);//pasa la validacion
 /** EL AUTOR ENVIA EL ARTICULO A LA SESION INFRAESTRUCTURA*/
-jose.enviarArticulo(sesionInfraestructura, articuloInfraestructura1);//pasa la validacion
+/*jose.enviarArticulo(sesionInfraestructura, articuloInfraestructura1);//pasa la validacion
 leo.enviarArticulo(sesionInfraestructura, articuloInfraestructura2);//pasa la validacion
 mariana.enviarArticulo(sesionInfraestructura, articuloInfraestructura3);//no pasa la validacion
 mateo.enviarArticulo(sesionInfraestructura, articuloInfraestructura4);//pasa la validacion
 /** EL AUTOR ENVIA EL ARTICULO A LA SESION SEGURIDAD*/
-jose.enviarArticulo(sesionSeguridad, articuloSeguridad1);//no pasa la validacion
+/*jose.enviarArticulo(sesionSeguridad, articuloSeguridad1);//no pasa la validacion
 leo.enviarArticulo(sesionSeguridad, articuloSeguridad2);//pasa la validacion
 mariana.enviarArticulo(sesionSeguridad, articuloSeguridad3);//pasa la validacion
 mateo.enviarArticulo(sesionSeguridad, articuloSeguridad4);//pasa la validacion
 
 /** SE VERIFICA SI EL AUTOR TIENE NOTIFICACIONES DE RECHAZADO SOBRE SU ARTICULO */
-const notificacionesMatias = matias.obtenerNotificaciones();
-//console.log('notificacionesMatias',notificacionesMatias);
+/*const notificacionesMatias = matias.obtenerNotificaciones();
+console.log('notificacionesMatias',notificacionesMatias);
 const notificacionesLeo = leo.obtenerNotificaciones();
-//console.log('notificacionesLeo',notificacionesLeo);
+console.log('notificacionesLeo',notificacionesLeo);
 const notificacionesMariana = mariana.obtenerNotificaciones();
-//console.log('notificacionesMariana',notificacionesMariana);
+console.log('notificacionesMariana',notificacionesMariana);
 const notificacionesMateo = mateo.obtenerNotificaciones();
-//console.log('notificacionesMateo',notificacionesMateo);
+console.log('notificacionesMateo',notificacionesMateo);
 
-/** COMO YA PASÓ EL DEADLINE VERIFICO QUE LA SESION HAYA PASADO AL BIDDING */
-//console.log('sesionInteligencia',sesionInteligencia);
+/*********************************************************************************************** */
+
+/****************** BIDDING **************** */
 
 /** VERIFICO EL ESTADO DE LA SESION */
-//const estadoDeLaSesion = sesionInteligencia.verificarDeadlineRecepcion();
-//console.log('estadoDeLaSesion',estadoDeLaSesion);
-
-/** OBTENER TODOS LOS ARTICULOS DE LA SESION */
-//const todosLosArticulosValidadosInteligencia = sesionInteligencia.obtenerArticulos();
-//console.log ('todosLosArticulosQuePasaronLaValidacionParSesionInteligencia',todosLosArticulosValidadosInteligencia);
-//const todosLosArticulosValidadosInfraestructura = sesionInfraestructura.obtenerArticulos();
-//console.log ('todosLosArticulosQuePasaronLaValidacionParSesionInfraestructura',todosLosArticulosValidadosInfraestructura);
-//const todosLosArticulosValidadosSeguridad = sesionSeguridad.obtenerArticulos();
-//console.log ('todosLosArticulosQuePasaronLaValidacionParSesionSeguridad',todosLosArticulosValidadosSeguridad);
-
-/** ESTAMOS EN PROCESO DE BIDDING */
-//const verTodosLosArticulosAprobadosSesionInteligencia = sesionInteligencia.verArticulos();
+const estadoDeLaSesionInt = sesionInteligencia.verificarDeadlineRecepcion();
+const estadoDeLaSesionInf = sesionInfraestructura.verificarDeadlineRecepcion();
+const estadoDeLaSesionSeg = sesionSeguridad.verificarDeadlineRecepcion();
+//console.log('sesionInteligencia',sesionInteligencia);
+/** BUSCO LOS ARTICULOS DE CADA SESIÓN EN LOS ARCHIVOS QUE SE GENERARON */
+const verTodosLosArticulosAprobadosSesionInteligencia = sesionInteligencia.verArticulos();
 //console.log('verTodosLosArticulosAprobadosSesionInteligencia',verTodosLosArticulosAprobadosSesionInteligencia);
-//const verTodosLosArticulosAprobadosSesionInfraestructura = sesionInfraestructura.verArticulos();
+const verTodosLosArticulosAprobadosSesionInfraestructura = sesionInfraestructura.verArticulos();
 //console.log('verTodosLosArticulosAprobadosSesionInfraestructura',verTodosLosArticulosAprobadosSesionInfraestructura);
-//const verTodosLosArticulosAprobadosSesionSeguridad = sesionSeguridad.verArticulos();
+const verTodosLosArticulosAprobadosSesionSeguridad = sesionSeguridad.verArticulos();
 //console.log('verTodosLosArticulosAprobadosSesionSeguridad',verTodosLosArticulosAprobadosSesionSeguridad);
-
+//console.log('VERART1',verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1));
 /** UN REVISOR EXPRESA SU INTERES */
-//maria.expresarInteres(sesionInteligencia, futureOfProjectManagement,'interesado');
-//const mostrarIntereses = maria.mostrarIntereses();
-//console.log('mostrarInteresesDelRevisor',mostrarIntereses);//mostrarRevisorInteres
-//const mostrarRevisorIntereses = futureOfProjectManagement.mostrarRevisorInteres();
-//console.log('mostrarRevisorInteresesDelArticulo',mostrarRevisorIntereses);
+maria.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'interesado');
+maria.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 3), 'no interesado');
+maria.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4), 'quizas');
+maria.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 1), 'interesado');
+maria.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 2), 'no interesado');
+maria.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 4), 'quizas');
+maria.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 2), 'interesado');
+maria.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 3), 'no interesado');
+maria.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 4), 'quizas');
+
+juana.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'no interesado');
+juana.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 3), 'no interesado');
+juana.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4), 'quizas');
+juana.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 1), 'no interesado');
+juana.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 2), 'interesado');
+juana.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 4), 'quizas');
+juana.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 2), 'quizas');
+juana.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 3), 'no interesado');
+juana.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 4), 'quizas');
+
+mara.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'quizas');
+mara.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4), 'quizas');
+mara.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 1), 'quizas');
+mara.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 2), 'interesado');
+mara.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 4), 'quizas');
+mara.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 3), 'no interesado');
+mara.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 4), 'quizas');
+
+juanG.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'interesado');
+juanG.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4), 'quizas');
+juanG.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 1), 'quizas');
+juanG.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 2), 'interesado');
+juanG.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 3), 'no interesado');
+juanG.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 4), 'quizas');
+
+raul.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 3), 'interesado');
+raul.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4), 'quizas');
+raul.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 1), 'quizas');
+raul.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 4), 'interesado');
+raul.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 2), 'no interesado');
+raul.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 4), 'quizas');
+
+oscar.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'interesado');
+oscar.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4), 'quizas');
+oscar.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 1), 'interesado');
+oscar.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 4), 'quizas');
+oscar.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 2), 'interesado');
+oscar.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 4), 'quizas');
+
+ines.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'interesado');
+ines.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 3), 'no interesado');
+ines.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 4), 'quizas');
+
+sonia.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4), 'quizas');
+sonia.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 1), 'interesado');
+sonia.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 2), 'no interesado');
+
+pedro.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 2), 'interesado');
+pedro.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 2), 'quizas');
+pedro.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 4), 'no interesado');
+
+daniel.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'quizas');
+daniel.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4), 'quizas');
+daniel.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 1), 'no interesado');
+daniel.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 4), 'quizas');
+daniel.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 2), 'interesado');
+daniel.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 4), 'quizas');
+
+luis.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'no interesado');
+luis.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 3), 'interesado');
+luis.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 1), 'quizas');
+luis.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 4), 'quizas');
+luis.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 2), 'quizas');
+luis.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 3), 'interesado');
+luis.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 4), 'quizas');
+
+/** PUEDO CONOCER LOS INTERESES DE CADA REVISOR */
+const mostrarIntereses = maria.mostrarIntereses();
+//console.log('mostrarInteresesDelRevisor',mostrarIntereses);
+/** PUEDO CONOCER LOS INTERESES POR CADA ARTICULO */
+
 
 /** CAMBIO EL INTERES DE UN REVISOR */
-//maria.expresarInteres(sesionInteligencia,futureOfProjectManagement,'quizas');
-//const mostrarIntereses1 = maria.mostrarIntereses();
-//console.log('mostrarIntereses1',mostrarIntereses1);
-//const mostrarRevisorIntereses1 = futureOfProjectManagement.mostrarRevisorInteres();
-//console.log('mostrarRevisorIntereses1',mostrarRevisorIntereses1);
+maria.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'quizas');
+const mostrarIntereses1 = maria.mostrarIntereses();
+/** VERIFICO LOS INTERESES DE CADA REVISOR A CADA ARTICULO */
+const mostrarRevisorIntereses1 = verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1).mostrarRevisorInteres();
+const mostrarRevisorIntereses3 = verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 3).mostrarRevisorInteres();
+const mostrarRevisorIntereses4 = verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4).mostrarRevisorInteres();
+const todosLosInteresesSesionInteligencia = mostrarRevisorIntereses1.concat(mostrarRevisorIntereses3, mostrarRevisorIntereses4);
+//console.log('todosLosInteresesSesionInteligencia',todosLosInteresesSesionInteligencia);
+const mostrarRevisorIntereses5 = verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 1).mostrarRevisorInteres();
+const mostrarRevisorIntereses6 = verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 2).mostrarRevisorInteres();
+const mostrarRevisorIntereses7 = verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 4).mostrarRevisorInteres();
+const todosLosInteresesSesionInfraestructura = mostrarRevisorIntereses5.concat(mostrarRevisorIntereses6, mostrarRevisorIntereses7);
+//console.log('todosLosInteresesSesionInfraestructura',todosLosInteresesSesionInfraestructura);
+const mostrarRevisorIntereses8 = verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 2).mostrarRevisorInteres();
+const mostrarRevisorIntereses9 = verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 3).mostrarRevisorInteres();
+const mostrarRevisorIntereses10 = verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 4).mostrarRevisorInteres();
+const todosLosInteresesSesionSeguridad = mostrarRevisorIntereses8.concat(mostrarRevisorIntereses9, mostrarRevisorIntereses10);
+//console.log('todosLosInteresesSesionSeguridad',todosLosInteresesSesionSeguridad);
 
+/*********************************************************************************************** */
+
+/****************** ASIGNACIÓN **************** */
 /** EL CHAIR CAMBIA EL ESTADO DE LA SESION DE BIDDING A ASIGNACION */
-//juan.cambiarEstadoSesion(sesionInteligencia,'asignacion');
+juan.cambiarEstadoSesion(sesionInteligencia,'asignacion');
+juan.cambiarEstadoSesion(sesionInfraestructura,'asignacion');
+juan.cambiarEstadoSesion(sesionSeguridad,'asignacion');
 //console.log('sesionInteligencia',sesionInteligencia);
-/** VER BIDDS */
-//const verBidds = juan.verBidds(futureOfProjectManagement);
-//console.log('verBidds',verBidds);
 /** ASIGNAR REVISORES */
-//const todosLosArticulos = juan.asignarRevisores(empresa,sesionInteligencia);
+const todosLosArticulos = juan.asignarRevisores(sesionInteligencia, todosLosInteresesSesionInteligencia, todosLosRevisores);
 //console.log('verBidds',verBidds);
 empresa;
