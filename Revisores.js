@@ -14,8 +14,7 @@ class Revisores extends Usuarios{
 
     expresarInteres(sesion, articulo, tipoInteres){
         const gestor = new GestorDeArticulos();
-        //const articuloId = gestor.obtenerArticuloPorId(sesion._tema, articulo.id);
-        //const objArticulo = this.desdeObjetoPlano(articulo);
+
         if(sesion._estadoSesion === 'bidding') {
             if (!articulo) {
                 //throw new Error("El artículo no existe.");
@@ -42,9 +41,38 @@ class Revisores extends Usuarios{
         }      
     }
 
-    realizarEvaluacion(){
 
+    verArticulosAsignados(sesion) {
+        const asignaciones = sesion._asignaciones.filter(asignacion =>
+          asignacion.revisor.includes(this._nombreUsuario)
+        );
+    
+        return asignaciones.map(asignacion => ({
+          articulo: asignacion.articulo,
+          sesion: asignacion.sesion,
+          revisores: asignacion.revisor
+        }));
     }
+    
+    realizarEvaluacion(sesion, articuloId, comentario, puntaje) {
+  // Normaliza el nombre del usuario del revisor
+  const nombreRevisorNormalizado = this._nombreUsuario.trim().toLowerCase();
+
+  // Busca en las asignaciones de la sesión el artículo específico para este revisor
+  const asignacion = sesion._asignaciones.find(asignacion =>
+    asignacion.articulo === articuloId &&
+    asignacion.revisor.some(revisor => revisor.trim().toLowerCase() === nombreRevisorNormalizado)
+  );
+
+  if (!asignacion) {
+    console.log(`No se encontró el artículo ${articuloId} asignado al revisor ${this._nombreUsuario}.`);
+    return;
+  }
+
+  // Agrega la evaluación en la sesión
+  sesion.agregarEvaluacion(articuloId, this._nombreUsuario, comentario, puntaje);
+  console.log(`Revisión enviada por ${this._nombreUsuario} para el artículo ${articuloId}.`);
+}    
 
     mostrarIntereses(){
         return this._intereses;

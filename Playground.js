@@ -240,9 +240,9 @@ oscar.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSeguri
 
 ines.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'interesado');
 ines.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 3), 'no interesado');
-ines.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4), 'quizas')
-ines.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 5), 'interesado')
-ines.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 7), 'no interesado')
+ines.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4), 'quizas');
+ines.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 5), 'interesado');
+ines.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 7), 'no interesado');
 ines.expresarInteres(sesionInfraestructura, verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 4), 'quizas');
 
 sonia.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 3), 'interesado');
@@ -274,7 +274,7 @@ luis.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSegurid
 
 /** PUEDO CONOCER LOS INTERESES DE CADA REVISOR */
 //const mostrarIntereses = maria.mostrarIntereses();
-//console.log('mostrarInteresesDelRevisor',mostrarIntereses);
+//console.log('mostrarInteresesDelRevisor',mostrarIntereses[0].tipoInteres);
 
 /** CAMBIO EL INTERES DE UN REVISOR */
 //maria.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'quizas');
@@ -282,19 +282,23 @@ luis.expresarInteres(sesionSeguridad, verTodosLosArticulosAprobadosSesionSegurid
 
 /** VERIFICO LOS INTERESES DE CADA REVISOR A CADA ARTICULO */
 const mostrarRevisorIntereses1 = verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1).mostrarRevisorInteres();
+const mostrarRevisorIntereses2 = verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 2).mostrarRevisorInteres();
 const mostrarRevisorIntereses3 = verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 3).mostrarRevisorInteres();
 const mostrarRevisorIntereses4 = verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4).mostrarRevisorInteres();
-const todosLosInteresesSesionInteligencia = mostrarRevisorIntereses1.concat(mostrarRevisorIntereses3, mostrarRevisorIntereses4);
+const mostrarRevisorIntereses5 = verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 5).mostrarRevisorInteres();
+const mostrarRevisorIntereses6 = verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 6).mostrarRevisorInteres();
+const mostrarRevisorIntereses7 = verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 7).mostrarRevisorInteres();
+const todosLosInteresesSesionInteligencia = mostrarRevisorIntereses1.concat(mostrarRevisorIntereses2, mostrarRevisorIntereses3, mostrarRevisorIntereses4, mostrarRevisorIntereses5, mostrarRevisorIntereses6, mostrarRevisorIntereses7);
 //console.log('todosLosInteresesSesionInteligencia',todosLosInteresesSesionInteligencia);
-const mostrarRevisorIntereses5 = verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 1).mostrarRevisorInteres();
-const mostrarRevisorIntereses6 = verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 2).mostrarRevisorInteres();
-const mostrarRevisorIntereses7 = verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 4).mostrarRevisorInteres();
-const todosLosInteresesSesionInfraestructura = mostrarRevisorIntereses5.concat(mostrarRevisorIntereses6, mostrarRevisorIntereses7);
+const mostrarRevisorIntereses8 = verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 1).mostrarRevisorInteres();
+const mostrarRevisorIntereses9 = verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 2).mostrarRevisorInteres();
+const mostrarRevisorIntereses10 = verTodosLosArticulosAprobadosSesionInfraestructura.find(articulo => articulo._id === 4).mostrarRevisorInteres();
+const todosLosInteresesSesionInfraestructura = mostrarRevisorIntereses8.concat(mostrarRevisorIntereses9, mostrarRevisorIntereses10);
 //console.log('todosLosInteresesSesionInfraestructura',todosLosInteresesSesionInfraestructura);
-const mostrarRevisorIntereses8 = verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 2).mostrarRevisorInteres();
-const mostrarRevisorIntereses9 = verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 3).mostrarRevisorInteres();
-const mostrarRevisorIntereses10 = verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 4).mostrarRevisorInteres();
-const todosLosInteresesSesionSeguridad = mostrarRevisorIntereses8.concat(mostrarRevisorIntereses9, mostrarRevisorIntereses10);
+const mostrarRevisorIntereses11 = verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 2).mostrarRevisorInteres();
+const mostrarRevisorIntereses12 = verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 3).mostrarRevisorInteres();
+const mostrarRevisorIntereses13 = verTodosLosArticulosAprobadosSesionSeguridad.find(articulo => articulo._id === 4).mostrarRevisorInteres();
+const todosLosInteresesSesionSeguridad = mostrarRevisorIntereses11.concat(mostrarRevisorIntereses12, mostrarRevisorIntereses13);
 //console.log('todosLosInteresesSesionSeguridad',todosLosInteresesSesionSeguridad);
 
 /*********************************************************************************************** */
@@ -305,7 +309,58 @@ juan.cambiarEstadoSesion(sesionInteligencia,'asignacion');
 juan.cambiarEstadoSesion(sesionInfraestructura,'asignacion');
 juan.cambiarEstadoSesion(sesionSeguridad,'asignacion');
 //console.log('sesionInteligencia',sesionInteligencia);
-/** ASIGNAR REVISORES */
-const todosLosArticulos = juan.asignarRevisores(sesionInteligencia, todosLosInteresesSesionInteligencia, todosLosRevisores);
-//console.log('verBidds',verBidds);
+
+/** EL CHAIR ASIGNA REVISORES */
+juan.asignarRevisores(sesionInteligencia, todosLosInteresesSesionInteligencia, todosLosRevisores);
+//const verAsignaciones = sesionInteligencia.verAsignaciones();
+//console.log('verAsignaciones',verAsignaciones);
+
+/** EL REVISOR VERIFICA SI TIENE ASIGNACIONES */
+const asignacionesMaria = maria.verArticulosAsignados(sesionInteligencia);
+console.log('asignacionesMaria',asignacionesMaria);
+const asignacionesJuana = juana.verArticulosAsignados(sesionInteligencia);
+//console.log('asignacionesJuana',asignacionesJuana);
+const asignacionesMara = mara.verArticulosAsignados(sesionInteligencia);
+//console.log('asignacionesMara',asignacionesMara);
+const asignacionesJuanG = juanG.verArticulosAsignados(sesionInteligencia);
+//console.log('asignacionesJuanG',asignacionesJuanG);
+const asignacionesRaul = raul.verArticulosAsignados(sesionInteligencia);
+//console.log('asignacionesRaul',asignacionesRaul);
+const asignacionesOscar = oscar.verArticulosAsignados(sesionInteligencia);
+//console.log('asignacionesOscar',asignacionesOscar);
+const asignacionesInes = ines.verArticulosAsignados(sesionInteligencia);
+//console.log('asignacionesInes',asignacionesInes);
+const asignacionesSonia = sonia.verArticulosAsignados(sesionInteligencia);
+//console.log('asignacionesSonia',asignacionesSonia);
+const asignacionesPedro = pedro.verArticulosAsignados(sesionInteligencia);
+//console.log('asignacionesPedro',asignacionesPedro);
+const asignacionesDaniel = daniel.verArticulosAsignados(sesionInteligencia);
+//console.log('asignacionesDaniel',asignacionesDaniel);
+const asignacionesLuis = luis.verArticulosAsignados(sesionInteligencia);
+//console.log('asignacionesLuis',asignacionesLuis);
+
+/** EL REVISOR CALIFICA UN ARTICULO */
+maria.realizarEvaluacion(sesionInteligencia,1,'Excelente artículo',3);
+maria.realizarEvaluacion(sesionInteligencia,7,'Artículo incoherente',-3);
+maria.realizarEvaluacion(sesionInteligencia,2,'Artículo incoherente',-3);
+/*const asignacionesJuana = juana.verArticulosAsignados(sesionInteligencia);
+console.log('asignacionesJuana',asignacionesJuana);
+const asignacionesMara = mara.verArticulosAsignados(sesionInteligencia);
+console.log('asignacionesMara',asignacionesMara);
+const asignacionesJuanG = juanG.verArticulosAsignados(sesionInteligencia);
+console.log('asignacionesJuanG',asignacionesJuanG);
+const asignacionesRaul = raul.verArticulosAsignados(sesionInteligencia);
+console.log('asignacionesRaul',asignacionesRaul);
+const asignacionesOscar = oscar.verArticulosAsignados(sesionInteligencia);
+console.log('asignacionesOscar',asignacionesOscar);
+const asignacionesInes = ines.verArticulosAsignados(sesionInteligencia);
+console.log('asignacionesInes',asignacionesInes);
+const asignacionesSonia = sonia.verArticulosAsignados(sesionInteligencia);
+console.log('asignacionesSonia',asignacionesSonia);
+const asignacionesPedro = pedro.verArticulosAsignados(sesionInteligencia);
+console.log('asignacionesPedro',asignacionesPedro);
+const asignacionesDaniel = daniel.verArticulosAsignados(sesionInteligencia);
+console.log('asignacionesDaniel',asignacionesDaniel);
+const asignacionesLuis = luis.verArticulosAsignados(sesionInteligencia);
+console.log('asignacionesLuis',asignacionesLuis);*/
 empresa;

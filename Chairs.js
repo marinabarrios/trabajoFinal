@@ -25,7 +25,7 @@ class Chairs extends Usuarios{
             if (cantRevisores >= maxRevisionesPorArticulo) {
                 //Obtengo un array aplanado con todos los intereses más la falta de interés
                 const interesesCompleto = this.obtenerIntereses(sesion, intereses, revisores);
-                console.log('interesesCompleto',interesesCompleto);
+                
                 //Contador de revisiones asignadas por cada revisor
                 const contadorRevisiones = {};
     

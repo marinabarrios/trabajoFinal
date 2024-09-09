@@ -115,26 +115,39 @@ class Sesiones{
     }
 
     guardarAsignacion(articuloId, revisoresAsignados) {
-        if (!this._asignaciones[articuloId]) {
+        if (!this._asignaciones) {
           // Inicializa el array de revisores asignados si no existe para el artículo dado
-          this._asignaciones[articuloId] = [];
+          this._asignaciones = [];
         }
     
         // Agrega los revisores asignados para el artículo
-        this._asignaciones[articuloId] = revisoresAsignados;
+        this._asignaciones.push({sesion: this._tema, articulo: articuloId, revisor: revisoresAsignados});
     
         console.log(`Asignación guardada para el artículo ${articuloId} de la Sesion ${this._tema}:`, revisoresAsignados);
-      }
+    }
+  /*  
+    agregarEvaluacion(articuloId, revisor, comentario, puntaje) {
+        // Inicializa las evaluaciones para el artículo si no existe
+        if (!this._evaluaciones[articuloId]) {
+          this._evaluaciones[articuloId] = [];
+        }
+        
+        // Agrega la evaluación del revisor al artículo
+        this._evaluaciones[articuloId].push({ revisor, comentario, puntaje });
     
-      // Método para obtener las asignaciones de un artículo
-      obtenerAsignaciones(articuloId) {
+        console.log(`Evaluación agregada para el artículo ${articuloId} por ${revisor}:`, { comentario, puntaje });
+      }
+    }*/
+
+    // Método para obtener las asignaciones de un artículo
+    /*obtenerAsignaciones(articuloId) {
         return this._asignaciones[articuloId] || [];
-      }
+    }*/
     
-      // Método para ver todos los artículos con sus asignaciones
-      verAsignaciones() {
+    // Método para ver todos los artículos con sus asignaciones
+    verAsignaciones() {
         return this._asignaciones;
-      }
+    }
 
     recuperarArticulo(){
         
