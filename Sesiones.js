@@ -3,7 +3,7 @@ const Articulos = require("./Articulos");
 const Autores = require("./Autores");
 
 class Sesiones{
-    constructor(tema, tipoSesion, deadlineRecepcion, estadoSesion, tipoDeEvaluacion = null) {
+    constructor(tema, tipoSesion, deadlineRecepcion, estadoSesion, tipoDeEvaluacion=null) {
         this._tema = tema;
         this._tipoSesion = tipoSesion; // 'regular', 'workshop', 'posters'
         this._deadlineRecepcion = deadlineRecepcion;
@@ -11,6 +11,9 @@ class Sesiones{
         this._tipoDeEvaluacion = tipoDeEvaluacion;
         this._articulos = [];
         this._asignaciones = [];
+        this._evaluaciones = [];
+        this._articulosAceptados = [];
+        this._articulosRechazados = [];
     }
 
     recibirArticulo(articulo) {
@@ -116,41 +119,89 @@ class Sesiones{
 
     guardarAsignacion(articuloId, revisoresAsignados) {
         if (!this._asignaciones) {
-          // Inicializa el array de revisores asignados si no existe para el artículo dado
-          this._asignaciones = [];
+          //Inicializo el array de revisores asignados si no existe para el artículo dado
+          this._asignaciones= [];
         }
     
         // Agrega los revisores asignados para el artículo
         this._asignaciones.push({sesion: this._tema, articulo: articuloId, revisor: revisoresAsignados});
     
         console.log(`Asignación guardada para el artículo ${articuloId} de la Sesion ${this._tema}:`, revisoresAsignados);
+      } 
+
+    agregarEvaluacion(articuloId, nombreRevisor, comentario, puntaje) {
+        // Crea una nueva evaluación
+        const nuevaEvaluacion = {
+            articulo: articuloId,
+            revisor: nombreRevisor,
+            comentario: comentario,
+            puntaje: puntaje,
+            fecha: new Date()
+        };
+
+        //Agrego la evaluación al array de evaluaciones
+        this._evaluaciones.push(nuevaEvaluacion);
+
+        console.log(`Evaluación agregada: ${nombreRevisor} evaluó el artículo ${articuloId} con puntaje ${puntaje}.`);
     }
-  /*  
-    agregarEvaluacion(articuloId, revisor, comentario, puntaje) {
-        // Inicializa las evaluaciones para el artículo si no existe
-        if (!this._evaluaciones[articuloId]) {
-          this._evaluaciones[articuloId] = [];
+      
+    //Método para ver todos los artículos con sus asignaciones
+    verAsignaciones(revisor=null) {
+        if (revisor) {
+            const asignacionesFiltradas = this._asignaciones.filter(asignacion =>
+                                                                    asignacion.revisores.includes(revisor)
+                                                                    );
+            return asignacionesFiltradas;
+        } else {
+            return this._asignaciones;     
+        }        
+    }
+
+    //Método para Seleccionar artículos basado en la estrategia
+    procesoDeSeleccionDeArticulos() {
+        //Agrupo evaluaciones por artículo
+        const puntajesPorArticulo = this._evaluaciones.reduce((acc, evaluacion) => {
+            if (!acc[evaluacion.articulo]) acc[evaluacion.articulo] = [];
+            acc[evaluacion.articulo].push(evaluacion.puntaje);
+            return acc;
+        }, {});
+
+        // Calcular el puntaje promedio de cada artículo
+        const articulosConPuntaje = Object.keys(puntajesPorArticulo).map(articulo => {
+        const puntajes = puntajesPorArticulo[articulo];
+        const puntajePromedio = puntajes.reduce((acc, p) => acc + p, 0) / puntajes.length;
+        return { articulo, puntajePromedio };
+        });
+
+        //Aplico la estrategia de Selección
+        const { articulosAceptados, articulosRechazados } = this._tipoDeEvaluacion.seleccionarTipoDeEvaluacion(articulosConPuntaje);
+
+        // Actualizar estado de la sesión y resultados
+        this._articulosAceptados = articulosAceptados;
+        this._articulosRechazados = articulosRechazados;
+        this._estadoSesion = 'seleccion';
+
+        console.log(`Artículos aceptados para la sesión ${this._tema}:`, articulosAceptados);
+        console.log(`Artículos rechazados para la sesión ${this._tema}:`, articulosRechazados);
+    }
+
+    // Método para ejecutar la evaluación con la estrategia actual
+    ejecutarEvaluacion(evaluaciones) {
+        if (this._tipoDeEvaluacion) {
+            return this._tipoDeEvaluacion.seleccionarTipoDeEvaluacion(evaluaciones);
+        } else {
+            throw new Error("No se ha definido una estrategia de evaluación.");
         }
-        
-        // Agrega la evaluación del revisor al artículo
-        this._evaluaciones[articuloId].push({ revisor, comentario, puntaje });
-    
-        console.log(`Evaluación agregada para el artículo ${articuloId} por ${revisor}:`, { comentario, puntaje });
-      }
-    }*/
-
-    // Método para obtener las asignaciones de un artículo
-    /*obtenerAsignaciones(articuloId) {
-        return this._asignaciones[articuloId] || [];
-    }*/
-    
-    // Método para ver todos los artículos con sus asignaciones
-    verAsignaciones() {
-        return this._asignaciones;
     }
 
-    recuperarArticulo(){
-        
+    //Método para cambiar la estrategia de evaluación
+    cambiarEstrategia(tipoDeEvaluacion) {
+        this._tipoDeEvaluacion = tipoDeEvaluacion;
+        console.log(`Estrategia de evaluación cambiada a ${tipoDeEvaluacion.constructor.name}`);
+    }
+
+    mostrarEvaluaciones(){
+        return this._evaluaciones;
     }
 
     simplificarArticulo(articulo) {

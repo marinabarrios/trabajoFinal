@@ -1,5 +1,10 @@
 @startuml
 class ComfyChair{
+  conferencias: conferencias
+  usuarios: usuarios
+  chairs: chairs
+  revisor: revisores
+  autores: autores
   +registrarUsuario(tipo,nombreUsuario,afiliacion,email,contrasenia)
   +listUsuarios()
   +listChairs()
@@ -15,6 +20,7 @@ class Conferencias{
   oganizadores: usuarios
   comite: usuarios
   autores: usuarios
+  sesiones: sesiones
   +nombreConferencia()
   +crearSesion(tema,tipoSesion,deadlineRecepdion,estadoSesion)
   +listSesiones()
@@ -24,13 +30,19 @@ class Sesiones{
   tipoSesion: String
   deadlineRecepdion: Date
   estadoSesion: String
-  articulos: articulos
   tipoDeEvaluacion: String
+  articulos: articulos
+  asignaciones: sesion, articulo, revisor
+  evaluaciones: articulo, revisor, comentario, puntaje, fecha
   +recibirArticulo(articulo)
   +obtenerArticulos()
   +validarArticulo(articulo)
   +verificarDeadlineRecepcion()
   +realizarNotificacion(autor,mensaje)
+  +verArticulos()
+  +guardarAsignacion(articulo,revisor)
+  +agregarEvaluacion(articulo,revisor,comentario,puntaje)
+  +verAsignaciones(revisor)
   +simplificarArticulo(articulo)
   +desdeObjetoPlano(datosArticulo)
 }
@@ -44,17 +56,9 @@ class Articulos{
   archivoFuentes: String
   autorNotificacion: nombreUsuario
   fechaEntrega: Date
+  interesRevisores: revisor, articulo, sesion
   +agregarInteres(revisor,tipoInteres,temaSesion)
   +mostrarRevisorInteres()
-}
-class Revisiones{
-  revisor: String
-  comentario: String
-  calificacion: Integer
-}
-class Bidding{
-  revisor: String
-  interes: String
 }
 abstract class Usuarios{
   nombreUsuario: String
@@ -66,14 +70,16 @@ abstract class Usuarios{
 class Chairs{
   +verBidds(articulo)
   +cambiarEstadoSesion(sesion,estadoSesion)
-  +asignarRevisores(empresa,sesion)
+  +asignarRevisores(sesion,intereses,revisores)
   +obtenerIntereses(sesion,intereses,revisores)
 }
 class Revisores{
-  intereses: (nombreUsuario,articuloId,tipoInteres)
+  intereses: (nombreUsuario,articulo,tipoInteres)
   +expresarInteres(sesion,articulo,tipoInteres)
+  +verArticulosAsignados(sesion)
+  +realizarEvaluacion(sesion,articulo,comentario,puntaje)
+  +encontrarAsignacionConFor(sesion,articulo,nombreRevisor)
   +mostrarInteres()
-  +realizarEvaluacion()
   +desdeObjetoPlano(datosArticulo)
 }
 class Autores{
@@ -86,13 +92,13 @@ class Autores{
   +agregarNotificacion(mensaje)
   +obtenerNotificaciones()
 }
-class Estrategia{
+class Estrategias{
   +seleccionarTipoDeEvaluacion()
 }
-class porcentajeDeAceptados{
+class PorcentajeDeAceptados{
   +seleccionarTipoDeEvaluacion()
 }
-class puntajeMinimo{
+class PuntajeMinimo{
   +seleccionarTipoDeEvaluacion()
 }
 ComfyChair *-- "*" Conferencias

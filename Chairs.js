@@ -35,7 +35,7 @@ class Chairs extends Usuarios{
                 });
     
                 //Clasifico intereses por artículo
-                const asignaciones = {}; //Almaceno los revisores asignados por artículo
+                const asignaciones = {};
     
                 interesesCompleto.forEach(interes => {
                     const { articulo, revisor, tipoInteres } = interes;
@@ -76,7 +76,8 @@ class Chairs extends Usuarios{
                     //Función auxiliar para asignar revisores por grupo de interés
                     const asignarDelGrupo = (grupo) => {
                         for (const interes of grupo) {
-                            if (revisionesRestantes > 0) { //Solo asignar si aún hay espacio para revisiones
+                             //Solo asignar si aún hay espacio para revisiones
+                            if (revisionesRestantes > 0) {
                                 revisoresAsignados.push(interes.revisor);
                                 contadorRevisiones[interes.revisor]++;
                                 revisionesRestantes--;

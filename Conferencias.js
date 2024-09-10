@@ -16,8 +16,8 @@ class Conferencias {
         return this._nombreConferencia;
     }
 
-    crearSesion(tema, tipoSesion, deadlineRecepcion, estadoSesion) {
-        const nuevaSesion = new Sesiones (tema, tipoSesion, deadlineRecepcion, estadoSesion);
+    crearSesion(tema, tipoSesion, deadlineRecepcion, estadoSesion, tipoDeEvaluacion) {
+        const nuevaSesion = new Sesiones (tema, tipoSesion, deadlineRecepcion, estadoSesion, tipoDeEvaluacion);
         this._sesiones.push(nuevaSesion);
         return nuevaSesion;
     }

@@ -41,7 +41,6 @@ class Revisores extends Usuarios{
         }      
     }
 
-
     verArticulosAsignados(sesion) {
         const asignaciones = sesion._asignaciones.filter(asignacion =>
           asignacion.revisor.includes(this._nombreUsuario)
@@ -55,24 +54,43 @@ class Revisores extends Usuarios{
     }
     
     realizarEvaluacion(sesion, articuloId, comentario, puntaje) {
-  // Normaliza el nombre del usuario del revisor
-  const nombreRevisorNormalizado = this._nombreUsuario.trim().toLowerCase();
+        const asignacion = this.encontrarAsignacionConFor(sesion, articuloId, this._nombreUsuario);
+        
+        if (!asignacion || asignacion.length === 0) {
+            return console.log(`No se encontró el artículo ${articuloId} asignado al revisor ${this._nombreUsuario}.`);           
+        }
 
-  // Busca en las asignaciones de la sesión el artículo específico para este revisor
-  const asignacion = sesion._asignaciones.find(asignacion =>
-    asignacion.articulo === articuloId &&
-    asignacion.revisor.some(revisor => revisor.trim().toLowerCase() === nombreRevisorNormalizado)
-  );
+        //Agrego la evaluación para todas las asignaciones encontradas
+        asignacion.forEach(asignacion => {
+            sesion.agregarEvaluacion(asignacion.articulo, this._nombreUsuario, comentario, puntaje);
+        });
+    }
 
-  if (!asignacion) {
-    console.log(`No se encontró el artículo ${articuloId} asignado al revisor ${this._nombreUsuario}.`);
-    return;
-  }
+    encontrarAsignacionConFor(sesion, articuloId, nombreRevisor) {
+        let asignacionesEncontradas = [];
+    
+        //Normalizo el nombre del revisor
+        const nombreRevisorNormalizado = nombreRevisor.trim().toLowerCase();
+        
+        //Verifico si 'sesion._asignaciones' es un arreglo
+        if (!Array.isArray(sesion._asignaciones)) {
+            return console.log('Error: La sesión no contiene una lista de asignaciones válida.');
+        }
+    
+        for (let i = 0; i < sesion._asignaciones.length; i++) {
+            const asignacion = sesion._asignaciones[i];
+            
+            //Normalizo todos los nombres de revisores en la asignación
+            const revisoresNormalizados = asignacion.revisor.map(revisor => revisor.trim().toLowerCase());
 
-  // Agrega la evaluación en la sesión
-  sesion.agregarEvaluacion(articuloId, this._nombreUsuario, comentario, puntaje);
-  console.log(`Revisión enviada por ${this._nombreUsuario} para el artículo ${articuloId}.`);
-}    
+            //Si encuentro una asignación que coincida, la almaceno en la variable
+            if (asignacion.articulo.toString().trim() === articuloId.toString().trim() && revisoresNormalizados.includes(nombreRevisorNormalizado)) {
+                asignacionesEncontradas.push(asignacion);
+            }
+        }
+    
+        return asignacionesEncontradas;
+    }    
 
     mostrarIntereses(){
         return this._intereses;
