@@ -43,7 +43,7 @@ class GestorDeArticulos {
     // Recuperar un artículo por su ID
     obtenerArticuloPorId(nombreSesion, id) {
         const articulos = this.leerArticulos(nombreSesion);
-        return articulos.find(articulo => articulo.id === id);
+        return articulos.find(articulo => parseInt(articulo.id) === parseInt(id));
     }
 
     // Eliminar un artículo por su ID

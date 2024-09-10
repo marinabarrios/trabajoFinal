@@ -1,6 +1,6 @@
 const Usuarios = require("./Usuarios");
 const Articulos = require("./Articulos");
-const GestorDeArticulos = require("./GestorDeArticulos");
+//const GestorDeArticulos = require("./GestorDeArticulos");
 
 class Revisores extends Usuarios{
     constructor (nombreUsuario, afiliacion, email, contrasenia){
@@ -13,7 +13,7 @@ class Revisores extends Usuarios{
     }
 
     expresarInteres(sesion, articulo, tipoInteres){
-        const gestor = new GestorDeArticulos();
+        //const gestor = new GestorDeArticulos();
 
         if(sesion._estadoSesion === 'bidding') {
             if (!articulo) {

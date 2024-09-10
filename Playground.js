@@ -45,13 +45,20 @@ const conferenciaRobotica = empresa.crearConferencia('Conferencia Robótica', '2
 const estrategiaPorcentaja = new PorcentajeDeAceptados(0.3); //Acepta el 30% de los artículos
 
 // DEFINO ESTRATEGIA DE PUNTAJE MÍNIMO /
-const estrategiaPuntaje = new PuntajeMinimo(2); //Acepta artículos con puntaje >= 2
+const estrategiaPuntaje = new PuntajeMinimo(1); //Acepta artículos con puntaje promedio >= 1
+
+// DEFINO LAS ESTRATEGIAS POR TIPO DE ARTICULO PARA CUANDO SE TRATA DE UNA WORKSHOP /
+
+const estrategiasPorTipo = {
+    paper: new PorcentajeDeAceptados(0.2), // Acepta el 20% de los papers
+    regular: new PuntajeMinimo(0.5) // Puntaje mínimo de 0.5 para artículos regulares
+};
 
 // CREO LA SESION /
 const sesionInteligencia = conferenciaInformatica.crearSesion('Inteligencia Artificial', 'regular',
                                                               '2024-09-08', 'recepcion', estrategiaPorcentaja);
 const sesionInfraestructura = conferenciaInformatica.crearSesion('Infraestructura', 'workshop',
-                                                                 '2024-09-08', 'recepcion', estrategiaPuntaje);
+                                                                 '2024-09-08', 'recepcion', estrategiaPuntaje, estrategiasPorTipo);
 const sesionSeguridad = conferenciaInformatica.crearSesion('Seguridad Infórmatica', 'poster',
                                                            '2024-09-08', 'recepcion', estrategiaPuntaje);
 //console.log('todasLasSesiones',conferenciaInformatica.listSesiones());
@@ -389,17 +396,15 @@ juan.cambiarEstadoSesion(sesionSeguridad,'seleccion');
 
 const evaluacionesSesionInteligencia = sesionInteligencia.mostrarEvaluaciones();
 //console.log('evaluacionesSesionInteligencia',evaluacionesSesionInteligencia);
-const estrategiaCorteFijo = sesionInteligencia.ejecutarEvaluacion(evaluacionesSesionInteligencia);//pasar el listado de las evaluaciones
-console.log('estrategiaCorteFijo',estrategiaCorteFijo); // ver si esta bien
-sesionInteligencia.cambiarEstrategia(estrategiaPuntaje)
+const estrategiaCorteFijo = sesionInteligencia.ejecutarEvaluacion(evaluacionesSesionInteligencia);
+console.log('estrategiaCorteFijo',JSON.stringify(estrategiaCorteFijo, null, 2)); // ver si esta bien
+sesionInteligencia.cambiarEstrategia(estrategiaPuntaje);
 const estrategiaPuntajeMinimo = sesionInteligencia.ejecutarEvaluacion(evaluacionesSesionInteligencia);
-console.log('estrategiaPuntajeMinimo',estrategiaPuntajeMinimo); // ver si esta bien
+console.log('estrategiaPuntajeMinimo',JSON.stringify(estrategiaPuntajeMinimo, null, 2)); // ver si esta bien
 
 /** ver como se puede hacer:
- * verificar que la estrategia de seleccion q se está utilizando sea la que se declaró en la sesion (no usa la otra ási q bien)
- * verificar que funcione bien la estrategia de puntaje
- * cambiar el tipo de estrategia para una sesion
- * cuando es worshop hay un trato distinto, ver que hay q hacer
+ * cuando es worshop PROBARRR
  * completar el test
+ * verificar que el rango de la calificacion sea entre -3 y 3
  */
 empresa;
