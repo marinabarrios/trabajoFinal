@@ -127,7 +127,7 @@ class Sesiones{
         this._asignaciones.push({sesion: this._tema, articulo: articuloId, revisor: revisoresAsignados});
     
         console.log(`Asignación guardada para el artículo ${articuloId} de la Sesion ${this._tema}:`, revisoresAsignados);
-      } 
+    } 
 
     agregarEvaluacion(articuloId, nombreRevisor, comentario, puntaje) {
         // Crea una nueva evaluación

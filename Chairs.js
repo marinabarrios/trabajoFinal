@@ -95,12 +95,6 @@ class Chairs extends Usuarios{
         
                     //Guardo la asignación de revisores para el artículo
                     sesion.guardarAsignacion(articulo, revisoresAsignados);
-        
-                    //Ingreso las revisiones de cada revisor asignado
-                    /* revisoresAsignados.forEach(revisor => {
-                        const revision = this.obtenerRevisionDelRevisor(articulo, revisor);
-                        sesion.guardarRevision(articulo, revisor, revision);
-                    });*/
                 });
             } else {
                 console.log('No se puede asignar revisores ya que la cantidad de revisiones por artículo necesarias supera a la cantidad de revisores de la sesion.');

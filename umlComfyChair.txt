@@ -1,1 +1,115 @@
-git
+@startuml
+class ComfyChair{
+  conferencias: conferencias
+  usuarios: usuarios
+  chairs: chairs
+  revisor: revisores
+  autores: autores
+  +registrarUsuario(tipo,nombreUsuario,afiliacion,email,contrasenia)
+  +listUsuarios()
+  +listChairs()
+  +listRevisores()
+  +listAutores()
+  +crearConferencia(nombreConferencia,fechaInicio,fechaFin,oganizadores,comite,autores)
+  +listConferencias()
+}
+class Conferencias{
+  nombreConferencia: String
+  fechaInicio: Date
+  fechaFin: Date
+  oganizadores: usuarios
+  comite: usuarios
+  autores: usuarios
+  sesiones: sesiones
+  +nombreConferencia()
+  +crearSesion(tema,tipoSesion,deadlineRecepdion,estadoSesion)
+  +listSesiones()
+}
+class Sesiones{
+  tema: String
+  tipoSesion: String
+  deadlineRecepdion: Date
+  estadoSesion: String
+  tipoDeEvaluacion: String
+  articulos: articulos
+  asignaciones: sesion, articulo, revisor
+  evaluaciones: articulo, revisor, comentario, puntaje, fecha
+  +recibirArticulo(articulo)
+  +obtenerArticulos()
+  +validarArticulo(articulo)
+  +verificarDeadlineRecepcion()
+  +realizarNotificacion(autor,mensaje)
+  +verArticulos()
+  +guardarAsignacion(articulo,revisor)
+  +agregarEvaluacion(articulo,revisor,comentario,puntaje)
+  +verAsignaciones(revisor)
+  +simplificarArticulo(articulo)
+  +desdeObjetoPlano(datosArticulo)
+}
+class Articulos{
+  id
+  tituloArticulo: String
+  tipoArticulo: String
+  abstract: String
+  archivoAdjunto: String
+  autoresArticulo: nombreUsuario
+  archivoFuentes: String
+  autorNotificacion: nombreUsuario
+  fechaEntrega: Date
+  interesRevisores: revisor, articulo, sesion
+  +agregarInteres(revisor,tipoInteres,temaSesion)
+  +mostrarRevisorInteres()
+}
+abstract class Usuarios{
+  nombreUsuario: String
+  afiliacion: String
+  email: String
+  contrasenia: String
+  +nombreUsuario()
+}
+class Chairs{
+  +verBidds(articulo)
+  +cambiarEstadoSesion(sesion,estadoSesion)
+  +asignarRevisores(sesion,intereses,revisores)
+  +obtenerIntereses(sesion,intereses,revisores)
+}
+class Revisores{
+  intereses: (nombreUsuario,articulo,tipoInteres)
+  +expresarInteres(sesion,articulo,tipoInteres)
+  +verArticulosAsignados(sesion)
+  +realizarEvaluacion(sesion,articulo,comentario,puntaje)
+  +encontrarAsignacionConFor(sesion,articulo,nombreRevisor)
+  +mostrarInteres()
+  +desdeObjetoPlano(datosArticulo)
+}
+class Autores{
+  articulosCreados: String
+  notificaciones: String
+  +nombreUsuario()
+  +crearArticulo(id,tituloArticulo,tipoArticulo,abstract,archivoAdjunto,autoresArticulo,archivoFuentes,autorNotificacion,fechaEntrega)
+  +enviarArticulo(sesion,articulo)
+  +listArticulosCreados()
+  +agregarNotificacion(mensaje)
+  +obtenerNotificaciones()
+}
+class Estrategias{
+  +seleccionarTipoDeEvaluacion()
+}
+class PorcentajeDeAceptados{
+  +seleccionarTipoDeEvaluacion()
+}
+class PuntajeMinimo{
+  +seleccionarTipoDeEvaluacion()
+}
+ComfyChair *-- "*" Conferencias
+ComfyChair *-- "*" Usuarios
+Conferencias *-- "*" Sesiones
+Sesiones *-- "*" Articulos
+Usuarios --> Sesiones
+Usuarios <|-- Chairs
+Usuarios <|-- Autores
+Usuarios <|-- Revisores
+Sesiones o-- Estrategias
+Estrategias<|-- PorcentajeDeAceptados
+Estrategias<|-- PuntajeMinimo
+@enduml
