@@ -2,30 +2,44 @@
   {
     "id": 1,
     "tituloArticulo": "An investigation into the Impact of Artificial Intelligence on the Future of Project Management",
-    "tipoArticulo": "regular",
-    "abstract": "The purpose of the study is to investigate the impact of Artificial Intelligence",
+    "tipoArticulo": "poster",
+    "abstract": null,
     "archivoAdjunto": "https://ieeexplore.ieee.org/document/9430234",
     "autoresArticulo": [
       "José Gonzalez",
       "Matias Lei"
     ],
-    "archivoFuentes": null,
+    "archivoFuentes": "https://ieeexplore.ieee.org/document/9430234",
     "autorNotificacion": "Matias Lei",
-    "fechaEntrega": "2024-09-09T23:28:15.169Z",
+    "fechaEntrega": "2024-09-11T19:40:00.122Z",
+    "estadoArticulo": "enProceso"
+  },
+  {
+    "id": 2,
+    "tituloArticulo": "Creative AI in Software Project Management",
+    "tipoArticulo": "poster",
+    "abstract": null,
+    "archivoAdjunto": "https://ieeexplore.ieee.org/document/10425234",
+    "autoresArticulo": [
+      "Leonardo Rey"
+    ],
+    "archivoFuentes": "https://ieeexplore.ieee.org/document/10425234",
+    "autorNotificacion": "Leonardo Rey",
+    "fechaEntrega": "2024-09-11T19:40:00.122Z",
     "estadoArticulo": "enProceso"
   },
   {
     "id": 3,
     "tituloArticulo": "Artificial Intelligence in the Innovation Management Systems",
-    "tipoArticulo": "regular",
-    "abstract": "In this paper the management of innovation processes and projects is studied, which is the basis for analyzing of factors affecting the complexity of the management process.",
+    "tipoArticulo": "poster",
+    "abstract": null,
     "archivoAdjunto": "https://ieeexplore.ieee.org/document/10479688",
     "autoresArticulo": [
       "Mariana Lei"
     ],
-    "archivoFuentes": null,
+    "archivoFuentes": "https://ieeexplore.ieee.org/document/10479688",
     "autorNotificacion": "Mariana Lei",
-    "fechaEntrega": "2024-09-09T23:28:15.169Z",
+    "fechaEntrega": "2024-09-11T19:40:00.122Z",
     "estadoArticulo": "enProceso"
   },
   {
@@ -39,7 +53,7 @@
     ],
     "archivoFuentes": null,
     "autorNotificacion": "Mateo Rey",
-    "fechaEntrega": "2024-09-09T23:28:15.169Z",
+    "fechaEntrega": "2024-09-11T19:40:00.122Z",
     "estadoArticulo": "enProceso"
   },
   {
@@ -53,7 +67,7 @@
     ],
     "archivoFuentes": null,
     "autorNotificacion": "Matias Lei",
-    "fechaEntrega": "2024-09-09T23:28:15.169Z",
+    "fechaEntrega": "2024-09-11T19:40:00.122Z",
     "estadoArticulo": "enProceso"
   },
   {
@@ -67,7 +81,7 @@
     ],
     "archivoFuentes": null,
     "autorNotificacion": "Julian Cotto",
-    "fechaEntrega": "2024-09-09T23:28:15.169Z",
+    "fechaEntrega": "2024-09-11T19:40:00.122Z",
     "estadoArticulo": "enProceso"
   },
   {
@@ -81,21 +95,7 @@
     ],
     "archivoFuentes": null,
     "autorNotificacion": "Graciela Meza",
-    "fechaEntrega": "2024-09-09T23:28:15.169Z",
-    "estadoArticulo": "enProceso"
-  },
-  {
-    "id": 2,
-    "tituloArticulo": "Creative AI in Software Project Management",
-    "tipoArticulo": "regular",
-    "abstract": "Software project management (SPM), which comprises planning, supervising, and keeping track of software projects...",
-    "archivoAdjunto": "https://ieeexplore.ieee.org/document/10425234",
-    "autoresArticulo": [
-      "Leonardo Rey"
-    ],
-    "archivoFuentes": null,
-    "autorNotificacion": "Leonardo Rey",
-    "fechaEntrega": "2024-09-09T23:28:15.169Z",
+    "fechaEntrega": "2024-09-11T19:40:00.122Z",
     "estadoArticulo": "enProceso"
   }
 ]

@@ -1,6 +1,5 @@
 const Usuarios = require("./Usuarios");
 const Articulos = require("./Articulos");
-//const GestorDeArticulos = require("./GestorDeArticulos");
 
 class Revisores extends Usuarios{
     constructor (nombreUsuario, afiliacion, email, contrasenia){
@@ -13,7 +12,6 @@ class Revisores extends Usuarios{
     }
 
     expresarInteres(sesion, articulo, tipoInteres){
-        //const gestor = new GestorDeArticulos();
 
         if(sesion._estadoSesion === 'bidding') {
             if (!articulo) {
@@ -25,13 +23,11 @@ class Revisores extends Usuarios{
                 throw new Error("El tipo de interés debe ser 'interesado' o 'no interesado' o 'quizás'.");
             }
     
-            // Verificar si ya existe un interés para el artículo
+            //Verifico si ya existe un interés para el artículo
             const interesExistente = this._intereses.find(interes => interes.articulo === articulo._id);
             if (interesExistente) {
-                // Si ya existe un interés, modificarlo
                 interesExistente.tipoInteres = tipoInteres;
             } else {
-                // Si no existe, agregar el nuevo interés
                 this._intereses.push({ revisor: this._nombreUsuario, articulo: articulo._id, tipoInteres: tipoInteres });
             }
     
@@ -54,6 +50,10 @@ class Revisores extends Usuarios{
     }
     
     realizarEvaluacion(sesion, articuloId, comentario, puntaje) {
+        //Verifico si el puntaje está en el rango permitido
+        if (puntaje < -3 || puntaje > 3) {
+            return console.log(`El puntaje ${puntaje} no es válido. Debe estar entre -3 y 3.`);
+        }
         const asignacion = this.encontrarAsignacionConFor(sesion, articuloId, this._nombreUsuario);
         
         if (!asignacion || asignacion.length === 0) {

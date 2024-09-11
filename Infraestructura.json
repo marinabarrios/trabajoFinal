@@ -11,35 +11,49 @@
     ],
     "archivoFuentes": null,
     "autorNotificacion": "Matias Lei",
-    "fechaEntrega": "2024-09-09T23:28:15.169Z",
+    "fechaEntrega": "2024-09-11T19:40:00.122Z",
     "estadoArticulo": "enProceso"
   },
   {
     "id": 2,
     "tituloArticulo": "Creative AI in Project of Infrastructure",
-    "tipoArticulo": "poster",
-    "abstract": null,
+    "tipoArticulo": "regular",
+    "abstract": "Software project management (SPM), which comprises planning, supervising, and keeping track of software projects...",
     "archivoAdjunto": "https://ieeexplore.ieee.org/document/10425234",
     "autoresArticulo": [
       "Leonardo Rey"
     ],
-    "archivoFuentes": "https://ieeexplore.ieee.org/document/10425234",
+    "archivoFuentes": null,
     "autorNotificacion": "Leonardo Rey",
-    "fechaEntrega": "2024-09-09T23:28:15.169Z",
+    "fechaEntrega": "2024-09-11T19:40:00.122Z",
+    "estadoArticulo": "enProceso"
+  },
+  {
+    "id": 3,
+    "tituloArticulo": "Artificial intelligence in innovation and infrastructure management systems",
+    "tipoArticulo": "regular",
+    "abstract": "In this paper the management of innovation processes and projects is studied, which is the basis for analyzing of factors affecting the complexity of the management process.",
+    "archivoAdjunto": "https://ieeexplore.ieee.org/document/10479688",
+    "autoresArticulo": [
+      "Mariana Lei"
+    ],
+    "archivoFuentes": null,
+    "autorNotificacion": "Mariana Lei",
+    "fechaEntrega": "2024-09-11T19:40:00.122Z",
     "estadoArticulo": "enProceso"
   },
   {
     "id": 4,
     "tituloArticulo": "Evaluation of the inclusivity of the problem in infrastructure",
-    "tipoArticulo": "poster",
-    "abstract": null,
+    "tipoArticulo": "regular",
+    "abstract": "The escalating integration of Artificial Intelligence (AI) in various domains, especially Project Management (PM).",
     "archivoAdjunto": "https://ieeexplore.ieee.org/document/10467463",
     "autoresArticulo": [
       "Mateo Rey"
     ],
-    "archivoFuentes": "https://ieeexplore.ieee.org/document/10467463",
+    "archivoFuentes": null,
     "autorNotificacion": "Mateo Rey",
-    "fechaEntrega": "2024-09-09T23:28:15.169Z",
+    "fechaEntrega": "2024-09-11T19:40:00.122Z",
     "estadoArticulo": "enProceso"
   }
 ]

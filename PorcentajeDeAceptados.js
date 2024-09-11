@@ -38,32 +38,6 @@ class PorcentajeDeAceptados extends Estrategias{
         const articulosRechazados = puntajes.slice(cantidadAceptada);
 
         return { articulosAceptados, articulosRechazados };
-
-        /*const puntajesPorArticulo = evaluaciones.reduce((acc, { articulo, puntaje }) => {
-      if (!acc[articulo]) {
-        acc[articulo] = { puntajes: [], promedio: 0 };
-      }
-      acc[articulo].puntajes.push(puntaje);
-      return acc;
-    }, {});
-
-    // Calcular promedio de puntajes por artículo
-    const articulosConPromedio = Object.keys(puntajesPorArticulo).map(idArticulo => {
-      const { puntajes } = puntajesPorArticulo[idArticulo];
-      const promedio = puntajes.reduce((a, b) => a + b, 0) / puntajes.length;
-      return { idArticulo, puntajePromedio: promedio };
-    });
-
-    // Ordenar por puntaje descendente
-    const ordenadosPorPuntaje = articulosConPromedio.sort((a, b) => b.puntajePromedio - a.puntajePromedio);
-
-    // Calcular el número de artículos a aceptar
-    const cantidadAceptados = Math.ceil((this.porcentaje / 100) * ordenadosPorPuntaje.length);
-
-    return {
-      articulosAceptados: ordenadosPorPuntaje.slice(0, cantidadAceptados),
-      articulosRechazados: ordenadosPorPuntaje.slice(cantidadAceptados),
-    };*/
     }
 }
 module.exports = PorcentajeDeAceptados;

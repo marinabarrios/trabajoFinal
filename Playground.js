@@ -50,39 +50,42 @@ const estrategiaPuntaje = new PuntajeMinimo(1); //Acepta artículos con puntaje 
 // DEFINO LAS ESTRATEGIAS POR TIPO DE ARTICULO PARA CUANDO SE TRATA DE UNA WORKSHOP /
 
 const estrategiasPorTipo = {
-    paper: new PorcentajeDeAceptados(0.2), // Acepta el 20% de los papers
+    poster: new PorcentajeDeAceptados(0.2), // Acepta el 20% de los poster
     regular: new PuntajeMinimo(0.5) // Puntaje mínimo de 0.5 para artículos regulares
 };
 
 // CREO LA SESION /
-const sesionInteligencia = conferenciaInformatica.crearSesion('Inteligencia Artificial', 'regular',
-                                                              '2024-09-08', 'recepcion', estrategiaPorcentaja);
-const sesionInfraestructura = conferenciaInformatica.crearSesion('Infraestructura', 'workshop',
-                                                                 '2024-09-08', 'recepcion', estrategiaPuntaje, estrategiasPorTipo);
-const sesionSeguridad = conferenciaInformatica.crearSesion('Seguridad Infórmatica', 'poster',
-                                                           '2024-09-08', 'recepcion', estrategiaPuntaje);
+const sesionInteligencia =    conferenciaInformatica.crearSesion('Inteligencia Artificial', 'workshop',
+                                                                 '2024-09-10', 'recepcion', estrategiaPorcentaja, estrategiasPorTipo);
+const sesionInfraestructura = conferenciaInformatica.crearSesion('Infraestructura', 'regular',
+                                                                 '2024-09-10', 'recepcion', estrategiaPuntaje);
+const sesionSeguridad =       conferenciaInformatica.crearSesion('Seguridad Infórmatica', 'poster',
+                                                                 '2024-09-10', 'recepcion', estrategiaPuntaje);
 //console.log('todasLasSesiones',conferenciaInformatica.listSesiones());
 
 // ****************************************************************************************** /
 
 
-
+/*
 // *****************************ETAPA DE RECEPCION ****************************************** /
+//para ejecutar esta etapa, tener comentada las etapas posteriores
+//y la fecha del deadline de la sesión de ser mayor o igual a la fecha actual
+
 // UN AUTOR CREA UN ARTICULO PARA LA SESION INTELIGENCIA /
-/*const futureOfProjectManagement = jose.crearArticulo(1, 'An investigation into the Impact of Artificial Intelligence on the Future of Project Management',
-                                                     'regular', 'The purpose of the study is to investigate the impact of Artificial Intelligence',
+const futureOfProjectManagement = jose.crearArticulo(1, 'An investigation into the Impact of Artificial Intelligence on the Future of Project Management',
+                                                     'poster', null,//'The purpose of the study is to investigate the impact of Artificial Intelligence',
                                                      'https://ieeexplore.ieee.org/document/9430234',
-                                                     [jose, matias], null, matias, new Date()
+                                                     [jose, matias], 'https://ieeexplore.ieee.org/document/9430234', matias, new Date()
                                                     );
 const creativeIA = leo.crearArticulo(2, 'Creative AI in Software Project Management',
-                                                     'regular', 'Software project management (SPM), which comprises planning, supervising, and keeping track of software projects, is a sophisticated art. However, the complexity and needs of modern software development projects are usually impossible for existing SPM methodologies to handle. The research paper investigates how business process reengineering (BPR) and the strategic application of artificial intelligence (AI) may enhance the effectiveness, quality, and competitiveness of software development processes. The development of artificial intelligence (AI) has the potential to transform project management practices by automating operations, enabling project analytics, and offering intelligent recommendations. This paper proposes a framework for managing agile projects, which are gaining popularity due to their speedy value delivery and minimal risk of project failure. Just a few examples of how AI might be incorporated into project management include automating administrative tasks, providing data-driven risk predictions, simplifying project planning, and producing actionable insights. Software development is one of several businesses that has benefited from the popularity of Scrum and other agile project management methodologies.',
+                                                     'poster', null,//'Software project management (SPM), which comprises planning, supervising, and keeping track of software projects, is a sophisticated art. However, the complexity and needs of modern software development projects are usually impossible for existing SPM methodologies to handle. The research paper investigates how business process reengineering (BPR) and the strategic application of artificial intelligence (AI) may enhance the effectiveness, quality, and competitiveness of software development processes. The development of artificial intelligence (AI) has the potential to transform project management practices by automating operations, enabling project analytics, and offering intelligent recommendations. This paper proposes a framework for managing agile projects, which are gaining popularity due to their speedy value delivery and minimal risk of project failure. Just a few examples of how AI might be incorporated into project management include automating administrative tasks, providing data-driven risk predictions, simplifying project planning, and producing actionable insights. Software development is one of several businesses that has benefited from the popularity of Scrum and other agile project management methodologies.',
                                                      'https://ieeexplore.ieee.org/document/10425234',
-                                                     [leo], null, leo, new Date()
+                                                     [leo], 'https://ieeexplore.ieee.org/document/10425234', leo, new Date()
                                                     );
 const innovationManagement = mariana.crearArticulo(3, 'Artificial Intelligence in the Innovation Management Systems',
-                                                     'regular', 'In this paper the management of innovation processes and projects is studied, which is the basis for analyzing of factors affecting the complexity of the management process.',
+                                                     'poster', null,//'In this paper the management of innovation processes and projects is studied, which is the basis for analyzing of factors affecting the complexity of the management process.',
                                                      'https://ieeexplore.ieee.org/document/10479688',
-                                                     [mariana], null, mariana, new Date()
+                                                     [mariana], 'https://ieeexplore.ieee.org/document/10479688', mariana, new Date()
                                                     );
 const inclusiveness = mateo.crearArticulo(4, 'Evaluating the Inclusiveness of Artificial Intelligence Software',
                                           'regular', 'The escalating integration of Artificial Intelligence (AI) in various domains, especially Project Management (PM).',
@@ -94,11 +97,6 @@ const evaluating = matias.crearArticulo(5, 'Evaluating the Artificial Intelligen
                                           'https://ieeexplore.ieee.org/document/10467463',
                                            [matias], null, matias, new Date()
                                          );
-const creativeIA2 = leo.crearArticulo(2, 'Creative AI in Software Project Management',
-                                                     'regular', 'Software project management (SPM), which comprises planning, supervising, and keeping track of software projects...',
-                                                     'https://ieeexplore.ieee.org/document/10425234',
-                                                     [leo], null, leo, new Date()
-                                                    );
 const escalating = julian.crearArticulo(6, 'Escalating the Artificial Intelligence Software',
                                           'regular', 'The escalating integration of Artificial Intelligence (AI) in various domains, especially Project Management (PM).',
                                           'https://ieeexplore.ieee.org/document/10467463',
@@ -116,18 +114,25 @@ const articuloInfraestructura1 = jose.crearArticulo(1, 'An investigation into th
                                                     'https://ieeexplore.ieee.org/document/9430234',
                                                     [jose, matias], null, matias, new Date()
                                                     );
+const articuloInfra2 = leo.crearArticulo(2, 'Creative AI in Software Project Management',
+                                        'poster', null,
+                                        'https://ieeexplore.ieee.org/document/10425234',
+                                        [leo], 'https://ieeexplore.ieee.org/document/10425234', leo, new Date()
+                                        );
 const articuloInfraestructura2 = leo.crearArticulo(2, 'Creative AI in Project of Infrastructure',
-                                                    'poster', null, 'https://ieeexplore.ieee.org/document/10425234',
-                                                    [leo], 'https://ieeexplore.ieee.org/document/10425234',
-                                                    leo, new Date()
+                                                    'regular', 'Software project management (SPM), which comprises planning, supervising, and keeping track of software projects...',
+                                                    'https://ieeexplore.ieee.org/document/10425234',
+                                                    [leo], null, leo, new Date()
                                                     );
 const articuloInfraestructura3 = mariana.crearArticulo(3, 'Artificial intelligence in innovation and infrastructure management systems',
-                                                    'poster', null, 'https://ieeexplore.ieee.org/document/10479688',
+                                                    'regular', 'In this paper the management of innovation processes and projects is studied, which is the basis for analyzing of factors affecting the complexity of the management process.',
+                                                    'https://ieeexplore.ieee.org/document/10479688',
                                                     [mariana], null, mariana, new Date()
                                                     );
 const articuloInfraestructura4 = mateo.crearArticulo(4, 'Evaluation of the inclusivity of the problem in infrastructure',
-                                                    'poster', null, 'https://ieeexplore.ieee.org/document/10467463',
-                                                    [mateo], 'https://ieeexplore.ieee.org/document/10467463',
+                                                    'regular', 'The escalating integration of Artificial Intelligence (AI) in various domains, especially Project Management (PM).',
+                                                    'https://ieeexplore.ieee.org/document/10467463',
+                                                    [mateo], null,
                                                     mateo, new Date()
                                                     );
 
@@ -152,18 +157,19 @@ const articuloSeguridad4 = mateo.crearArticulo(4, 'Evaluation of the inclusivity
 
 // EL AUTOR ENVIA EL ARTICULO A LA SESION INTELIGENCIA /
 jose.enviarArticulo(sesionInteligencia, futureOfProjectManagement);//pasa la validacion
-leo.enviarArticulo(sesionInteligencia, creativeIA);//no pasa la validacion
+leo.enviarArticulo(sesionInteligencia, creativeIA);//pasa la validacion
 mariana.enviarArticulo(sesionInteligencia, innovationManagement);//pasa la validacion
 mateo.enviarArticulo(sesionInteligencia, inclusiveness);//pasa la validacion
 matias.enviarArticulo(sesionInteligencia, evaluating);//pasa la validacion
 julian.enviarArticulo(sesionInteligencia, escalating);//pasa la validacion
 graciela.enviarArticulo(sesionInteligencia, integration);//pasa la validacion
-leo.enviarArticulo(sesionInteligencia, creativeIA2);//pasa la validacion
+
 
 // EL AUTOR ENVIA EL ARTICULO A LA SESION INFRAESTRUCTURA /
 jose.enviarArticulo(sesionInfraestructura, articuloInfraestructura1);//pasa la validacion
+leo.enviarArticulo(sesionInfraestructura, articuloInfra2);//no pasa la validacion
 leo.enviarArticulo(sesionInfraestructura, articuloInfraestructura2);//pasa la validacion
-mariana.enviarArticulo(sesionInfraestructura, articuloInfraestructura3);//no pasa la validacion
+mariana.enviarArticulo(sesionInfraestructura, articuloInfraestructura3);//pasa la validacion
 mateo.enviarArticulo(sesionInfraestructura, articuloInfraestructura4);//pasa la validacion
 
 // EL AUTOR ENVIA EL ARTICULO A LA SESION SEGURIDAD /
@@ -181,12 +187,15 @@ const notificacionesMariana = mariana.obtenerNotificaciones();
 console.log('notificacionesMariana',notificacionesMariana);
 const notificacionesMateo = mateo.obtenerNotificaciones();
 console.log('notificacionesMateo',notificacionesMateo);
+
+// ****************************** FIN ETAPA RECEPCION *********************************** /
+
 */
-// *********************************************************************************************** /
-
-
 
 // ********************************** BIDDING *************************************************** /
+// para ejecutar esta etapa, comentar la etapa de recepción 
+// y modificar el deadline de la sesión, debe ser anterior anterior a la fecha actual
+
 // VERIFICO EL ESTADO DE LA SESION /
 const estadoDeLaSesionInt = sesionInteligencia.verificarDeadlineRecepcion();
 const estadoDeLaSesionInf = sesionInfraestructura.verificarDeadlineRecepcion();
@@ -321,10 +330,12 @@ const mostrarRevisorIntereses13 = verTodosLosArticulosAprobadosSesionSeguridad.f
 const todosLosInteresesSesionSeguridad = mostrarRevisorIntereses11.concat(mostrarRevisorIntereses12, mostrarRevisorIntereses13);
 console.log('todosLosInteresesSesionSeguridad',todosLosInteresesSesionSeguridad);
 
-// ********************************************************************************************** */
+// ********************************* FIN ETAPA BIDDING **************************************** * /
 
-// ****************************** ETAPA DE ASIGNACIÓN ****************************************** */
-/** EL CHAIR CAMBIA EL ESTADO DE LA SESION DE BIDDING A ASIGNACION */
+// ****************************** ETAPA DE ASIGNACIÓN ****************************************** * /
+//para ejecutar esta etapa mantener comentada etapas posteriores a esta y la etapa de recepción
+
+// ** EL CHAIR CAMBIA EL ESTADO DE LA SESION DE BIDDING A ASIGNACION * /
 juan.cambiarEstadoSesion(sesionInteligencia,'asignacion');
 juan.cambiarEstadoSesion(sesionInfraestructura,'asignacion');
 juan.cambiarEstadoSesion(sesionSeguridad,'asignacion');
@@ -332,8 +343,8 @@ juan.cambiarEstadoSesion(sesionSeguridad,'asignacion');
 
 // EL CHAIR ASIGNA REVISORES /
 juan.asignarRevisores(sesionInteligencia, todosLosInteresesSesionInteligencia, todosLosRevisores);
-//const verAsignaciones = sesionInteligencia.verAsignaciones();
-//console.log('verAsignaciones',verAsignaciones);
+const verAsignaciones = sesionInteligencia.verAsignaciones();
+console.log('verAsignaciones',verAsignaciones);
 
 // EL REVISOR VERIFICA SI TIENE ASIGNACIONES /
 const asignacionesMaria = maria.verArticulosAsignados(sesionInteligencia);
@@ -381,7 +392,7 @@ sonia.realizarEvaluacion(sesionInteligencia,6,'Artículo incoherente',-2);
 pedro.realizarEvaluacion(sesionInteligencia,5,'Artículo básico',0);
 daniel.realizarEvaluacion(sesionInteligencia,4,'Artículo incoherente',-3);
 luis.realizarEvaluacion(sesionInteligencia,5,'Excelente artículo',3);
-luis.realizarEvaluacion(sesionInteligencia,7,'Artículo incoherente',-3);
+luis.realizarEvaluacion(sesionInteligencia,7,'Artículo incoherente',4);
 
 // EL REVISOR CALIFICA UN ARTICULO QUE NO LE ASIGNARON /
 // luis.realizarEvaluacion(sesionInteligencia,2,'Artículo incoherente',-3);
@@ -389,7 +400,9 @@ luis.realizarEvaluacion(sesionInteligencia,7,'Artículo incoherente',-3);
 // *********************************************************************************************** /
 
 // ****************** SELECCIÓN **************** /
-/** EL CHAIR CAMBIA EL ESTADO DE LA SESION DE ASIGNACION A SELECCIÓN */
+//para ejecutar esta etapa, sólo tener comentado la etapa de recepción
+
+// ** EL CHAIR CAMBIA EL ESTADO DE LA SESION DE ASIGNACION A SELECCIÓN * /
 juan.cambiarEstadoSesion(sesionInteligencia,'seleccion');
 juan.cambiarEstadoSesion(sesionInfraestructura,'seleccion');
 juan.cambiarEstadoSesion(sesionSeguridad,'seleccion');
@@ -397,14 +410,13 @@ juan.cambiarEstadoSesion(sesionSeguridad,'seleccion');
 const evaluacionesSesionInteligencia = sesionInteligencia.mostrarEvaluaciones();
 //console.log('evaluacionesSesionInteligencia',evaluacionesSesionInteligencia);
 const estrategiaCorteFijo = sesionInteligencia.ejecutarEvaluacion(evaluacionesSesionInteligencia);
-console.log('estrategiaCorteFijo',JSON.stringify(estrategiaCorteFijo, null, 2)); // ver si esta bien
+console.log('estrategiaCorteFijo',JSON.stringify(estrategiaCorteFijo, null, 2));
 sesionInteligencia.cambiarEstrategia(estrategiaPuntaje);
 const estrategiaPuntajeMinimo = sesionInteligencia.ejecutarEvaluacion(evaluacionesSesionInteligencia);
-console.log('estrategiaPuntajeMinimo',JSON.stringify(estrategiaPuntajeMinimo, null, 2)); // ver si esta bien
+console.log('estrategiaPuntajeMinimo',JSON.stringify(estrategiaPuntajeMinimo, null, 2));
 
 /** ver como se puede hacer:
- * cuando es worshop PROBARRR
+ * 
  * completar el test
- * verificar que el rango de la calificacion sea entre -3 y 3
  */
 empresa;
