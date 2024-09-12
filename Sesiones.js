@@ -3,19 +3,26 @@ const Articulos = require("./Articulos");
 const Autores = require("./Autores");
 
 class Sesiones{
-    constructor(tema, tipoSesion, deadlineRecepcion, estadoSesion, tipoDeEvaluacion=null) {
+    constructor(tema, tipoSesion, deadlineRecepcion, estadoSesion, estrategiaPorDefecto, estrategiasPorTipoDeArticulo = {}) {
         this._tema = tema;
         this._tipoSesion = tipoSesion; // 'regular', 'workshop', 'posters'
         this._deadlineRecepcion = deadlineRecepcion;
         this._estadoSesion = estadoSesion;
-        this._tipoDeEvaluacion = tipoDeEvaluacion;
+        this._tipoDeEvaluacion = estrategiaPorDefecto;
+        this._estrategiasPorTipoDeArticulo = new Map(Object.entries(estrategiasPorTipoDeArticulo));//Inicializo con las estrategias dadas;
         this._articulos = [];
         this._asignaciones = [];
         this._evaluaciones = [];
         this._articulosAceptados = [];
         this._articulosRechazados = [];
+
+        if (tipoSesion !== 'workshop' && Object.keys(estrategiasPorTipoDeArticulo).length > 0) {
+            console.warn("Las estrategias por tipo de artículo solo son aplicables para sesiones tipo 'Workshop'.");
+            this._estrategiasPorTipoDeArticulo.clear();
+        }
     }
 
+    //Método que recibe el artículo del autor
     recibirArticulo(articulo) {
         if (this.validarArticulo(articulo)) {
             this._articulos.push(articulo);
@@ -37,6 +44,7 @@ class Sesiones{
         return this._estadoSesion; 
     }
 
+    //Método que verifica si el artículo es válido. Si no es válido envía una notificación al autor
     validarArticulo(articulo) {
         if (!articulo._autorNotificacion) {
             throw new Error('Falta definir el Autor que recibe las notificaciones. Se rechaza el artículo');
@@ -66,21 +74,18 @@ class Sesiones{
 
         // Validar otros requisitos como abstract y autores
         if (articulo._tipoArticulo === 'regular' && (!articulo._tituloArticulo || !articulo._archivoAdjunto || !articulo._abstract || articulo._abstract.length >= 300)) {
-            //debería informarle al autor que tiene errores
             const mensaje = 'Falta Abstract o no tiene menos de 300 caracteres o Falta Título o Archivo Adjunto. Se rechaza el artículo';
             this.realizarNotificacion(articulo._autorNotificacion, mensaje);
             return false;
         }
 
         if (articulo._tipoArticulo === 'poster' && (!articulo._tituloArticulo || !articulo._archivoAdjunto || !articulo._archivoFuentes || articulo._abstract)) {
-            //debería informarle al autor que tiene errores
             const mensaje = 'Falta Título o Archivo Adjunto o Fuentes o Tiene Abstract y no debe tener. Se rechaza el artículo';
             this.realizarNotificacion(articulo._autorNotificacion, mensaje);
             return false;
         }
 
         if (articulo._tipoArticulo === 'regular' && (!articulo._tituloArticulo)) {
-            //debería informarle al autor que tiene errores
             const mensaje = 'Falta el Título. Se rechaza el artículo';
             this.realizarNotificacion(articulo._autorNotificacion, mensaje);
             return false;
@@ -95,6 +100,7 @@ class Sesiones{
         return true;
     }
 
+    //Método que permite verificar si se pasó la fecha del deadline
     verificarDeadlineRecepcion(){
         const fechaActual = new Date();
         const fechaActualSinHora = fechaActual.toISOString().split('T')[0];
@@ -106,33 +112,38 @@ class Sesiones{
         return this._estadoSesion;
     }
 
+    //Método que envía la notificación de que no pasó la validación al autorNotificacion
     realizarNotificacion(autores, mensaje){
         autores.agregarNotificacion(mensaje);
     }
 
+    //Método que busca los artículos de la sesión en archivo .json que se generó
     verArticulos(){
         const gestor = new GestorDeArticulos();
-        const articulosAlmacenados =gestor.leerArticulos(this._tema);
+        const articulosAlmacenados = gestor.leerArticulos(this._tema);
         const articulosDeLaSesion = this.desdeObjetoPlano(articulosAlmacenados);
         return articulosDeLaSesion;
     }
 
+    //Método que guarda a que revisor se le asignó el artículo
     guardarAsignacion(articuloId, revisoresAsignados) {
         if (!this._asignaciones) {
           //Inicializo el array de revisores asignados si no existe para el artículo dado
           this._asignaciones= [];
         }
     
-        // Agrega los revisores asignados para el artículo
-        this._asignaciones.push({sesion: this._tema, articulo: articuloId, revisor: revisoresAsignados});
-    
+        //Agrego los revisores asignados para el artículo
+        this._asignaciones.push({sesion: this._tema, articulo: articuloId, revisor: revisoresAsignados});    
         console.log(`Asignación guardada para el artículo ${articuloId} de la Sesion ${this._tema}:`, revisoresAsignados);
     } 
 
+    //Método que guarda la evaluación del revisor a cada artículo
     agregarEvaluacion(articuloId, nombreRevisor, comentario, puntaje) {
-        // Crea una nueva evaluación
+        //Creo una nueva evaluación
+        const tipoArticulo = this.verTipoArticulo(articuloId);
         const nuevaEvaluacion = {
             articulo: articuloId,
+            tipoArticulo: tipoArticulo,
             revisor: nombreRevisor,
             comentario: comentario,
             puntaje: puntaje,
@@ -141,7 +152,6 @@ class Sesiones{
 
         //Agrego la evaluación al array de evaluaciones
         this._evaluaciones.push(nuevaEvaluacion);
-
         console.log(`Evaluación agregada: ${nombreRevisor} evaluó el artículo ${articuloId} con puntaje ${puntaje}.`);
     }
       
@@ -166,7 +176,7 @@ class Sesiones{
             return acc;
         }, {});
 
-        // Calcular el puntaje promedio de cada artículo
+        //Calculo el puntaje promedio de cada artículo
         const articulosConPuntaje = Object.keys(puntajesPorArticulo).map(articulo => {
         const puntajes = puntajesPorArticulo[articulo];
         const puntajePromedio = puntajes.reduce((acc, p) => acc + p, 0) / puntajes.length;
@@ -176,7 +186,7 @@ class Sesiones{
         //Aplico la estrategia de Selección
         const { articulosAceptados, articulosRechazados } = this._tipoDeEvaluacion.seleccionarTipoDeEvaluacion(articulosConPuntaje);
 
-        // Actualizar estado de la sesión y resultados
+        //Actualizo estado de la sesión y resultados
         this._articulosAceptados = articulosAceptados;
         this._articulosRechazados = articulosRechazados;
         this._estadoSesion = 'seleccion';
@@ -185,12 +195,44 @@ class Sesiones{
         console.log(`Artículos rechazados para la sesión ${this._tema}:`, articulosRechazados);
     }
 
-    // Método para ejecutar la evaluación con la estrategia actual
+    //Método para ejecutar la evaluación con la estrategia actual
     ejecutarEvaluacion(evaluaciones) {
-        if (this._tipoDeEvaluacion) {
-            return this._tipoDeEvaluacion.seleccionarTipoDeEvaluacion(evaluaciones);
-        } else {
+        if (!this._tipoDeEvaluacion) {
             throw new Error("No se ha definido una estrategia de evaluación.");
+        }
+        const resultados = {};
+        //Agrupo evaluaciones por tipo de artículo
+        const evaluacionesPorTipo = evaluaciones.reduce((grupos, evaluacion) => {
+                                        const { tipoArticulo } = evaluacion;
+                                        if (!grupos[tipoArticulo]) {
+                                        grupos[tipoArticulo] = [];
+                                        }
+                                        grupos[tipoArticulo].push(evaluacion);
+                                        return grupos;
+        }, {});
+
+        //Evaluar cada grupo de artículos por separado según su tipo
+        for (const tipoArticulo in evaluacionesPorTipo) {
+            const estrategia = this._tipoSesion === 'workshop' && this._estrategiasPorTipoDeArticulo.has(tipoArticulo)
+                ? this._estrategiasPorTipoDeArticulo.get(tipoArticulo)
+                : this._tipoDeEvaluacion;
+
+            const evaluacionesGrupo = evaluacionesPorTipo[tipoArticulo];
+    
+            const resultado = estrategia.seleccionarTipoDeEvaluacion(
+            evaluacionesGrupo.map(e => ({ idArticulo: e.articulo, puntajePromedio: e.puntaje }))
+            );
+    
+            resultados[tipoArticulo] = resultado;
+        }
+        return resultados;
+    }
+
+    definirEstrategiaPorTipoArticulo(tipoArticulo, estrategia) {
+        if (this._tipoSesion === 'workshop') {
+            this._estrategiasPorTipoDeArticulo.set(tipoArticulo, estrategia);
+        } else {
+            console.warn("No se pueden definir estrategias por tipo de artículo para esta sesión.");
         }
     }
 
@@ -204,6 +246,14 @@ class Sesiones{
         return this._evaluaciones;
     }
 
+    verTipoArticulo(id){
+        const gestor = new GestorDeArticulos();
+        const articulosAlmacenados = gestor.obtenerArticuloPorId(this._tema, id);
+        const articulosDeLaSesion = articulosAlmacenados.tipoArticulo;
+        return articulosDeLaSesion;
+    }
+
+    //Método que recibe un objeto y lo guarda en plano en el archivo .json
     simplificarArticulo(articulo) {
         return {
             id: articulo._id,
@@ -219,6 +269,7 @@ class Sesiones{
         };
     }
 
+    //Método que combierte algo plano a objeto para luego poder tratarlo
     desdeObjetoPlano(obj) {
         const armoArticulo = [];
         const articulosCreados = [];
