@@ -203,7 +203,7 @@ const estadoDeLaSesionSeg = sesionSeguridad.verificarDeadlineRecepcion();
 //console.log('sesionInteligencia',sesionInteligencia);
 // BUSCO LOS ARTICULOS DE CADA SESIÓN EN LOS ARCHIVOS QUE SE GENERARON /
 const verTodosLosArticulosAprobadosSesionInteligencia = sesionInteligencia.verArticulos();
-//console.log('verTodosLosArticulosAprobadosSesionInteligencia',verTodosLosArticulosAprobadosSesionInteligencia);
+console.log('verTodosLosArticulosAprobadosSesionInteligencia',verTodosLosArticulosAprobadosSesionInteligencia);
 const verTodosLosArticulosAprobadosSesionInfraestructura = sesionInfraestructura.verArticulos();
 //console.log('verTodosLosArticulosAprobadosSesionInfraestructura',verTodosLosArticulosAprobadosSesionInfraestructura);
 const verTodosLosArticulosAprobadosSesionSeguridad = sesionSeguridad.verArticulos();

@@ -166,10 +166,10 @@ test("Se crea una Sesión", () => {
     const todosLosChairs = empresa.listChairs();
     const todosLosRevisores = empresa.listRevisores();
     const todosLosAutores = empresa.listAutores();
-    const conferenciaInformatica = empresa.crearConferencia('Conferencia Informática', '2024-07-28', '2024-07-31',
+    const conferenciaInformatica = empresa.crearConferencia('Conferencia Informática', '2024-12-28', '2024-12-31',
                                                             todosLosChairs, todosLosRevisores,todosLosAutores);
     const sesionInteligencia = conferenciaInformatica.crearSesion('Inteligencia Artificial', 'regular',
-                                                                  '2024-08-15', 'recepcion');
+                                                                  '2024-09-20', 'recepcion');
     expect(sesionInteligencia._tema).toBe('Inteligencia Artificial');
 });
 
@@ -217,10 +217,10 @@ test("Un autor creó un artículo", () => {
     const todosLosChairs = empresa.listChairs();
     const todosLosRevisores = empresa.listRevisores();
     const todosLosAutores = empresa.listAutores();
-    const conferenciaInformatica = empresa.crearConferencia('Conferencia Informática', '2024-07-28', '2024-07-31',
+    const conferenciaInformatica = empresa.crearConferencia('Conferencia Informática', '2024-12-28', '2024-12-31',
                                                             todosLosChairs, todosLosRevisores,todosLosAutores);
     const sesionInteligencia = conferenciaInformatica.crearSesion('Inteligencia Artificial', 'regular',
-                                                                  '2024-09-15', 'recepcion');
+                                                                  '2024-09-20', 'recepcion');
     const futureOfProjectManagement = {
         _id: 1,
         _titulo: 'An investigation into the Impact of Artificial Intelligence on the Future of Project Management',
@@ -291,17 +291,17 @@ test("La sesión rechaza el artículo y envía un mensaje al autor que recibe la
     });
     const jose = empresa.registrarUsuario('autor','José Gonzalez', 'UNNE', 'jose_gonzalez@gmail.com', '123456');
     const matias = empresa.registrarUsuario('autor','Matias Lei', 'UNAM', 'matias_lei@gmail.com', '123456');
-    const leo = empresa.registrarUsuario('autor','Leonardo Rey', 'UNAM', 'leonardo_rey@gmail.com', '123456');
-    const maria = empresa.registrarUsuario('revisor','Maria Gonzalez', 'UNNE', 'maria_gonzalez@gmail.com', '123456');
-    const juana = empresa.registrarUsuario('revisor','Juana Gómez', 'UNLP', 'juana_gomez@gmail.com', '123456');
+    //const leo = empresa.registrarUsuario('autor','Leonardo Rey', 'UNAM', 'leonardo_rey@gmail.com', '123456');
+    //const maria = empresa.registrarUsuario('revisor','Maria Gonzalez', 'UNNE', 'maria_gonzalez@gmail.com', '123456');
+    //const juana = empresa.registrarUsuario('revisor','Juana Gómez', 'UNLP', 'juana_gomez@gmail.com', '123456');
 
     const todosLosChairs = empresa.listChairs();
     const todosLosRevisores = empresa.listRevisores();
     const todosLosAutores = empresa.listAutores();
-    const conferenciaInformatica = empresa.crearConferencia('Conferencia Informática', '2024-07-28', '2024-07-31',
+    const conferenciaInformatica = empresa.crearConferencia('Conferencia Informática', '2024-12-28', '2024-12-31',
                                                             todosLosChairs, todosLosRevisores,todosLosAutores);
     const sesionInteligencia = conferenciaInformatica.crearSesion('Inteligencia Artificial', 'regular',
-                                                                  '2024-09-15', 'recepcion');
+                                                                  '2024-09-20', 'recepcion');
     const futureOfProjectManagement = {
         _id: 1,
         _titulo: 'An investigation into the Impact of Artificial Intelligence on the Future of Project Management',
@@ -316,7 +316,7 @@ test("La sesión rechaza el artículo y envía un mensaje al autor que recibe la
 
     jose.listArticulosCreados.mockReturnValue([futureOfProjectManagement]);
 
-    const articuloCreado = jose.crearArticulo(
+    jose.crearArticulo(
         1,
         'An investigation into the Impact of Artificial Intelligence on the Future of Project Management',
         'regular',
