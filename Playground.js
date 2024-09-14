@@ -35,9 +35,9 @@ const todosLosAutores = empresa.listAutores();
 //console.log('todosLosAutores',empresa.listAutores());
 
 // CREO CONFERENCIAS /
-const conferenciaInformatica = empresa.crearConferencia('Conferencia Informática', '2024-10-28', '2024-10-31', 
+const conferenciaInformatica = empresa.crearConferencia('Conferencia Informática', '2024-12-28', '2024-12-31', 
                                                   todosLosChairs, todosLosRevisores, todosLosAutores);
-const conferenciaRobotica = empresa.crearConferencia('Conferencia Robótica', '2024-08-28', '2024-08-31',
+const conferenciaRobotica = empresa.crearConferencia('Conferencia Robótica', '2024-12-28', '2024-12-31',
                                                  todosLosChairs, todosLosRevisores, todosLosAutores);
 //console.log('DatosConferenciaInformatica',conferenciaInformatica);
 
@@ -66,7 +66,7 @@ const sesionSeguridad =       conferenciaInformatica.crearSesion('Seguridad Inf�
 // ****************************************************************************************** /
 
 
-/*
+
 // *****************************ETAPA DE RECEPCION ****************************************** /
 //para ejecutar esta etapa, tener comentada las etapas posteriores
 //y la fecha del deadline de la sesión de ser mayor o igual a la fecha actual
@@ -164,7 +164,6 @@ matias.enviarArticulo(sesionInteligencia, evaluating);//pasa la validacion
 julian.enviarArticulo(sesionInteligencia, escalating);//pasa la validacion
 graciela.enviarArticulo(sesionInteligencia, integration);//pasa la validacion
 
-
 // EL AUTOR ENVIA EL ARTICULO A LA SESION INFRAESTRUCTURA /
 jose.enviarArticulo(sesionInfraestructura, articuloInfraestructura1);//pasa la validacion
 leo.enviarArticulo(sesionInfraestructura, articuloInfra2);//no pasa la validacion
@@ -190,7 +189,7 @@ console.log('notificacionesMateo',notificacionesMateo);
 
 // ****************************** FIN ETAPA RECEPCION *********************************** /
 
-*/
+/*
 
 // ********************************** BIDDING *************************************************** /
 // para ejecutar esta etapa, comentar la etapa de recepción 
@@ -415,8 +414,5 @@ sesionInteligencia.cambiarEstrategia(estrategiaPuntaje);
 const estrategiaPuntajeMinimo = sesionInteligencia.ejecutarEvaluacion(evaluacionesSesionInteligencia);
 console.log('estrategiaPuntajeMinimo',JSON.stringify(estrategiaPuntajeMinimo, null, 2));
 
-/** ver como se puede hacer:
- * 
- * completar el test
  */
 empresa;

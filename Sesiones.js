@@ -120,7 +120,7 @@ class Sesiones{
     //Método que busca los artículos de la sesión en archivo .json que se generó
     verArticulos(){
         const gestor = new GestorDeArticulos();
-        const articulosAlmacenados = gestor.leerArticulos(this._tema);
+        const articulosAlmacenados = gestor.leerArticulos(this._tema);console.log('articulosAlmacenados',articulosAlmacenados);
         const articulosDeLaSesion = this.desdeObjetoPlano(articulosAlmacenados);
         return articulosDeLaSesion;
     }
