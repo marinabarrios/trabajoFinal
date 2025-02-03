@@ -1,7 +1,7 @@
-const Autores = require('./Autores.js');
-const Chairs = require('./Chairs.js');
 const Conferencias = require('./Conferencias.js');
-const Revisores = require('./Revisores.js');
+const Autores = require('./Usuarios/Autores.js');
+const Chairs = require('./Usuarios/Chairs.js');
+const Revisores = require('./Usuarios/Revisores.js');
 
 class ComfyChair {
     constructor() {

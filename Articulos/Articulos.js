@@ -1,6 +1,9 @@
 class Articulos{
     constructor(id, tituloArticulo, tipoArticulo, abstract = null, archivoAdjunto, autoresArticulo, archivoFuentes = null, autorNotificacion, fechaEntrega){
-        this._id = id;
+        if (this.constructor === Usuarios) {
+            throw new Error("No se puede instanciar una clase abstracta");
+        }
+        this._id = id; //se tiene que eliminar
         this._tituloArticulo = tituloArticulo;
         this._tipoArticulo = tipoArticulo;
         this._abstract = abstract;

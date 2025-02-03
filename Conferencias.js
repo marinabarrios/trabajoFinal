@@ -1,4 +1,4 @@
-const Sesiones = require("./Sesiones");
+const Sesiones = require("./Sesiones/Sesiones");
 
 class Conferencias { 
 

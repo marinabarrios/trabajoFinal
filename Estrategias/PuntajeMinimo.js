@@ -1,4 +1,4 @@
-const Estrategias = require("./Estrategias");
+const Estrategias = require("./Estrategias/Estrategias");
 
 class PuntajeMinimo extends Estrategias {
     constructor(puntajeMinimo) {

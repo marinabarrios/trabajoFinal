@@ -1,6 +1,6 @@
 const ComfyChair = require('./ComfyChair.js');
-const PorcentajeDeAceptados = require('./PorcentajeDeAceptados.js');
-const PuntajeMinimo = require('./PuntajeMinimo.js');
+const PorcentajeDeAceptados = require('./Estrategias/PorcentajeDeAceptados.js');
+const PuntajeMinimo = require('./Estrategias/PuntajeMinimo.js');
 const empresa = new ComfyChair();
 
 // ********************* CONFIGURACIÓN GENERAL ************************************** /

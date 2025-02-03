@@ -1,4 +1,4 @@
-const Estrategias = require("./Estrategias.js");
+const Estrategias = require("./Estrategias/Estrategias.js");
 
 class PorcentajeDeAceptados extends Estrategias{
     constructor(porcentajeAceptacion) {

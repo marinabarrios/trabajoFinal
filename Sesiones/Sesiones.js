@@ -1,9 +1,30 @@
-const GestorDeArticulos = require("./GestorDeArticulos");
-const Articulos = require("./Articulos");
-const Autores = require("./Autores");
+//const GestorDeArticulos = require("./GestorDeArticulos");
+//const Articulos = require("./Articulos/Articulos");
+//const Autores = require("./Usuarios/Autores");
 
 class Sesiones{
-    constructor(tema, tipoSesion, deadlineRecepcion, estadoSesion, estrategiaPorDefecto, estrategiasPorTipoDeArticulo = {}) {
+    constructor(tema, deadlineRecepcion, estadoSesion) {
+        if (this.constructor === Sesiones) {
+            throw new Error("No se puede instanciar una clase abstracta");
+        }
+        this.tema = tema;
+        this.deadlineRecepcion = deadlineRecepcion;
+        this.estadoSesion = estadoSesion;
+        this.articulos = [];
+    }
+    
+    recibirArticulo(articulo) {
+        if (this.validarArticulo(articulo)) {
+            this.articulos.push(articulo);
+        } else {
+            throw new Error("El artículo no cumple con los criterios de la sesión");
+        }
+    }
+    
+    realizarNotificacion(autor, mensaje) {
+        autor.agregarNotificacion(mensaje);
+    }
+    /*constructor(tema, tipoSesion, deadlineRecepcion, estadoSesion, estrategiaPorDefecto, estrategiasPorTipoDeArticulo = {}) {
         this._tema = tema;
         this._tipoSesion = tipoSesion; // 'regular', 'workshop', 'posters'
         this._deadlineRecepcion = deadlineRecepcion;
@@ -299,6 +320,6 @@ class Sesiones{
             articulosCreados.push(artObj);
         });
         return articulosCreados;
-    }
+    }*/
 }
 module.exports = Sesiones;

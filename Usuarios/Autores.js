@@ -1,4 +1,4 @@
-const Articulos = require("./Articulos");
+const Articulos = require("../Articulos/Articulos");
 const Usuarios = require("./Usuarios");
 
 class Autores extends Usuarios{
