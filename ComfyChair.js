@@ -66,7 +66,7 @@ class ComfyChair {
         const nuevaConferencia = new Conferencias (nombreConferencia,fechaInicio, fechaFin, organizadores, comite, autores);
         this._conferencias.push(nuevaConferencia);
         return nuevaConferencia;
-    }    
+    }   
 
     listConferencias() {
         return this._conferencias;            

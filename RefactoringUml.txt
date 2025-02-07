@@ -1,0 +1,100 @@
+@startuml
+class ComfyChair{
+  +registrarUsuario(tipo,nombreUsuario,afiliacion,email,contrasenia)
+  +crearConferencia(nombreConferencia,fechaInicio,fechaFin)
+}
+class Conferencias{
+}
+abstract class Sesiones{
+}
+class SesionPoster{
+}
+class SesionRegular{
+}
+class SesionWorkshop{
+}
+
+Sesiones <|-- SesionPoster
+Sesiones <|-- SesionRegular
+Sesiones <|-- SesionWorkshop
+
+abstract class Articulos{
+}
+class ArticuloPoster{
+}
+class ArticuloRegular{
+}
+
+Articulos <|-- ArticuloPoster
+Articulos <|-- ArticuloRegular
+
+abstract class Usuarios{
+}
+class Chairs{
+}
+class Revisores{
+}
+class Autores{
+}
+
+Usuarios <|-- Chairs
+Usuarios <|-- Revisores
+Usuarios <|-- Autores
+
+abstract class Estrategias{
+}
+class PorcentajeDeAceptados{
+}
+class PuntajeMinimo{
+}
+
+Estrategias <|-- PorcentajeDeAceptados
+Estrategias <|-- PuntajeMinimo
+
+ComfyChair *-- Conferencias
+ComfyChair *-- Usuarios
+Conferencias *-- Sesiones
+Sesiones --> Estrategias
+SesionPoster --> Estrategias
+SesionRegular --> Estrategias
+SesionWorkshop --> Estrategias
+Sesiones --> Articulos
+
+enum EstadosSesion{
+  Recepcion
+  Bidding
+  Asignacion
+  Revision
+  Seleccion
+}
+Sesiones ..> EstadosSesion
+  enum TiposDeInteres{
+  Interesado
+  NoInteresado
+  Quizas
+}
+Sesiones ..> TiposDeInteres
+Revisores ..> TiposDeInteres
+enum TiposDeArticulos{
+  Poster
+  Regular
+}
+Sesiones ..> TiposDeArticulos
+Articulos ..> TiposDeArticulos
+enum EstadosDelArticulo{
+  Recepcion
+  Aceptado
+  Rechazado
+  Bidding
+  Asignacion
+  Revision
+  Seleccion
+}
+Articulos ..> EstadosDelArticulo
+enum TiposDeUsuarios{
+  Chair
+  Revisor
+  Autor
+}
+Usuarios ..> TiposDeUsuarios
+@enduml

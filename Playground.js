@@ -6,7 +6,7 @@ const empresa = new ComfyChair();
 // ********************* CONFIGURACIÓN GENERAL ************************************** /
 //  REGISTRO USUARIOS /
 const juan = empresa.registrarUsuario('chair', 'Juan Rodriguez', 'UNLP', 'juan_rodriguez@gmail.com', '123456');
-const jose = empresa.registrarUsuario('autor','José Gonzalez', 'UNNE', 'jose_gonzalez@gmail.com', '123456');
+/*const jose = empresa.registrarUsuario('autor','José Gonzalez', 'UNNE', 'jose_gonzalez@gmail.com', '123456');
 const matias = empresa.registrarUsuario('autor','Matias Lei', 'UNAM', 'matias_lei@gmail.com', '123456');
 const leo = empresa.registrarUsuario('autor','Leonardo Rey', 'UNAM', 'leonardo_rey@gmail.com', '123456');
 const mariana = empresa.registrarUsuario('autor','Mariana Lei', 'UNAM', 'mariana_lei@gmail.com', '123456');
@@ -185,7 +185,7 @@ console.log('notificacionesLeo',notificacionesLeo);
 const notificacionesMariana = mariana.obtenerNotificaciones();
 console.log('notificacionesMariana',notificacionesMariana);
 const notificacionesMateo = mateo.obtenerNotificaciones();
-console.log('notificacionesMateo',notificacionesMateo);
+console.log('notificacionesMateo',notificacionesMateo);*/
 
 // ****************************** FIN ETAPA RECEPCION *********************************** /
 

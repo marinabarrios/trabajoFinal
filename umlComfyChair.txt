@@ -46,13 +46,7 @@ class Sesiones{
   +simplificarArticulo(articulo)
   +desdeObjetoPlano(datosArticulo)
 }
-class SesionPoster {
-}
-class SesionRegular {
-}
-class SesionWorkshop {
-}
-abstract class Articulos{
+class Articulos{
   id
   tituloArticulo: String
   tipoArticulo: String
@@ -65,10 +59,6 @@ abstract class Articulos{
   interesRevisores: revisor, articulo, sesion
   +agregarInteres(revisor,tipoInteres,temaSesion)
   +mostrarRevisorInteres()
-}
-class ArticuloPoster{
-}
-class ArticuloRegular{
 }
 abstract class Usuarios{
   nombreUsuario: String
@@ -119,15 +109,7 @@ Usuarios --> Sesiones
 Usuarios <|-- Chairs
 Usuarios <|-- Autores
 Usuarios <|-- Revisores
-Sesiones <|-- SesionPoster
-Sesiones <|-- SesionRegular
-Sesiones <|-- SesionWorkshop
-Sesiones ..> Estrategias
-SesionPoster ..> Estrategias
-SesionRegular ..> Estrategias
-SesionWorkshop ..> Estrategias
+Sesiones o-- Estrategias
 Estrategias<|-- PorcentajeDeAceptados
 Estrategias<|-- PuntajeMinimo
-Articulos<|-- ArticuloPoster
-Articulos<|-- ArticuloRegular
 @enduml
