@@ -1,10 +1,27 @@
 @startuml
-class ComfyChair{
-  +registrarUsuario(tipo,nombreUsuario,afiliacion,email,contrasenia)
-  +crearConferencia(nombreConferencia,fechaInicio,fechaFin)
+class Comfychair{
 }
 class Conferencias{
 }
+abstract class Usuarios{
+}
+
+Comfychair --> Conferencias
+Comfychair --> Usuarios
+
+class Chairs{
+}
+class Autores{
+}
+class Revisores{
+}
+class Revision{
+}
+Usuarios --> Chairs
+Usuarios --> Autores
+Usuarios --> Revisores
+Revisores --> Revision
+
 abstract class Sesiones{
 }
 class SesionPoster{
@@ -14,87 +31,54 @@ class SesionRegular{
 class SesionWorkshop{
 }
 
+Conferencias --> Sesiones
 Sesiones <|-- SesionPoster
 Sesiones <|-- SesionRegular
 Sesiones <|-- SesionWorkshop
 
-abstract class Articulos{
+abstract class EstadoSesion{
 }
-class ArticuloPoster{
+class EstadoRecepcion{
 }
-class ArticuloRegular{
+class EstadoBidding{
 }
-
-Articulos <|-- ArticuloPoster
-Articulos <|-- ArticuloRegular
-
-abstract class Usuarios{
+class EstadoRevision{
 }
-class Chairs{
+class EstadoAsignacion{
 }
-class Revisores{
-}
-class Autores{
+class EstadoSeleccion{
 }
 
-Usuarios <|-- Chairs
-Usuarios <|-- Revisores
-Usuarios <|-- Autores
+Sesiones --> EstadoSesion
+EstadoSesion <|-- EstadoRecepcion
+EstadoSesion <|-- EstadoBidding
+EstadoSesion <|-- EstadoRevision
+EstadoSesion <|-- EstadoAsignacion
+EstadoSesion <|-- EstadoSeleccion
 
 abstract class Estrategias{
 }
-class PorcentajeDeAceptados{
+class PorcetajeDeAceptados{
 }
 class PuntajeMinimo{
 }
 
-Estrategias <|-- PorcentajeDeAceptados
-Estrategias <|-- PuntajeMinimo
-
-ComfyChair *-- Conferencias
-ComfyChair *-- Usuarios
-Conferencias *-- Sesiones
 Sesiones --> Estrategias
 SesionPoster --> Estrategias
 SesionRegular --> Estrategias
 SesionWorkshop --> Estrategias
-Sesiones --> Articulos
+Estrategias <|-- PorcetajeDeAceptados
+Estrategias <|-- PuntajeMinimo
 
-enum EstadosSesion{
-  Recepcion
-  Bidding
-  Asignacion
-  Revision
-  Seleccion
+abstract class Articulos{
 }
-Sesiones ..> EstadosSesion
-  enum TiposDeInteres{
-  Interesado
-  NoInteresado
-  Quizas
+class ArticuloRegular{
 }
-Sesiones ..> TiposDeInteres
-Revisores ..> TiposDeInteres
-enum TiposDeArticulos{
-  Poster
-  Regular
+class ArticuloPoster{
 }
-Sesiones ..> TiposDeArticulos
-Articulos ..> TiposDeArticulos
-enum EstadosDelArticulo{
-  Recepcion
-  Aceptado
-  Rechazado
-  Bidding
-  Asignacion
-  Revision
-  Seleccion
-}
-Articulos ..> EstadosDelArticulo
-enum TiposDeUsuarios{
-  Chair
-  Revisor
-  Autor
-}
-Usuarios ..> TiposDeUsuarios
+
+Sesiones --> Articulos
+Articulos <|-- ArticuloRegular
+Articulos <|-- ArticuloPoster
+Articulos --> Revision
 @enduml
