@@ -3,27 +3,39 @@
 //const Autores = require("./Usuarios/Autores");
 
 class Sesiones{
-    constructor(tema, deadlineRecepcion, estadoSesion) {
+    constructor(tema, tipoSesion, deadlineRecepcion) {
         if (this.constructor === Sesiones) {
             throw new Error("No se puede instanciar una clase abstracta");
         }
-        this.tema = tema;
-        this.deadlineRecepcion = deadlineRecepcion;
-        this.estadoSesion = estadoSesion;
-        this.articulos = [];
+        this._tema = tema;
+        this._tipoSesion = tipoSesion;
+        this._deadlineRecepcion = deadlineRecepcion;
+        //this.articulos = [];
     }
     
-    recibirArticulo(articulo) {
+  /*  recibirArticulo(articulo) {
         if (this.validarArticulo(articulo)) {
             this.articulos.push(articulo);
         } else {
             throw new Error("El artículo no cumple con los criterios de la sesión");
         }
     }
+
+     //Método que permite verificar si se pasó la fecha del deadline
+     verificarDeadlineRecepcion(){
+        const fechaActual = new Date();
+        const fechaActualSinHora = fechaActual.toISOString().split('T')[0];
+        if (fechaActualSinHora > this._deadlineRecepcion) {
+            this._estadoSesion = 'bidding';
+        } else {
+            this._estadoSesion = 'recepcion';
+        }
+        return this._estadoSesion;
+    }
     
     realizarNotificacion(autor, mensaje) {
         autor.agregarNotificacion(mensaje);
-    }
+    }*/
     /*constructor(tema, tipoSesion, deadlineRecepcion, estadoSesion, estrategiaPorDefecto, estrategiasPorTipoDeArticulo = {}) {
         this._tema = tema;
         this._tipoSesion = tipoSesion; // 'regular', 'workshop', 'posters'

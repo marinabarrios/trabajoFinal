@@ -93,13 +93,17 @@ class Autores{
   +obtenerNotificaciones()
 }
 class Estrategias{
-  +seleccionarTipoDeEvaluacion()
+  +seleccionarArticulos(articulos: List<articulos>): List<Articulo>
 }
 class PorcentajeDeAceptados{
-  +seleccionarTipoDeEvaluacion()
+  porcentajeDeAceptados: float
+  +seleccionarArticulos(articulos: List<articulos>): List<Articulo>
+  +metodoPorcentajeDeAceptados(porcentajeDeAceptados: float)
 }
 class PuntajeMinimo{
-  +seleccionarTipoDeEvaluacion()
+  puntajeMinimo: float
+  +seleccionarArticulos(articulos: List<articulos>): List<Articulo>
+  +metodoPuntajeMinimo(puntajeMinimo: float)
 }
 ComfyChair *-- "*" Conferencias
 ComfyChair *-- "*" Usuarios

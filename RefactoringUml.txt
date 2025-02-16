@@ -1,28 +1,63 @@
 @startuml
 class Comfychair{
+  +crearConferencia(nombreConferencia: String, fechaInicio: Date, fechaFin: Date): Sesiones
+  +listConferencias(): List<conferencias>
 }
 class Conferencias{
+  nombreConferencia: String
+  fechaInicio: Date
+  fechaFin: Date
+  oganizadores: List<chairs>
+  comite: List<revisores>
+  sesiones: List<sesiones>
+  +nombreConferencia(): String
+  +crearSesion(tema: String, tipoSesion: String, deadlineRecepdion: Date): Sesion
+  +listSesiones(): List<sesiones>
+  +asignarRevisores(List<revisores>): Void
+  +listChairs(): List<chairs>
 }
 abstract class Usuarios{
+  nombreUsuario: String
+  afiliacion: String
+  email: String
+  contrasenia: String
+  +nombreUsuario(): String
+  +listUsuarios(): List<usuarios>
+  +agregarRol(tipoUsuario): Void
 }
 
 Comfychair --> Conferencias
-Comfychair --> Usuarios
 
 class Chairs{
+  +asignarRevisores(articulo: Articulos, revisor: Revisores): Void
 }
 class Autores{
 }
 class Revisores{
+  +expresarInteres(sesion: Sesiones, articulo: Articulos, tipoInteres: String): Void
+  +realizarEvaluacion(sesion: Sesiones, articulo: Articulos, comentario: String, puntaje: Integer): Void
 }
 class Revision{
 }
+Conferencias --> Chairs
+Conferencias --> Revisores
 Usuarios --> Chairs
 Usuarios --> Autores
 Usuarios --> Revisores
 Revisores --> Revision
 
 abstract class Sesiones{
+  tema: String  
+  tipoSesion: String  
+  maximoArticulosAceptados: Integer
+  estadoSesion: EstadoSesion
+  estrategia: Estrategias
+  articulos: List<articulos>
+  +verificarDeadlineRecepcion(): Boolean
+  +setEstrategia()
+  +listArticulos(): List<articulos>
+  +validarArticulo(articulo: Articulos): Boolean
+  +cambiarEstadoSesion(estadoSesion: EstadoSesion)
 }
 class SesionPoster{
 }
@@ -39,6 +74,8 @@ Sesiones <|-- SesionWorkshop
 abstract class EstadoSesion{
 }
 class EstadoRecepcion{
+  deadlineRecepdion: Date
+  +verificarDeadlineRecepcion(): Boolean
 }
 class EstadoBidding{
 }
@@ -71,10 +108,21 @@ Estrategias <|-- PorcetajeDeAceptados
 Estrategias <|-- PuntajeMinimo
 
 abstract class Articulos{
+  tituloArticulo: String
+  tipoArticulo: String
+  archivoAdjunto: String
+  autoresArticulo: nombreUsuario
+  autorNotificacion: nombreUsuario
+  fechaEntrega: Date
+  interesRevisores: revisor, articulo, sesion
+  +agregarInteres(revisor,tipoInteres,temaSesion)
+  +mostrarRevisorInteres()
 }
 class ArticuloRegular{
+  abstract: String
 }
 class ArticuloPoster{
+  archivoFuentes: String
 }
 
 Sesiones --> Articulos

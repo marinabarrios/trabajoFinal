@@ -4,12 +4,17 @@ const Articulos = require("../Articulos/Articulos");
 class Chairs extends Usuarios{
     constructor (nombreUsuario, afiliacion, email, contrasenia){
         super(nombreUsuario, afiliacion, email, contrasenia);
+        this._nombreUsuario = nombreUsuario;
+        this._afiliacion = afiliacion;
+        this._email = email;
+        this._contrasenia = contrasenia;
+        this.agregarRol('CHAIR');
     }
 
     nombreUsuario() {
         return this._nombreUsuario;
     }    
-
+/*
     verBidds(articulo){
         return articulo.mostrarRevisorInteres();
     }
@@ -125,6 +130,6 @@ class Chairs extends Usuarios{
         // Aplano el array de arrays en un solo array.
         const interesesAplanados = interesesPorRevisor.flat();
         return interesesAplanados;
-    }
+    }*/
 }
 module.exports = Chairs;

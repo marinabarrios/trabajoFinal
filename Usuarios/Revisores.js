@@ -4,13 +4,18 @@ const Articulos = require("../Articulos/Articulos");
 class Revisores extends Usuarios{
     constructor (nombreUsuario, afiliacion, email, contrasenia){
         super(nombreUsuario, afiliacion, email, contrasenia);
+        this._nombreUsuario = nombreUsuario;
+        this._afiliacion = afiliacion;
+        this._email = email;
+        this._contrasenia = contrasenia;
+        this.agregarRol('REVISOR');
         this._intereses = [];
     }
 
     nombreUsuario() {
         return this._nombreUsuario;
     }
-
+/*
     expresarInteres(sesion, articulo, tipoInteres){
 
         if(sesion._estadoSesion === 'bidding') {
@@ -109,6 +114,6 @@ class Revisores extends Usuarios{
             new Date(obj._fechaEntrega),
             obj.estadoArticulo
         );
-    }
+    }*/
 }
 module.exports = Revisores;

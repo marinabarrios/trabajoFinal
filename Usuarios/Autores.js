@@ -4,11 +4,16 @@ const Usuarios = require("./Usuarios");
 class Autores extends Usuarios{
     constructor (nombreUsuario, afiliacion, email, contrasenia){
         super(nombreUsuario, afiliacion, email, contrasenia);
-        this._articulosCreados = []; //Lista de articulos enviados
-        this._notificaciones = []; // Lista de notificaciones recibidas
+        this._nombreUsuario = nombreUsuario;
+        this._afiliacion = afiliacion;
+        this._email = email;
+        this._contrasenia = contrasenia;
+        this.agregarRol('AUTOR');
+        //this._articulosCreados = []; //Lista de articulos enviados
+        //this._notificaciones = []; // Lista de notificaciones recibidas
     }
 
-    nombreUsuario() {
+    /*nombreUsuario() {
         return this._nombreUsuario;
     }
 
@@ -38,6 +43,6 @@ class Autores extends Usuarios{
 
     obtenerNotificaciones() {
         return this._notificaciones;
-    }
+    }*/
 }
 module.exports = Autores;
