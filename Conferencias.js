@@ -1,13 +1,20 @@
 const SesionRegular = require("./Sesiones/SesionRegular");
 const SesionWorkshop = require("./Sesiones/SesionWorkshop");
 const SesionPoster = require("./Sesiones/SesionPoster");
+const Usuarios = require("./Usuarios/Usuarios");
 
 class Conferencias { 
     constructor(nombreConferencia, fechaInicio, fechaFin) {
         this._nombreConferencia = nombreConferencia;
         this._fechaInicio = fechaInicio;
         this._fechaFin = fechaFin;
+        //this._organizadores = organizadores; //listado de usuarios organizadores de la conferencia
+        //this._comite = comite; //listado de usuarios revisores que conforman el comite
         this._sesiones =[];
+
+        const usuarios = Usuarios.listarTodosLosUsuarios();
+        this._organizadores = usuarios.filter(usuario => usuario.roles.includes("CHAIR"));
+        this._comite = usuarios.filter(usuario => usuario.roles.includes("REVISOR"));
     }
 
     nombreConferencia() {
@@ -35,6 +42,14 @@ class Conferencias {
 
     listSesiones(){
         return this._sesiones;
+    }
+
+    // Lista organizadores y comité de revisores de la conferencia
+    listarOrganizadoresYComite() {
+        return {
+            organizadores: this._organizadores.map(org => org.nombre),
+            comite: this._comite.map(rev => rev.nombre)
+        };
     }
 /*
     constructor(nombreConferencia, fechaInicio, fechaFin, organizadores, comite, autores) {

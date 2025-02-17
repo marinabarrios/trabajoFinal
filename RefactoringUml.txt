@@ -21,19 +21,27 @@ abstract class Usuarios{
   afiliacion: String
   email: String
   contrasenia: String
+  rol: String
   +nombreUsuario(): String
-  +listUsuarios(): List<usuarios>
-  +agregarRol(tipoUsuario): Void
+  +listarUsuariosPorRol(usuario: Usuarios, rol: String): List<usuarios>
+  +agregarRol(rol: String): Void
+  +cambiarRolUsuario(rol: String)
 }
 
 Comfychair --> Conferencias
 
 class Chairs{
+  +nombreUsuario(): String
+  +cambiarRolUsuario(rol: String)
   +asignarRevisores(articulo: Articulos, revisor: Revisores): Void
 }
 class Autores{
+  +nombreUsuario(): String
+  +cambiarRolUsuario(rol: String)
 }
 class Revisores{
+  +nombreUsuario(): String
+  +cambiarRolUsuario(rol: String)
   +expresarInteres(sesion: Sesiones, articulo: Articulos, tipoInteres: String): Void
   +realizarEvaluacion(sesion: Sesiones, articulo: Articulos, comentario: String, puntaje: Integer): Void
 }

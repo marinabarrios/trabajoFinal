@@ -74,5 +74,16 @@ describe("Usuarios y sus subclases", () => {
             expect(revisores.length).toBe(1);
             expect(revisores).toContain(usuario3);
         });
+
+        test("Cambiar el rol de un usuario", () => {
+            usuario3.cambiarRolUsuario("CHAIR");
+            expect(usuario3._rol.length).toBe(1);
+            expect(usuario3._rol).toContain("CHAIR");
+        });
+        
+        test("Intentar cambiar el rol de un usuario sin rol asignado", () => {
+            usuario3._rol = []; // Eliminar todos los roles manualmente
+            expect(() => usuario3.cambiarRolUsuario("AUTOR")).toThrow("El usuario no tiene un rol asignado.");
+        });
     });
 });

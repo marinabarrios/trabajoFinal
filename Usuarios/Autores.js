@@ -13,10 +13,18 @@ class Autores extends Usuarios{
         //this._notificaciones = []; // Lista de notificaciones recibidas
     }
 
-    /*nombreUsuario() {
+    nombreUsuario() {
         return this._nombreUsuario;
     }
 
+    cambiarRolUsuario(nuevoRol) {
+        if (!this._rol.length) {
+            throw new Error("El usuario no tiene un rol asignado.");
+        }
+
+        this._rol = [nuevoRol];
+    }
+/*
     crearArticulo(id, tituloArticulo, tipoArticulo, abstract = null, archivoAdjunto, autoresArticulo, archivoFuentes = null, autorNotificacion, fechaEntrega){
         const nuevoArticulo = new Articulos (id, tituloArticulo, tipoArticulo, abstract, archivoAdjunto, autoresArticulo, archivoFuentes, autorNotificacion, fechaEntrega);
         //Cuando se crea el articulo se crea en el estado enProceso, eso quiere decir que aun no esta aceptado ni rechazado//

@@ -15,6 +15,14 @@ class Revisores extends Usuarios{
     nombreUsuario() {
         return this._nombreUsuario;
     }
+
+    cambiarRolUsuario(nuevoRol) {
+        if (!this._rol.length) {
+            throw new Error("El usuario no tiene un rol asignado.");
+        }
+
+        this._rol = [nuevoRol];
+    }
 /*
     expresarInteres(sesion, articulo, tipoInteres){
 
