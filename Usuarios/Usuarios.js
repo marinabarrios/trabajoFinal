@@ -11,7 +11,7 @@ class Usuarios {
         this._email = email;
         this._contrasenia = contrasenia;
         this._usuarios = [];
-        this._rol = []; // el usuario tiene un solo rol... antes de seguir avanzando -> ver todos los cambios que debo hacer. xq así como está puede tener mas de un rol
+        this._rol = null; // el usuario tiene un solo rol... antes de seguir avanzando -> ver todos los cambios que debo hacer. xq así como está puede tener mas de un rol
 
         // Agrega cada usuario creado a la lista
         Usuarios.usuariosRegistrados.push(this);
@@ -22,21 +22,22 @@ class Usuarios {
     }
 
     agregarRol(rol){
-        if (!this._rol.includes(rol)) {
-            this._rol.push(rol);
+        if (this._rol) {
+            throw new Error(`El usuario ya tiene un rol asignado: ${this._rol}`);
         }
+        this._rol = rol;
     }
 
     static listarUsuariosPorRol(usuarios, rol) {
-        return usuarios.filter(usuario => usuario._rol.includes(rol));
+        return usuarios.filter(usuario => usuario._rol === rol);
     }
 
     cambiarRolUsuario(nuevoRol) {
-        if (!this._rol.length) {
+        if (!this._rol) {
             throw new Error("El usuario no tiene un rol asignado.");
         }
 
-        this._rol = [nuevoRol];
+        this._rol = nuevoRol;
     }
 
     // Lista todos los usuarios con sus roles
@@ -45,6 +46,10 @@ class Usuarios {
             nombre: usuario._nombreUsuario,
             roles: usuario._rol
         }));
+    }
+
+    rol() {
+        return this._rol;
     }
 }
 module.exports = Usuarios;

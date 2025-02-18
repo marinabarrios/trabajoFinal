@@ -1,16 +1,17 @@
 const Conferencias = require("../Conferencias");
 const Sesiones = require("../Sesiones/Sesiones");
+const Usuarios = require("../Usuarios/Usuarios");
 
 describe("Conferencias", () => {
     let conferencia;
 
     beforeEach(() => {
         Usuarios.usuariosRegistrados = [
-            { _nombreUsuario: "Ana Pérez", _rol: ["CHAIR"] },
-            { _nombreUsuario: 'Juan Rodriguez', _afiliacion: 'UNLP', _email: 'juan_rodriguez@gmail.com', _contrasenia: '123456', _rol: ["CHAIR"]},
-            { _nombreUsuario: "Luis Gómez", _rol: ["REVISOR"] },
-            { _nombreUsuario: "Carlos Ruiz", _rol: ["AUTOR"] },
-            { _nombreUsuario: "Marta Díaz", _rol: ["CHAIR", "REVISOR"] }
+            { _nombreUsuario: 'Juan Rodriguez', _afiliacion: 'UNLP', _email: 'juan_rodriguez@gmail.com', _contrasenia: '123456', _rol: 'AUTOR'},
+            { _nombreUsuario: 'José Gonzalez', _afiliacion: 'UNNE', _email: 'jose_gonzalez@gmail.com', _contrasenia: '123456', _rol: 'CHAIR'},
+            { _nombreUsuario: 'Matias Lei', _afiliacion: 'UNAM', _email: 'matias_lei@gmail.com', _contrasenia: '123456', _rol: 'REVISOR'},
+            { _nombreUsuario: 'Leonardo Rey', _afiliacion: 'UNAM', _email: 'leonardo_rey@gmail.com', _contrasenia: '123456', _rol: 'AUTOR'},
+            { _nombreUsuario: 'Mateo Rey', _afiliacion: 'UNAM', _email: 'mateo_rey@gmail.com', _contrasenia: '123456', _rol: 'REVISOR'}
         ];
 
         conferencia = new Conferencias('Conferencia Informática', '2025-05-10', '2025-05-15');
@@ -24,10 +25,10 @@ describe("Conferencias", () => {
         expect(conferencia.listSesiones()).toEqual([]); // No tiene sesiones al inicio
     });
 
-    /*
-test("Debe asignar correctamente los organizadores y comité de revisores", () => {
-        const organizadoresEsperados = ["Ana Pérez", "Marta Díaz"]; // CHAIR
-        const comiteEsperado = ["Luis Gómez", "Marta Díaz"]; // REVISOR
+    
+    test("Debe asignar correctamente los organizadores y comité de revisores", () => {
+        const organizadoresEsperados = ['José Gonzalez']; // CHAIR
+        const comiteEsperado = ['Matias Lei', 'Mateo Rey']; // REVISORES
 
         expect(conferencia._organizadores.map(o => o.nombre)).toEqual(organizadoresEsperados);
         expect(conferencia._comite.map(c => c.nombre)).toEqual(comiteEsperado);
@@ -37,11 +38,11 @@ test("Debe asignar correctamente los organizadores y comité de revisores", () =
         const listado = conferencia.listarOrganizadoresYComite();
 
         expect(listado).toEqual({
-            organizadores: ["Ana Pérez", "Marta Díaz"],
-            comite: ["Luis Gómez", "Marta Díaz"]
+            organizadores: ['José Gonzalez'],
+            comite: ['Matias Lei', 'Mateo Rey']
         });
     });
-    */
+    
 
     test("Debe crear una sesión correctamente", () => {
         const sesion = conferencia.crearSesion('Inteligencia Artificial', 'WORKSHOP', '2025-04-30');

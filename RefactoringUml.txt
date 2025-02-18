@@ -13,6 +13,7 @@ class Conferencias{
   +nombreConferencia(): String
   +crearSesion(tema: String, tipoSesion: String, deadlineRecepdion: Date): Sesion
   +listSesiones(): List<sesiones>
+  +listarOrganizadoresYComite(): { organizadores: List<String>, comite: List<String> }
   +asignarRevisores(List<revisores>): Void
   +listChairs(): List<chairs>
 }

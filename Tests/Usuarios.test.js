@@ -13,7 +13,7 @@ describe("Usuarios y sus subclases", () => {
 
         expect(autor).toBeInstanceOf(Autores);
         expect(autor.nombreUsuario()).toBe('José Gonzalez');
-        expect(autor._rol).toContain('AUTOR');
+        expect(autor.rol()).toContain('AUTOR');
     });
 
     test("Debe crear correctamente un Chair", () => {
@@ -21,7 +21,7 @@ describe("Usuarios y sus subclases", () => {
 
         expect(chair).toBeInstanceOf(Chairs);
         expect(chair.nombreUsuario()).toBe('Matias Lei');
-        expect(chair._rol).toContain("CHAIR");
+        expect(chair.rol()).toContain("CHAIR");
     });
 
     test("Debe crear correctamente un Revisor", () => {
@@ -29,19 +29,19 @@ describe("Usuarios y sus subclases", () => {
 
         expect(revisor).toBeInstanceOf(Revisores);
         expect(revisor.nombreUsuario()).toBe('Leonardo Rey');
-        expect(revisor._rol).toContain("REVISOR");
+        expect(revisor.rol()).toContain("REVISOR");
         expect(revisor._intereses).toEqual([]);
     });
 
     test("Debe dar de alta 2 autores y verificar que existen", () => {
-        const autor1 = new Autores("Ana", "UNNE", "ana@correo.com", "5678");
-        const autor2 = new Autores("Pedro", "UNNE", "pedro@correo.com", "abcd");
+        const autor1 = new Autores('Matias Lei', 'UNAM', 'matias_lei@gmail.com', '123456');
+        const autor2 = new Autores('Leonardo Rey', 'UNAM', 'leonardo_rey@gmail.com', '123456');
     
         const listaAutores = [autor1, autor2];
     
         expect(listaAutores.length).toBe(2);
-        expect(listaAutores[0].nombreUsuario()).toBe("Ana");
-        expect(listaAutores[1].nombreUsuario()).toBe("Pedro");
+        expect(listaAutores[0].nombreUsuario()).toBe('Matias Lei');
+        expect(listaAutores[1].nombreUsuario()).toBe('Leonardo Rey');
     });
 
     describe("Usuarios - Listar por Rol", () => {
@@ -77,12 +77,11 @@ describe("Usuarios y sus subclases", () => {
 
         test("Cambiar el rol de un usuario", () => {
             usuario3.cambiarRolUsuario("CHAIR");
-            expect(usuario3._rol.length).toBe(1);
-            expect(usuario3._rol).toContain("CHAIR");
+            expect(usuario3.rol()).toContain("CHAIR");
         });
         
         test("Intentar cambiar el rol de un usuario sin rol asignado", () => {
-            usuario3._rol = []; // Eliminar todos los roles manualmente
+            usuario3._rol = null; // Eliminar todos los roles manualmente
             expect(() => usuario3.cambiarRolUsuario("AUTOR")).toThrow("El usuario no tiene un rol asignado.");
         });
     });

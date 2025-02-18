@@ -18,11 +18,11 @@ class Autores extends Usuarios{
     }
 
     cambiarRolUsuario(nuevoRol) {
-        if (!this._rol.length) {
+        if (!this._rol) {
             throw new Error("El usuario no tiene un rol asignado.");
         }
 
-        this._rol = [nuevoRol];
+        this._rol = nuevoRol;
     }
 /*
     crearArticulo(id, tituloArticulo, tipoArticulo, abstract = null, archivoAdjunto, autoresArticulo, archivoFuentes = null, autorNotificacion, fechaEntrega){
