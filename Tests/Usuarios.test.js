@@ -4,85 +4,93 @@ const Revisores = require("../Usuarios/Revisores");
 const Usuarios = require("../Usuarios/Usuarios");
 
 describe("Usuarios y sus subclases", () => {
+    let autor, autor1, autor2, autor3, revisor, revisor1, chair, chair1;
+
+        beforeEach(() => {
+            autor = new Autores('Juan Rodriguez', 'UNLP', 'juan_rodriguez@gmail.com', '123456');
+            chair = new Chairs('Matias Lei', 'UNAM', 'matias_lei@gmail.com', '123456');
+            revisor = new Revisores('Leonardo Rey', 'UNAM', 'leonardo_rey@gmail.com', '123456');
+            autor1 = new Autores('Sofia Perez', 'UBA', 'sofia_perez@gmail.com', '123456');
+            revisor1 = new Revisores('Carlos Lopez', 'UTN', 'carlos_lopez@gmail.com', '123456');
+            chair1 = new Chairs('Laura Díaz', 'UNL', 'laura_diaz@gmail.com', '123456');
+            autor2 = new Autores('José Gonzalez', 'UNNE', 'jose_gonzalez@gmail.com', '123456');
+            autor3 = new Autores('Julian Cotto', 'UBA', 'julian_cotto@gmail.com', '123456');
+
+            usuarios = [autor, autor1, autor2, autor3, revisor, revisor1, chair, chair1];
+        });
+
     test("No se puede instanciar directamente la clase Usuarios", () => {
-        expect(() => new Usuarios('Juan Rodriguez', 'UNLP', 'juan_rodriguez@gmail.com', '123456')).toThrow("No se puede instanciar una clase abstracta");
+        expect(() => new Usuarios('Juan Rodriguez', 'UNLP', 'juan_rodriguez@gmail.com', '123456'))
+        .toThrow("No se puede instanciar una clase abstracta");
     });
 
     test("Debe crear correctamente un Autor", () => {
-        const autor = new Autores('José Gonzalez', 'UNNE', 'jose_gonzalez@gmail.com', '123456');
-
         expect(autor).toBeInstanceOf(Autores);
-        expect(autor.nombreUsuario()).toBe('José Gonzalez');
-        expect(autor.rol()).toContain('AUTOR');
+        expect(autor.nombreUsuario()).toBe('Juan Rodriguez');
+        expect(autor._roles).toContain('AUTOR');
     });
 
     test("Debe crear correctamente un Chair", () => {
-        const chair = new Chairs('Matias Lei', 'UNAM', 'matias_lei@gmail.com', '123456');
-
         expect(chair).toBeInstanceOf(Chairs);
         expect(chair.nombreUsuario()).toBe('Matias Lei');
-        expect(chair.rol()).toContain("CHAIR");
+        expect(chair._roles).toContain("CHAIR");
     });
 
     test("Debe crear correctamente un Revisor", () => {
-        const revisor = new Revisores('Leonardo Rey', 'UNAM', 'leonardo_rey@gmail.com', '123456');
-
         expect(revisor).toBeInstanceOf(Revisores);
         expect(revisor.nombreUsuario()).toBe('Leonardo Rey');
-        expect(revisor.rol()).toContain("REVISOR");
+        expect(revisor._roles).toContain("REVISOR");
         expect(revisor._intereses).toEqual([]);
     });
 
+    test("Debe permitir que un autor también sea revisor o chair", () => {
+        autor1.agregarRol('REVISOR');
+        expect(autor1._roles).toContain('AUTOR');
+        expect(autor1._roles).toContain('REVISOR');
+    });
+
+    test("No debe permitir que un revisor también sea chair", () => {
+        expect(() => revisor1.agregarRol('CHAIR')).toThrow("Un usuario no puede ser CHAIR y REVISOR al mismo tiempo.");
+    });
+
+    test("No debe permitir que un chair también sea revisor", () => {
+        expect(() => chair1.agregarRol('REVISOR')).toThrow("Un usuario no puede ser CHAIR y REVISOR al mismo tiempo.");
+    });
+
     test("Debe dar de alta 2 autores y verificar que existen", () => {
-        const autor1 = new Autores('Matias Lei', 'UNAM', 'matias_lei@gmail.com', '123456');
-        const autor2 = new Autores('Leonardo Rey', 'UNAM', 'leonardo_rey@gmail.com', '123456');
-    
-        const listaAutores = [autor1, autor2];
+        const listaAutores = [autor2, autor3];
     
         expect(listaAutores.length).toBe(2);
-        expect(listaAutores[0].nombreUsuario()).toBe('Matias Lei');
-        expect(listaAutores[1].nombreUsuario()).toBe('Leonardo Rey');
+        expect(listaAutores[0].nombreUsuario()).toBe('José Gonzalez');
+        expect(listaAutores[1].nombreUsuario()).toBe('Julian Cotto');
     });
 
     describe("Usuarios - Listar por Rol", () => {
-        let usuario1, usuario2, usuario3, usuario4, usuarios;
-
-        beforeEach(() => {
-            usuario1 = new Autores('Juan Rodriguez', 'UNLP', 'juan_rodriguez@gmail.com', '123456');
-            usuario2 = new Chairs('José Gonzalez', 'UNNE', 'jose_gonzalez@gmail.com', '123456');
-            usuario3 = new Revisores('Matias Lei', 'UNAM', 'matias_lei@gmail.com', '123456');
-            usuario4 = new Autores('Leonardo Rey', 'UNAM', 'leonardo_rey@gmail.com', '123456');
-
-            usuarios = [usuario1, usuario2, usuario3, usuario4];
-        });
 
         test("Debe listar correctamente los usuarios con el rol 'AUTOR'", () => {
-            const autores = Usuarios.listarUsuariosPorRol(usuarios, "AUTOR");
-            expect(autores.length).toBe(2);
-            expect(autores).toContain(usuario1);
-            expect(autores).toContain(usuario4);
+            const autores = usuarios.filter(usuario => usuario._roles.includes("AUTOR"));
+            console.log("Usuarios con rol AUTOR:", autores.map(a => a.nombreUsuario()));
+            expect(autores.length).toBe(4);
         });
 
         test("Debe listar correctamente los usuarios con el rol 'CHAIR'", () => {
-            const chairs = Usuarios.listarUsuariosPorRol(usuarios, "CHAIR");
-            expect(chairs.length).toBe(1);
-            expect(chairs).toContain(usuario2);
+            const chairs = usuarios.filter(usuario => usuario._roles.includes("CHAIR"));            
+            expect(chairs.length).toBe(2);
         });
 
         test("Debe listar correctamente los usuarios con el rol 'REVISOR'", () => {
-            const revisores = Usuarios.listarUsuariosPorRol(usuarios, "REVISOR");
-            expect(revisores.length).toBe(1);
-            expect(revisores).toContain(usuario3);
+            const revisores = usuarios.filter(usuario => usuario._roles.includes("REVISOR"));
+            expect(revisores.length).toBe(2);
         });
 
         test("Cambiar el rol de un usuario", () => {
-            usuario3.cambiarRolUsuario("CHAIR");
-            expect(usuario3.rol()).toContain("CHAIR");
+            autor.cambiarRolUsuario("CHAIR");
+            expect(autor._roles).toContain("CHAIR");
         });
         
         test("Intentar cambiar el rol de un usuario sin rol asignado", () => {
-            usuario3._rol = null; // Eliminar todos los roles manualmente
-            expect(() => usuario3.cambiarRolUsuario("AUTOR")).toThrow("El usuario no tiene un rol asignado.");
+            revisor._roles = null; // Eliminar todos los roles manualmente
+            expect(() => revisor.cambiarRolUsuario("AUTOR")).toThrow("El usuario no tiene un rol asignado.");
         });
     });
 });

@@ -12,8 +12,8 @@ class Conferencias {
         this._sesiones =[];
 
         const usuarios = Usuarios.listarTodosLosUsuarios();
-        this._organizadores = usuarios.filter(usuario => usuario.roles === 'CHAIR');
-        this._comite = usuarios.filter(usuario => usuario.roles === 'REVISOR');
+        this._organizadores = usuarios.filter(usuario => usuario.roles.includes('CHAIR'));
+        this._comite = usuarios.filter(usuario => usuario.roles.includes('REVISOR'));
     }
 
     nombreConferencia() {
