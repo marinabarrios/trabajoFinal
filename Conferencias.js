@@ -11,7 +11,7 @@ class Conferencias {
 
         this._sesiones =[];
 
-        const usuarios = Usuarios.listarTodosLosUsuarios();
+        const usuarios = Usuarios.listarTodosLosUsuarios();console.log(usuarios);
         this._organizadores = usuarios.filter(usuario => usuario.roles.includes('CHAIR'));
         this._comite = usuarios.filter(usuario => usuario.roles.includes('REVISOR'));
     }

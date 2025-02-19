@@ -22,11 +22,13 @@ abstract class Usuarios{
   afiliacion: String
   email: String
   contrasenia: String
-  rol: String
+  roles: String
   +nombreUsuario(): String
-  +listarUsuariosPorRol(usuario: Usuarios, rol: String): List<usuarios>
+  +listarUsuariosPorRol(rol: String): List<usuarios>
   +agregarRol(rol: String): Void
+  +removerRol(rol: String): Void
   +cambiarRolUsuario(rol: String)
+  +listarTodosLosUsuarios(): { nombreUsuario: List<String>, roles: List<String> }
 }
 
 Comfychair --> Conferencias

@@ -6,12 +6,12 @@ describe("Conferencias", () => {
     let conferencia;
 
     beforeEach(() => {
-        Usuarios.usuariosRegistrados = [
-            { _nombreUsuario: 'Juan Rodriguez', _afiliacion: 'UNLP', _email: 'juan_rodriguez@gmail.com', _contrasenia: '123456', _rol: 'AUTOR'},
-            { _nombreUsuario: 'José Gonzalez', _afiliacion: 'UNNE', _email: 'jose_gonzalez@gmail.com', _contrasenia: '123456', _rol: 'CHAIR'},
-            { _nombreUsuario: 'Matias Lei', _afiliacion: 'UNAM', _email: 'matias_lei@gmail.com', _contrasenia: '123456', _rol: 'REVISOR'},
-            { _nombreUsuario: 'Leonardo Rey', _afiliacion: 'UNAM', _email: 'leonardo_rey@gmail.com', _contrasenia: '123456', _rol: 'AUTOR'},
-            { _nombreUsuario: 'Mateo Rey', _afiliacion: 'UNAM', _email: 'mateo_rey@gmail.com', _contrasenia: '123456', _rol: 'REVISOR'}
+       Usuarios.usuariosRegistrados = [
+            { _nombreUsuario: 'Juan Rodriguez', _afiliacion: 'UNLP', _email: 'juan_rodriguez@gmail.com', _contrasenia: '123456', _roles: 'AUTOR'},
+            { _nombreUsuario: 'José Gonzalez', _afiliacion: 'UNNE', _email: 'jose_gonzalez@gmail.com', _contrasenia: '123456', _roles: 'CHAIR'},
+            { _nombreUsuario: 'Matias Lei', _afiliacion: 'UNAM', _email: 'matias_lei@gmail.com', _contrasenia: '123456', _roles: 'REVISOR'},
+            { _nombreUsuario: 'Leonardo Rey', _afiliacion: 'UNAM', _email: 'leonardo_rey@gmail.com', _contrasenia: '123456', _roles: 'AUTOR'},
+            { _nombreUsuario: 'Mateo Rey', _afiliacion: 'UNAM', _email: 'mateo_rey@gmail.com', _contrasenia: '123456', _roles: 'REVISOR'}
         ];
 
         conferencia = new Conferencias('Conferencia Informática', '2025-05-10', '2025-05-15');
