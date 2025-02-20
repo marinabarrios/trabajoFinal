@@ -1,20 +1,17 @@
 class Articulos{
-    constructor(id, tituloArticulo, tipoArticulo, abstract = null, archivoAdjunto, autoresArticulo, archivoFuentes = null, autorNotificacion, fechaEntrega){
+    constructor(tituloArticulo, archivoAdjunto, autoresArticulo, autorNotificacion){
         if (this.constructor === Usuarios) {
             throw new Error("No se puede instanciar una clase abstracta");
         }
-        this._id = id; //se tiene que eliminar
         this._tituloArticulo = tituloArticulo;
-        this._tipoArticulo = tipoArticulo;
-        this._abstract = abstract;
+        //this._tipoArticulo = tipoArticulo;
         this._archivoAdjunto = archivoAdjunto;
         this._autoresArticulo = autoresArticulo;
-        this._archivoFuentes = archivoFuentes;
         this._autorNotificacion = autorNotificacion;
-        this._fechaEntrega = fechaEntrega;
         this._interesRevisores = [];
     }  
-    
+    //LOS ARTICULOS SE VAN A CREAR INSTANCIANDO LA CLASE
+
     agregarInteres(revisor, tipoInteres, temaSesion) {
         // Buscar si el revisor ya ha expresado interés previamente
         const interesExistente = this._interesRevisores.find(interes => interes.revisor === revisor._nombreUsuario);

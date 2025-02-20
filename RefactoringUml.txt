@@ -122,12 +122,8 @@ abstract class Articulos{
   tituloArticulo: String
   tipoArticulo: String
   archivoAdjunto: String
-  autoresArticulo: nombreUsuario
-  autorNotificacion: nombreUsuario
-  fechaEntrega: Date
-  interesRevisores: revisor, articulo, sesion
-  +agregarInteres(revisor,tipoInteres,temaSesion)
-  +mostrarRevisorInteres()
+  autoresArticulo: List<Autores>
+  autorNotificacion: Autores
 }
 class ArticuloRegular{
   abstract: String
