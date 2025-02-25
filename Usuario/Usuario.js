@@ -32,7 +32,6 @@ class Usuario {
     }
 
     static listarUsuariosPorRol(rol) {
-        //return usuarios.filter(usuario => usuario._rol.includes(rol));
         return Usuario.usuariosRegistrados.filter(usuario => usuario._roles.includes(rol));
     }
 

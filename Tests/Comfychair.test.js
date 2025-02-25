@@ -12,7 +12,7 @@ describe('ComfyChair', () => {
 
     test('Debe crear una conferencia correctamente', () => {
         const confDatos = conferencias[0];
-        const conferencia = comfyChair.crearConferencia(confDatos.nombre, confDatos.fechaInicio, confDatos.fechaFin);
+        const conferencia = comfyChair.crearConferencia(confDatos.nombreConferencia, confDatos.fechaInicio, confDatos.fechaFin);
 
         expect(conferencia).toBeInstanceOf(Conferencia);
         expect(comfyChair.listConferencias()).toContain(conferencia);
@@ -20,7 +20,7 @@ describe('ComfyChair', () => {
     });
 
     test('Debe listar correctamente las conferencias creadas', () => {
-        conferencias.forEach(conf => comfyChair.crearConferencia(conf.nombre, conf.fechaInicio, conf.fechaFin));
+        conferencias.forEach(conf => comfyChair.crearConferencia(conf.nombreConferencia, conf.fechaInicio, conf.fechaFin));
         const conferencias_ = comfyChair.listConferencias();
         expect(conferencias_.length).toBe(2);
         expect(conferencias_[0].nombreConferencia()).toBe('Conferencia Informática');

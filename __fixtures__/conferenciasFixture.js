@@ -1,7 +1,4 @@
-/*const conferenciasFixture = [
-    { nombre: 'Conferencia Informática', fechaInicio: '2025-05-10', fechaFin: '2025-05-15' },
-    { nombre: 'Conferencia Robótica', fechaInicio: '2025-06-01', fechaFin: '2025-06-05' }
-];*/
+const Conferencia = require("../Conferencia");
 
 const conferencia1 = {
     nombreConferencia: 'Conferencia Informática',
@@ -14,6 +11,10 @@ const conferencia2 = {
     fechaInicio: '2025-03-10',
     fechaFin: '2025-03-15',
 };
+
+const instanciaConf1 = new Conferencia('Conferencia Informática', '2025-02-20', '2025-02-28');
+const instanciaConf2 = new Conferencia('Conferencia Robótica', '2025-03-10', '2025-03-15');
+
 const conferencias = [conferencia1, conferencia2];
 
-module.exports = { conferencias, conferencia1, conferencia2 };
+module.exports = { conferencias, conferencia1, conferencia2, instanciaConf1, instanciaConf2 };

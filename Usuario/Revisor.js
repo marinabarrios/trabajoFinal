@@ -1,5 +1,4 @@
 const Usuario = require("./Usuario");
-const Articulo = require("../Articulo/Articulo");
 
 class Revisor extends Usuario{
     constructor (nombreUsuario, afiliacion, email, contrasenia){

@@ -1,5 +1,4 @@
 const Usuario = require("./Usuario");
-const Articulo = require("../Articulo/Articulo");
 
 class Chair extends Usuario{
     constructor (nombreUsuario, afiliacion, email, contrasenia){

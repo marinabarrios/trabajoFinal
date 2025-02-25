@@ -1,4 +1,3 @@
-//const Articulo = require("../Articulo/Articulo");
 const Usuario = require("./Usuario");
 
 class Autor extends Usuario{
