@@ -1,5 +1,6 @@
-const ComfyChair = require('../ComfyChair.js');
-const Conferencia = require('../Conferencia.js');
+const ComfyChair = require('../ComfyChair');
+const Conferencia = require('../Conferencia');
+const { conferencias } = require('../__fixtures__/conferenciasFixture');
 
 describe('ComfyChair', () => {
     let comfyChair;
@@ -10,7 +11,8 @@ describe('ComfyChair', () => {
     });
 
     test('Debe crear una conferencia correctamente', () => {
-        const conferencia = comfyChair.crearConferencia('Conferencia Informática', '2025-05-10', '2025-05-15');
+        const confDatos = conferencias[0];
+        const conferencia = comfyChair.crearConferencia(confDatos.nombre, confDatos.fechaInicio, confDatos.fechaFin);
 
         expect(conferencia).toBeInstanceOf(Conferencia);
         expect(comfyChair.listConferencias()).toContain(conferencia);
@@ -18,12 +20,10 @@ describe('ComfyChair', () => {
     });
 
     test('Debe listar correctamente las conferencias creadas', () => {
-        comfyChair.crearConferencia('Conferencia Informática', '2025-05-10', '2025-05-15');
-        comfyChair.crearConferencia('Conferencia Robótica', '2025-06-01', '2025-06-05');
-
-        const conferencias = comfyChair.listConferencias();
-        expect(conferencias.length).toBe(2);
-        expect(conferencias[0].nombreConferencia()).toBe('Conferencia Informática');
-        expect(conferencias[1].nombreConferencia()).toBe('Conferencia Robótica');
+        conferencias.forEach(conf => comfyChair.crearConferencia(conf.nombre, conf.fechaInicio, conf.fechaFin));
+        const conferencias_ = comfyChair.listConferencias();
+        expect(conferencias_.length).toBe(2);
+        expect(conferencias_[0].nombreConferencia()).toBe('Conferencia Informática');
+        expect(conferencias_[1].nombreConferencia()).toBe('Conferencia Robótica');
     });
 });
