@@ -31,10 +31,6 @@ class Usuarios {
         }
     }
 
-    removerRol(rol) {
-        this._roles = this._roles.filter(r => r !== rol);
-    }
-
     static listarUsuariosPorRol(rol) {
         //return usuarios.filter(usuario => usuario._rol.includes(rol));
         return Usuarios.usuariosRegistrados.filter(usuario => usuario._roles.includes(rol));

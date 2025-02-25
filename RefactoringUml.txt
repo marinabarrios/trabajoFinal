@@ -26,8 +26,7 @@ abstract class Usuarios{
   +nombreUsuario(): String
   +listarUsuariosPorRol(rol: String): List<usuarios>
   +agregarRol(rol: String): Void
-  +removerRol(rol: String): Void
-  +cambiarRolUsuario(rol: String)
+  +cambiarRolUsuario(rol: String): Void
   +listarTodosLosUsuarios(): { nombreUsuario: List<String>, roles: List<String> }
 }
 
@@ -35,18 +34,15 @@ Comfychair --> Conferencias
 
 class Chairs{
   +nombreUsuario(): String
-  +cambiarRolUsuario(rol: String)
-  +asignarRevisores(articulo: Articulos, revisor: Revisores): Void
+  +cambiarRolUsuario(rol: String): Void
 }
 class Autores{
   +nombreUsuario(): String
-  +cambiarRolUsuario(rol: String)
+  +cambiarRolUsuario(rol: String): Void
 }
 class Revisores{
   +nombreUsuario(): String
-  +cambiarRolUsuario(rol: String)
-  +expresarInteres(sesion: Sesiones, articulo: Articulos, tipoInteres: String): Void
-  +realizarEvaluacion(sesion: Sesiones, articulo: Articulos, comentario: String, puntaje: Integer): Void
+  +cambiarRolUsuario(rol: String): Void
 }
 class Revision{
 }
@@ -123,7 +119,8 @@ abstract class Articulos{
   tipoArticulo: String
   archivoAdjunto: String
   autoresArticulo: List<Autores>
-  autorNotificacion: Autores
+  autorNotificacion: List<Autores>
+  +agregarTipoArticulo(tipoArticulo: String): Void
 }
 class ArticuloRegular{
   abstract: String

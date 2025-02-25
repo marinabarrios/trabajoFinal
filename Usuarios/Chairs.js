@@ -8,6 +8,7 @@ class Chairs extends Usuarios{
         this._afiliacion = afiliacion;
         this._email = email;
         this._contrasenia = contrasenia;
+        this._roles  = [];
         this.agregarRol('CHAIR');
     }
 

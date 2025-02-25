@@ -8,7 +8,9 @@ class Autores extends Usuarios{
         this._afiliacion = afiliacion;
         this._email = email;
         this._contrasenia = contrasenia;
+        this._roles  = [];
         this.agregarRol('AUTOR');
+        
         //this._articulosCreados = []; //Lista de articulos enviados
         //this._notificaciones = []; // Lista de notificaciones recibidas
     }
