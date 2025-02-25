@@ -1,12 +1,12 @@
-const Conferencias = require("../Conferencias");
-const Sesiones = require("../Sesiones/Sesiones");
-const Usuarios = require("../Usuarios/Usuarios");
+const Conferencia = require("../Conferencia");
+const Sesion = require("../Sesion/Sesion");
+const Usuario = require("../Usuario/Usuario");
 
 describe("Conferencias", () => {
     let conferencia;
 
     beforeEach(() => {
-       Usuarios.usuariosRegistrados = [
+       Usuario.usuariosRegistrados = [
             { _nombreUsuario: 'Juan Rodriguez', _afiliacion: 'UNLP', _email: 'juan_rodriguez@gmail.com', _contrasenia: '123456', _roles: 'AUTOR'},
             { _nombreUsuario: 'José Gonzalez', _afiliacion: 'UNNE', _email: 'jose_gonzalez@gmail.com', _contrasenia: '123456', _roles: 'CHAIR'},
             { _nombreUsuario: 'Matias Lei', _afiliacion: 'UNAM', _email: 'matias_lei@gmail.com', _contrasenia: '123456', _roles: 'REVISOR'},
@@ -14,11 +14,11 @@ describe("Conferencias", () => {
             { _nombreUsuario: 'Mateo Rey', _afiliacion: 'UNAM', _email: 'mateo_rey@gmail.com', _contrasenia: '123456', _roles: 'REVISOR'}
         ];
 
-        conferencia = new Conferencias('Conferencia Informática', '2025-05-10', '2025-05-15');
+        conferencia = new Conferencia('Conferencia Informática', '2025-05-10', '2025-05-15');
     });
 
     test("Debe crear una conferencia correctamente", () => {
-        expect(conferencia).toBeInstanceOf(Conferencias);
+        expect(conferencia).toBeInstanceOf(Conferencia);
         expect(conferencia.nombreConferencia()).toBe('Conferencia Informática');
         expect(conferencia._fechaInicio).toBe('2025-05-10');
         expect(conferencia._fechaFin).toBe('2025-05-15');
@@ -47,7 +47,7 @@ describe("Conferencias", () => {
     test("Debe crear una sesión correctamente", () => {
         const sesion = conferencia.crearSesion('Inteligencia Artificial', 'WORKSHOP', '2025-04-30');
 
-        expect(sesion).toBeInstanceOf(Sesiones);
+        expect(sesion).toBeInstanceOf(Sesion);
         expect(conferencia.listSesiones()).toContain(sesion);
     });
 

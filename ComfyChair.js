@@ -1,4 +1,4 @@
-const Conferencias = require('./Conferencias');
+const Conferencia = require('./Conferencia');
 
 class ComfyChair {
     constructor() {
@@ -6,7 +6,7 @@ class ComfyChair {
     }
 
     crearConferencia(nombreConferencia, fechaInicio, fechaFin) {
-        const nuevaConferencia = new Conferencias (nombreConferencia,fechaInicio, fechaFin);
+        const nuevaConferencia = new Conferencia (nombreConferencia,fechaInicio, fechaFin);
         this._conferencias.push(nuevaConferencia);
         return nuevaConferencia;
     } 

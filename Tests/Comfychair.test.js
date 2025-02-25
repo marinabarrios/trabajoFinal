@@ -1,5 +1,5 @@
 const ComfyChair = require('../ComfyChair.js');
-const Conferencias = require('../Conferencias.js');
+const Conferencia = require('../Conferencia.js');
 
 describe('ComfyChair', () => {
     let comfyChair;
@@ -12,7 +12,7 @@ describe('ComfyChair', () => {
     test('Debe crear una conferencia correctamente', () => {
         const conferencia = comfyChair.crearConferencia('Conferencia Informática', '2025-05-10', '2025-05-15');
 
-        expect(conferencia).toBeInstanceOf(Conferencias);
+        expect(conferencia).toBeInstanceOf(Conferencia);
         expect(comfyChair.listConferencias()).toContain(conferencia);
         expect(conferencia.nombreConferencia()).toBe('Conferencia Informática');
     });
