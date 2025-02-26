@@ -3,7 +3,7 @@ class Comfychair{
   +crearConferencia(nombreConferencia: String, fechaInicio: Date, fechaFin: Date): Sesiones
   +listConferencias(): List<conferencias>
 }
-class Conferencias{
+class Conferencia{
   nombreConferencia: String
   fechaInicio: Date
   fechaFin: Date
@@ -17,7 +17,7 @@ class Conferencias{
   +asignarRevisores(List<revisores>): Void
   +listChairs(): List<chairs>
 }
-abstract class Usuarios{
+abstract class Usuario{
   nombreUsuario: String
   afiliacion: String
   email: String
@@ -32,15 +32,16 @@ abstract class Usuarios{
 
 Comfychair --> Conferencias
 
-class Chairs{
+class Chair{
   +nombreUsuario(): String
   +cambiarRolUsuario(rol: String): Void
 }
-class Autores{
+class Autor{
   +nombreUsuario(): String
   +cambiarRolUsuario(rol: String): Void
+  +enviarArticulo(sesion: Sesion, articulo: Articulo, fecha: Date): Void
 }
-class Revisores{
+class Revisor{
   +nombreUsuario(): String
   +cambiarRolUsuario(rol: String): Void
 }
@@ -53,7 +54,7 @@ Usuarios --> Autores
 Usuarios --> Revisores
 Revisores --> Revision
 
-abstract class Sesiones{
+abstract class Sesion{
   tema: String  
   tipoSesion: String  
   maximoArticulosAceptados: Integer
@@ -63,6 +64,7 @@ abstract class Sesiones{
   +verificarDeadlineRecepcion(): Boolean
   +setEstrategia()
   +listArticulos(): List<articulos>
+
   +validarArticulo(articulo: Articulos): Boolean
   +cambiarEstadoSesion(estadoSesion: EstadoSesion)
 }
@@ -73,10 +75,10 @@ class SesionRegular{
 class SesionWorkshop{
 }
 
-Conferencias --> Sesiones
-Sesiones <|-- SesionPoster
-Sesiones <|-- SesionRegular
-Sesiones <|-- SesionWorkshop
+Conferencia --> Sesion
+Sesion <|-- SesionPoster
+Sesion <|-- SesionRegular
+Sesion <|-- SesionWorkshop
 
 abstract class EstadoSesion{
 }
@@ -93,28 +95,28 @@ class EstadoAsignacion{
 class EstadoSeleccion{
 }
 
-Sesiones --> EstadoSesion
+Sesion --> EstadoSesion
 EstadoSesion <|-- EstadoRecepcion
 EstadoSesion <|-- EstadoBidding
 EstadoSesion <|-- EstadoRevision
 EstadoSesion <|-- EstadoAsignacion
 EstadoSesion <|-- EstadoSeleccion
 
-abstract class Estrategias{
+abstract class Estrategia{
 }
 class PorcetajeDeAceptados{
 }
 class PuntajeMinimo{
 }
 
-Sesiones --> Estrategias
-SesionPoster --> Estrategias
-SesionRegular --> Estrategias
-SesionWorkshop --> Estrategias
-Estrategias <|-- PorcetajeDeAceptados
-Estrategias <|-- PuntajeMinimo
+Sesion --> Estrategia
+SesionPoster --> Estrategia
+SesionRegular --> Estrategia
+SesionWorkshop --> Estrategia
+Estrategia <|-- PorcetajeDeAceptados
+Estrategia <|-- PuntajeMinimo
 
-abstract class Articulos{
+abstract class Articulo{
   tituloArticulo: String
   tipoArticulo: String
   archivoAdjunto: String
@@ -129,8 +131,8 @@ class ArticuloPoster{
   archivoFuentes: String
 }
 
-Sesiones --> Articulos
-Articulos <|-- ArticuloRegular
-Articulos <|-- ArticuloPoster
-Articulos --> Revision
+Sesion --> Articulo
+Articulo <|-- ArticuloRegular
+Articulo <|-- ArticuloPoster
+Articulo --> Revision
 @enduml

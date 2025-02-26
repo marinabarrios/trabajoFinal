@@ -9,10 +9,30 @@ class Sesion{
         }
         this._tema = tema;
         this._tipoSesion = tipoSesion;
-        this._deadlineRecepcion = deadlineRecepcion;
-        //this.articulos = [];
+        this._estadoSesion = new EstadoRecepcion(this, deadlineRecepcion);
+        this._articulos = [];
     }
     
+    //Pienso q es la sesion la que debe notificar al autorNotificaciones cuando se recibió un articulo
+    //del tipo incorrecto para esta sesion y tb si ya paso el deadline de recepcion
+
+    listArticulos(){
+        return this._articulos;
+    }
+
+    estadoSesion(estado){
+        this._estadoSesion = estado;
+    }
+
+    recibirArticulo(articulo, autor){
+        const fechaActual = new Date();
+        const fechaActualSinHora = fechaActual.toISOString().split('T')[0];
+        this._estadoSesion.agregarArticulo(articulo, autor, fechaActualSinHora);
+    }
+
+    agregarArticuloVerificado(articulo){
+        this._articulos.push(articulo);
+    }
   /*  recibirArticulo(articulo) {
         if (this.validarArticulo(articulo)) {
             this.articulos.push(articulo);
