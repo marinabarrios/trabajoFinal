@@ -4,6 +4,11 @@ class EstadoSesion{
     }
 
     setEstado(){
-        throw new Error("Este metodo se utiliza en las subclases");
+        throw new Error("Método no implementado en el estado actual");
+    }
+
+    agregarArticulo(articulo, fechaActual) {
+        throw new Error('Método no implementado en el estado actual');
     }
 }
+module.exports = EstadoSesion;

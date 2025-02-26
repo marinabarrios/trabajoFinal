@@ -3,6 +3,8 @@ const PorcentajeDeAceptados = require('./Estrategias/PorcentajeDeAceptados.js');
 const PuntajeMinimo = require('./Estrategias/PuntajeMinimo.js');
 const empresa = new ComfyChair();
 
+const conferencia = empresa.crearConferencia('Conferencia Informática', '2025-02-20', '2025-02-28');
+console.log('DatosConferenciaInformatica', conferencia);
 // ********************* CONFIGURACIÓN GENERAL ************************************** /
 //  REGISTRO USUARIOS /
 const juan = empresa.registrarUsuario('chair', 'Juan Rodriguez', 'UNLP', 'juan_rodriguez@gmail.com', '123456');

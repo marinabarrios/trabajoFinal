@@ -29,7 +29,7 @@ class Autor extends Usuario{
 
     // Método para enviar artículos a la sesion
     enviarArticulo(sesion, articulo) { 
-        sesion.recibirArticulo(articulo, this);
+        sesion.recibirArticulo(articulo);
     }
 
 /*

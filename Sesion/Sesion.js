@@ -1,6 +1,7 @@
 //const GestorDeArticulos = require("./GestorDeArticulos");
 //const Articulos = require("./Articulos/Articulos");
 //const Autores = require("./Usuarios/Autores");
+const EstadoRecepcion = require('../EstadoSesion/EstadoRecepcion');
 
 class Sesion{
     constructor(tema, tipoSesion, deadlineRecepcion) {
@@ -12,7 +13,7 @@ class Sesion{
         this._estadoSesion = new EstadoRecepcion(this, deadlineRecepcion);
         this._articulos = [];
     }
-    
+    //AGREGAR EL TIPO DE SESION - USAR LA CLASE SESIONPOSTER Y SESIONREGULAR
     //Pienso q es la sesion la que debe notificar al autorNotificaciones cuando se recibió un articulo
     //del tipo incorrecto para esta sesion y tb si ya paso el deadline de recepcion
 
@@ -24,10 +25,9 @@ class Sesion{
         this._estadoSesion = estado;
     }
 
-    recibirArticulo(articulo, autor){
-        const fechaActual = new Date();
-        const fechaActualSinHora = fechaActual.toISOString().split('T')[0];
-        this._estadoSesion.agregarArticulo(articulo, autor, fechaActualSinHora);
+    recibirArticulo(articulo){
+        const fechaActual = new Date().toISOString().split('T')[0];
+        this._estadoSesion.agregarArticulo(articulo, fechaActual);
     }
 
     agregarArticuloVerificado(articulo){

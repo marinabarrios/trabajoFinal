@@ -38,6 +38,10 @@ class Articulo{
         this._tipoArticulo = tipoArticulo;;
     }
 
+    notificacion(this.autorNotificacion, msg){
+        this._autorNotificacion.receive_notification(msg);
+    }
+
 /*
     agregarInteres(revisor, tipoInteres, temaSesion) {
         // Buscar si el revisor ya ha expresado interés previamente

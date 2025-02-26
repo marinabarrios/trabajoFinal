@@ -1,8 +1,9 @@
-const EstadoSesion = require("../EstadoSesion/EstadoSesion");
+const EstadoSesion = require("./EstadoSesion");
 
 class EstadoRecepcion extends EstadoSesion {
     constructor(sesion, deadlineRecepcion) {
         super(sesion);
+        this._sesion = sesion; 
         this._deadlineRecepcion = deadlineRecepcion;
     }
 
@@ -14,19 +15,25 @@ class EstadoRecepcion extends EstadoSesion {
         return (fechaActual <= this._deadlineRecepcion);
     }
 
-    agregarArticulo(articulo, autorNotificacion, fechaActual){
-        if (this.verificarDeadline(fechaActual)) {//falta una verificacion
+    agregarArticulo(articulo, fechaActual){
+        if (this.verificarDeadline(fechaActual)) { // Verifico si está dentro del deadline //falta una verificacion
             this._sesion.agregarArticuloVerificado(articulo);
-            articulo.notification(autorNotificacion,'Su articulo fue aceptado');
+            
+            // Notifico a todos los autores del artículo
+            articulo.autoresArticulo.forEach(autor => {
+            articulo.notification(autor, 'Su artículo fue aceptado');
+        });
         } else {
-            articulo.notification(autorNotificacion,'Su artículo fue enviado fuera de tiempo');
+            articulo.autoresArticulo.forEach(autor => {
+                articulo.notification(autor, 'Su artículo fue enviado fuera de tiempo');
+            });
             throw new Error('El artículo fue rechazado');
         }
     }
-    //verificar deadline
 
     //verificar si se está mandando el artículo correcto a la sesion correcta
     //sesion regular acepta articulos regulares
     //sesion poster acepta articulos poster
     //sesion workshop acepta ambos
 }
+module.exports = EstadoRecepcion;
