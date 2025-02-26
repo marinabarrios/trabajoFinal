@@ -12,12 +12,8 @@ class SesionRegular extends Sesion{
         //this.metodoSeleccionPosters = null;
     }
 
-    validarArticulo(articulo) {
-        return articulo.tipoArticulo === "Regular";
-    }
-    
-    verificarDeadlineRecepcion() {
-        return new Date() <= this.deadlineRecepcion;
+    tipoArticuloPermitido(tipoArticulo) {
+        return tipoArticulo === "REGULAR";
     }
 
     /*//Método que verifica si el artículo es válido. Si no es válido envía una notificación al autor

@@ -28,6 +28,7 @@ abstract class Usuario{
   +agregarRol(rol: String): Void
   +cambiarRolUsuario(rol: String): Void
   +listarTodosLosUsuarios(): { nombreUsuario: List<String>, roles: List<String> }
+  +recibe_notification(msg: String): String
 }
 
 Comfychair --> Conferencias

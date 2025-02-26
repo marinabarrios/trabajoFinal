@@ -1,7 +1,8 @@
-const { instanciaConf1, instanciaConf3 } = require('../__fixtures__/conferenciasFixture');
+const { instanciaConf1, instanciaConf2, instanciaConf3 } = require('../__fixtures__/conferenciasFixture');  
 
-const sesion1 = instanciaConf1.crearSesion('Inteligencia Artificial', 'WORKSHOP', '2025-02-21');
-const sesion2 = instanciaConf1.crearSesion('Infraestructura', 'REGULAR', '2025-02-23');
-const sesion3 = instanciaConf3.crearSesion('Infraestructura', 'REGULAR', '2025-07-23');
+const sesionW = instanciaConf1.crearSesion('Inteligencia Artificial', 'WORKSHOP', '2025-02-21');
+const sesionRfD = instanciaConf1.crearSesion('Infraestructura', 'REGULAR', '2025-02-23');
+const sesionR = instanciaConf2.crearSesion('Robótica', 'REGULAR', '2025-03-23');
+const sesionP = instanciaConf3.crearSesion('Bases de Datos', 'POSTER', '2025-07-23');
 
-module.exports = { sesion1, sesion2, sesion3 };
+module.exports = { sesionW, sesionRfD, sesionR, sesionP };

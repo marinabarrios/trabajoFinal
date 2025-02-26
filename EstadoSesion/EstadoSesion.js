@@ -4,11 +4,11 @@ class EstadoSesion{
     }
 
     setEstado(){
-        throw new Error("Método no implementado en el estado actual");
+        throw new Error("Método no implementado en la clase actual");
     }
 
     agregarArticulo(articulo, fechaActual) {
-        throw new Error('Método no implementado en el estado actual');
+        throw new Error('Método no implementado en la clase actual');
     }
 }
 module.exports = EstadoSesion;

@@ -35,13 +35,14 @@ class Articulo{
         if (this._tipoArticulo !== null) {
             throw new Error(`El artículo ya tiene un tipo asignado: ${this._tipoArticulo}`);
         }
-        this._tipoArticulo = tipoArticulo;;
+        this._tipoArticulo = tipoArticulo;
     }
 
-    notificacion(this.autorNotificacion, msg){
-        this._autorNotificacion.receive_notification(msg);
+    notificacion(msg){
+        this._autorNotificacion.forEach(autor => {
+            autor.recibe_notificacion(msg);
+        });
     }
-
 /*
     agregarInteres(revisor, tipoInteres, temaSesion) {
         // Buscar si el revisor ya ha expresado interés previamente

@@ -33,6 +33,10 @@ class Sesion{
     agregarArticuloVerificado(articulo){
         this._articulos.push(articulo);
     }
+
+    tipoArticuloPermitido(tipoArticulo) {
+        throw new Error('Método no implementado en la clase actual');
+    }
   /*  recibirArticulo(articulo) {
         if (this.validarArticulo(articulo)) {
             this.articulos.push(articulo);

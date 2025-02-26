@@ -12,16 +12,8 @@ class SesionWorkshop extends Sesion{
         //this.metodoSeleccionPosters = null;
     }
 
-    validarArticulo(articulo) {
-        return articulo.tipoArticulo === "Workshop";
-    }
-    
-    simplificarArticulo(articulo) {
-        return {
-            titulo: articulo.tituloArticulo,
-            autores: articulo.autoresArticulo,
-            resumen: articulo.abstract
-        };
+    tipoArticuloPermitido(tipoArticulo) {
+        return tipoArticulo === "REGULAR" || tipoArticulo === "POSTER";
     }
 }
 module.exports = SesionWorkshop;

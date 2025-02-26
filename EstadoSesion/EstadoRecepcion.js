@@ -15,20 +15,24 @@ class EstadoRecepcion extends EstadoSesion {
         return (fechaActual <= this._deadlineRecepcion);
     }
 
-    agregarArticulo(articulo, fechaActual){
-        if (this.verificarDeadline(fechaActual)) { // Verifico si está dentro del deadline //falta una verificacion
-            this._sesion.agregarArticuloVerificado(articulo);
-            
-            // Notifico a todos los autores del artículo
-            articulo.autoresArticulo.forEach(autor => {
-            articulo.notification(autor, 'Su artículo fue aceptado');
-        });
-        } else {
-            articulo.autoresArticulo.forEach(autor => {
-                articulo.notification(autor, 'Su artículo fue enviado fuera de tiempo');
-            });
-            throw new Error('El artículo fue rechazado');
+    agregarArticulo(articulo, fechaActual){       
+        if (!this.verificarDeadline(fechaActual)) {
+            // Notificar a los autores que el artículo fue rechazado por enviarlo fuera de tiempo
+            articulo.notification('Su artículo fue enviado fuera de tiempo');
+            throw new Error('El artículo fue rechazado por estar fuera del deadline');
         }
+    
+        if (!this._sesion.tipoArticuloPermitido(articulo.tipoArticulo)) {
+            // Notificar a los autores que el artículo es del tipo incorrecto
+            articulo.notification('Su artículo fue rechazado porque no es del tipo permitido para esta sesión');
+            throw new Error('El artículo es del tipo incorrecto para esta sesión');
+        }
+    
+        // Si pasa todas las validaciones, se agrega a la sesión
+        this._sesion.agregarArticuloVerificado(articulo);
+    
+        // Notificar a los autores que el artículo fue aceptado
+        articulo.notification('Su artículo fue aceptado');
     }
 
     //verificar si se está mandando el artículo correcto a la sesion correcta
