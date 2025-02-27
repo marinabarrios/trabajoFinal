@@ -15,14 +15,14 @@ class EstadoRecepcion extends EstadoSesion {
         return (fechaActual <= this._deadlineRecepcion);
     }
 
-    agregarArticulo(articulo, fechaActual){       
+    agregarArticulo(articulo, fechaActual){
         if (!this.verificarDeadline(fechaActual)) {
             // Notificar a los autores que el artículo fue rechazado por enviarlo fuera de tiempo
             articulo.notification('Su artículo fue enviado fuera de tiempo');
             throw new Error('El artículo fue rechazado por estar fuera del deadline');
         }
     
-        if (!this._sesion.tipoArticuloPermitido(articulo.tipoArticulo)) {
+        if (!this._sesion.tipoArticuloPermitido(articulo._tipoArticulo)) {
             // Notificar a los autores que el artículo es del tipo incorrecto
             articulo.notification('Su artículo fue rechazado porque no es del tipo permitido para esta sesión');
             throw new Error('El artículo es del tipo incorrecto para esta sesión');

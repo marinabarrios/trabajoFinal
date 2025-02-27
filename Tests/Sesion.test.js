@@ -3,8 +3,9 @@ const { autor } = require("../__fixtures__/usuariosFixture");
 const { articuloPoster, articuloRegular, artPosterCon2AutoresNotif } = require("../__fixtures__/articulosFixture");
 
 describe('Gestión de envío de artículos', () => {
-
-    test('El artículo es aceptado si está dentro del deadline', () => {
+    
+    test('El artículo es aceptado si está dentro del deadline y envía el tipo correcto de artículo a la sesión', () => {
+        //Envío un Artículo Regular a una Sesión Regular
         articulo = { ...articuloRegular };
         articulo.notification = jest.fn(); // Simulo el método de notificación
         autor.enviarArticulo(sesionR, articulo);
@@ -13,6 +14,7 @@ describe('Gestión de envío de artículos', () => {
     });
 
     test('El artículo es rechazado si está fuera del deadline', () => {
+        //Envío un Artículo Regular a una Sesión Regular con un deadline expirado
         articulo = { ...articuloRegular };
         articulo.notification = jest.fn();
         expect(() => autor.enviarArticulo(sesionRfD, articulo)).toThrow('El artículo fue rechazado por estar fuera del deadline');
@@ -20,11 +22,15 @@ describe('Gestión de envío de artículos', () => {
     });
 
     test('Todos los autores reciben la notificación si el artículo es aceptado', () => {
+        //Envío un Artículo Poster a una Sesión Poster
         articulo = { ...artPosterCon2AutoresNotif };
         articulo.notification = jest.fn();
         autor.enviarArticulo(sesionP, articulo);
 
         expect(sesionP.listArticulos()).toContain(articulo);
-       // expect(articulo.notification).toHaveBeenCalledWith('Su artículo fue aceptado');
+        expect(articulo.notification).toHaveBeenCalledWith('Su artículo fue aceptado');
+        //agregar verificacion de q recibio
     });
+    // verificar que no puedan enviar un articulo regular a una sesion poster y viceversa
+    // verificar q workshop reciba poster y regular
 });
