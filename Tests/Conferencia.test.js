@@ -1,7 +1,7 @@
 const Sesion = require("../Sesion/Sesion");
 const Usuario = require("../Usuario/Usuario");
 const { usuarios } = require("../__fixtures__/usuariosFixture"); 
-const { sesionW, sesionRfD } = require("../__fixtures__/sesionesFixture");
+const { sesionWfD, sesionRfD } = require("../__fixtures__/sesionesFixture");
 const { instanciaConf1 } = require("../__fixtures__/conferenciasFixture"); 
 
 describe("Conferencias", () => {
@@ -36,15 +36,15 @@ describe("Conferencias", () => {
     
 
     test("Debe crear una sesión correctamente", () => {
-        expect(sesionW).toBeInstanceOf(Sesion);
-        expect(instanciaConf1.listSesiones()).toContain(sesionW);
+        expect(sesionWfD).toBeInstanceOf(Sesion);
+        expect(instanciaConf1.listSesiones()).toContain(sesionWfD);
     });
 
     test("Debe listar correctamente las sesiones creadas", () => {
         const sesiones = instanciaConf1.listSesiones();
 
         expect(sesiones.length).toBe(2);
-        expect(sesiones[0]).toBe(sesionW);
+        expect(sesiones[0]).toBe(sesionWfD);
         expect(sesiones[1]).toBe(sesionRfD);
     });
 });

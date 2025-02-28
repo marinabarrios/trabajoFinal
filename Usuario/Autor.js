@@ -32,6 +32,10 @@ class Autor extends Usuario{
         sesion.recibirArticulo(articulo);
     }
 
+    recibe_notificacion(msg) {
+        console.log(`Notificación para ${this._nombreUsuario}: ${msg}`);
+    }
+
 /*
     crearArticulo(id, tituloArticulo, tipoArticulo, abstract = null, archivoAdjunto, autoresArticulo, archivoFuentes = null, autorNotificacion, fechaEntrega){
         const nuevoArticulo = new Articulos (id, tituloArticulo, tipoArticulo, abstract, archivoAdjunto, autoresArticulo, archivoFuentes, autorNotificacion, fechaEntrega);

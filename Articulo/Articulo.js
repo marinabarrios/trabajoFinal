@@ -21,9 +21,14 @@ class Articulo{
         }
         this._autoresArticulo = autoresArticulo;
 
-        if (!autorNotificacion && !autoresArticulo.includes(autorNotificacion)) {
-            throw new Error("Rechazado: Debe tener un autor designado para recibir notificaciones");
+        if (!Array.isArray(autorNotificacion)) {
+            throw new Error("Rechazado: autorNotificacion debe ser un array de autores.");
         }
+
+        if (!autorNotificacion.every(autor => autoresArticulo.includes(autor))) {
+            throw new Error("Rechazado: Todos los autores de notificación deben estar en la lista de autores del artículo.");
+        }
+
         this._autorNotificacion = autorNotificacion;
         
         this._tipoArticulo = null;

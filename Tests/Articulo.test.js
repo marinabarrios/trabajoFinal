@@ -5,7 +5,7 @@ const ArticuloPoster = require("../Articulo/ArticuloPoster");
 
 describe("Pruebas Artículos Regulares", () => {
 
-    test("Crear un nuevo artículo regular con sus autores", () => {
+    test("Crear un nuevo artículo regular con sus autores", () => {console.log('articuloo ',articuloRegular);
         expect(articuloRegular._tituloArticulo).toBe("An investigation into the Impact of Artificial Intelligence on the Future of Project Management");
         expect(articuloRegular._archivoAdjunto).toBe("https://ieeexplore.ieee.org/document/9430234");
         expect(articuloRegular._abstract).toBe("Abstract del artículo 1");
@@ -13,7 +13,7 @@ describe("Pruebas Artículos Regulares", () => {
         expect(articuloRegular._tipoArticulo).toBe('REGULAR');
         expect(articuloRegular._autoresArticulo[0]._nombreUsuario).toBe('Juan Rodriguez');
         expect(articuloRegular._autoresArticulo[1]._nombreUsuario).toBe('Sofia Perez');
-        expect(articuloRegular._autorNotificacion._nombreUsuario).toBe('Sofia Perez');
+        expect(articuloRegular._autorNotificacion[0]._nombreUsuario).toBe('Sofia Perez');
     });
 
     test('No se le puede asignar a un artículo regular un tipo de artículo poster', () => {
@@ -25,7 +25,7 @@ describe("Pruebas Artículos Regulares", () => {
       expect(() => new ArticuloRegular(
                     null,
                     "https://ieeexplore.ieee.org/document/9430234", [autor, autor1],
-                    "Abstract del artículo 1", autor1
+                    "Abstract del artículo 1", [autor1]
             )).toThrow("Rechazado: El título del artículo no puede estar vacío");
     });
 
@@ -33,7 +33,7 @@ describe("Pruebas Artículos Regulares", () => {
       expect(() => new ArticuloRegular(
                     "An investigation into the Impact of Artificial Intelligence on the Future of Project Management",
                     "https://ieeexplore.ieee.org/document/9430234", [],
-                    "Abstract del artículo 1", autor1
+                    "Abstract del artículo 1", [autor1]
             )).toThrow("Rechazado: Debe tener definido al menos un autor");
     });
 
@@ -41,7 +41,7 @@ describe("Pruebas Artículos Regulares", () => {
       expect(() => new ArticuloRegular(
                     "An investigation into the Impact of Artificial Intelligence on the Future of Project Management",
                     "SIN URL VALIDA", [autor, autor1],
-                    "Abstract del artículo 1", autor1
+                    "Abstract del artículo 1", [autor1]
             )).toThrow("Rechazado: El archivo adjunto debe ser una URL válida");
     });
 
@@ -49,7 +49,7 @@ describe("Pruebas Artículos Regulares", () => {
       expect(() => new ArticuloRegular(
                     "An investigation into the Impact of Artificial Intelligence on the Future of Project Management",
                     "https://ieeexplore.ieee.org/document/9430234", [autor, autor1],
-                    null, autor1
+                    null, [autor1]
             )).toThrow("Rechazado: El abstract no puede estar vacío");
     });
 
@@ -57,7 +57,7 @@ describe("Pruebas Artículos Regulares", () => {
       expect(() => new ArticuloRegular(
                   "An investigation into the Impact of Artificial Intelligence on the Future of Project Management",
                   "https://ieeexplore.ieee.org/document/9430234", [autor, autor1],
-                  "", autor1
+                  "", [autor1]
             )).toThrow("Rechazado: El abstract no puede estar vacío");
     });
 
@@ -66,7 +66,7 @@ describe("Pruebas Artículos Regulares", () => {
       expect(() => new ArticuloRegular(
                   "An investigation into the Impact of Artificial Intelligence on the Future of Project Management",
                   "https://ieeexplore.ieee.org/document/9430234", [autor, autor1],
-                  abstractLargo, autor1
+                  abstractLargo, [autor1]
             )).toThrow("Rechazado: El resúmen no puede tener más de 300 palabras");
     });
   });
@@ -81,7 +81,7 @@ describe("Pruebas Artículos Poster", () => {
       expect(articuloPoster._tipoArticulo).toBe('POSTER');
       expect(articuloPoster._autoresArticulo[0]._nombreUsuario).toBe('Juan Rodriguez');
       expect(articuloPoster._autoresArticulo[1]._nombreUsuario).toBe('Sofia Perez');
-      expect(articuloPoster._autorNotificacion._nombreUsuario).toBe('Sofia Perez');
+      expect(articuloPoster._autorNotificacion[0]._nombreUsuario).toBe('Sofia Perez');
     });
 
     test('No se le puede asignar a un artículo poster un tipo de artículo regular', () => {
@@ -93,7 +93,7 @@ describe("Pruebas Artículos Poster", () => {
       expect(() => new ArticuloPoster(
                      null,
                     "https://ieeexplore.ieee.org/document/9430234", [autor, autor1],
-                    "https://ieeexplore.ieee.org/document/9430234", autor1
+                    "https://ieeexplore.ieee.org/document/9430234", [autor1]
                   )    
       ).toThrow("Rechazado: El título del artículo no puede estar vacío");
     });
@@ -102,7 +102,7 @@ describe("Pruebas Artículos Poster", () => {
       expect(() => new ArticuloPoster(
                     "An investigation into the Impact of Artificial Intelligence on the Future of Project Management",
                     "https://ieeexplore.ieee.org/document/9430234", [],
-                    "https://ieeexplore.ieee.org/document/9430234", autor1
+                    "https://ieeexplore.ieee.org/document/9430234", [autor1]
                   )    
       ).toThrow("Rechazado: Debe tener definido al menos un autor");
     });
@@ -111,7 +111,7 @@ describe("Pruebas Artículos Poster", () => {
       expect(() => new ArticuloPoster(
                     "An investigation into the Impact of Artificial Intelligence on the Future of Project Management",
                     "ArtificialIntelligence.pdf", [autor, autor1],
-                    "https://ieeexplore.ieee.org/document/9430234", autor1
+                    "https://ieeexplore.ieee.org/document/9430234", [autor1]
                   )    
       ).toThrow("Rechazado: El archivo adjunto debe ser una URL válida");
     });
@@ -120,7 +120,7 @@ describe("Pruebas Artículos Poster", () => {
       expect(() => new ArticuloPoster(
                     "An investigation into the Impact of Artificial Intelligence on the Future of Project Management",
                     "https://ieeexplore.ieee.org/document/9430234", [autor, autor1],
-                    "ArtificialIntelligence.pdf", autor1
+                    "ArtificialIntelligence.pdf", [autor1]
                   )    
       ).toThrow("Rechazado: El archivo fuente debe ser una URL válida");
     });

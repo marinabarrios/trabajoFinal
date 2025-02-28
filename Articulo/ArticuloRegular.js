@@ -15,7 +15,12 @@ class ArticuloRegular extends Articulo{
         this._abstract = abstract;
     }
 
-
+    notificacion(msg){
+        this._autorNotificacion.forEach(autor => {
+            autor.recibe_notificacion(msg);
+        });
+    }
+    
     /*calcularPuntajeFinal(evaluaciones) {
         let total = evaluaciones.reduce((sum, eval) => sum + eval.puntaje, 0);
         return total / evaluaciones.length;
