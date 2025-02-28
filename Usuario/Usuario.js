@@ -55,9 +55,5 @@ class Usuario {
             roles: usuario._roles
         }));
     }
-/*
-    recibe_notificacion(msg){
-        console.log(msg);
-    }*/
 }
 module.exports = Usuario;

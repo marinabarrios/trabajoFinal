@@ -3,8 +3,6 @@ const Sesion = require("./Sesion");
 class SesionRegular extends Sesion{
     constructor(tema, tipoSesion, deadlineRecepcion) {
         super(tema, tipoSesion, deadlineRecepcion);
-        this._tema = tema;
-        this._tipoSesion = tipoSesion;
         this._deadlineRecepcion = deadlineRecepcion;
         this._maximoArticulosAceptados = 0;
               //    this.metodoSeleccionPorTipo = {};

@@ -1,6 +1,6 @@
 @startuml
 class Comfychair{
-  +crearConferencia(nombreConferencia: String, fechaInicio: Date, fechaFin: Date): Sesiones
+  +crearConferencia(nombreConferencia: String, fechaInicio: Date, fechaFin: Date): Conferencia
   +listConferencias(): List<conferencias>
 }
 class Conferencia{
@@ -13,22 +13,19 @@ class Conferencia{
   +nombreConferencia(): String
   +crearSesion(tema: String, tipoSesion: String, deadlineRecepdion: Date): Sesion
   +listSesiones(): List<sesiones>
-  +listarOrganizadoresYComite(): { organizadores: List<String>, comite: List<String> }
-  +asignarRevisores(List<revisores>): Void
-  +listChairs(): List<chairs>
+  +listarOrganizadoresYComite(): { organizadores: List<Usuario>, comite: List<Usuario> }
 }
 abstract class Usuario{
   nombreUsuario: String
   afiliacion: String
   email: String
   contrasenia: String
-  roles: String
+  roles: Array
   +nombreUsuario(): String
   +listarUsuariosPorRol(rol: String): List<usuarios>
   +agregarRol(rol: String): Void
   +cambiarRolUsuario(rol: String): Void
   +listarTodosLosUsuarios(): { nombreUsuario: List<String>, roles: List<String> }
-  +recibe_notification(msg: String): String
 }
 
 Comfychair --> Conferencias
@@ -40,7 +37,8 @@ class Chair{
 class Autor{
   +nombreUsuario(): String
   +cambiarRolUsuario(rol: String): Void
-  +enviarArticulo(sesion: Sesion, articulo: Articulo, fecha: Date): Void
+  +enviarArticulo(sesion: Sesion, articulo: Articulo): Void
+  +recibe_notification(msg: String): String
 }
 class Revisor{
   +nombreUsuario(): String
@@ -58,22 +56,23 @@ Revisores --> Revision
 abstract class Sesion{
   tema: String  
   tipoSesion: String  
-  maximoArticulosAceptados: Integer
   estadoSesion: EstadoSesion
   estrategia: Estrategias
   articulos: List<articulos>
-  +verificarDeadlineRecepcion(): Boolean
-  +setEstrategia()
   +listArticulos(): List<articulos>
-
-  +validarArticulo(articulo: Articulos): Boolean
-  +cambiarEstadoSesion(estadoSesion: EstadoSesion)
+  +estadoSesion(estado: String): Void
+  +recibirArticulo(articulo: Articulo): Void
+  +agregarArticuloVerificado(articulo: Articulo): Void
+  +tipoArticuloPermitido(tipoArticulo: String): Void
 }
 class SesionPoster{
+  +tipoArticuloPermitido(tipoArticulo: String): Boolean
 }
 class SesionRegular{
+  +tipoArticuloPermitido(tipoArticulo: String): Boolean
 }
 class SesionWorkshop{
+  +tipoArticuloPermitido(tipoArticulo: String): Boolean
 }
 
 Conferencia --> Sesion
@@ -82,18 +81,42 @@ Sesion <|-- SesionRegular
 Sesion <|-- SesionWorkshop
 
 abstract class EstadoSesion{
+  sesion: Sesion
+  +setEstado(): Void
+  +agregarArticulo(articulo: Articulo, fechaActual: Date): Void
+  +asignarEstado(): Void
 }
 class EstadoRecepcion{
   deadlineRecepdion: Date
-  +verificarDeadlineRecepcion(): Boolean
+  sesion: Sesion
+  +setEstado(): Void
+  +asignarEstado(): Void
+  +verificarDeadline(fechaActual: Date): Boolean
+  +agregarArticulo(articulo: Articulo, fechaActual: Date): Void
 }
 class EstadoBidding{
-}
-class EstadoRevision{
+  sesion: Sesion
+  +setEstado(): Void
+  +asignarEstado(): Void
+  +agregarArticulo(articulo: Articulo, fechaActual: Date): Void
 }
 class EstadoAsignacion{
+  sesion: Sesion
+  +setEstado(): Void
+  +asignarEstado(): Void
+  +agregarArticulo(articulo: Articulo, fechaActual: Date): Void
+}
+class EstadoRevision{
+  sesion: Sesion
+  +setEstado(): Void
+  +asignarEstado(): Void
+  +agregarArticulo(articulo: Articulo, fechaActual: Date): Void
 }
 class EstadoSeleccion{
+  sesion: Sesion
+  +setEstado(): Void
+  +asignarEstado(): Void
+  +agregarArticulo(articulo: Articulo, fechaActual: Date): Void
 }
 
 Sesion --> EstadoSesion
@@ -119,17 +142,20 @@ Estrategia <|-- PuntajeMinimo
 
 abstract class Articulo{
   tituloArticulo: String
-  tipoArticulo: String
   archivoAdjunto: String
   autoresArticulo: List<Autores>
   autorNotificacion: List<Autores>
+  tipoArticulo: String  
   +agregarTipoArticulo(tipoArticulo: String): Void
+  +notificacion(msg: String): Void
 }
 class ArticuloRegular{
   abstract: String
+  +notificacion(msg: String): Void
 }
 class ArticuloPoster{
   archivoFuentes: String
+  +notificacion(msg: String): Void
 }
 
 Sesion --> Articulo

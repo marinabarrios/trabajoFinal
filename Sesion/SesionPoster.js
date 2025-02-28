@@ -3,6 +3,7 @@ const Sesion = require("./Sesion");
 class SesionPoster extends Sesion{
     constructor(tema, tipoSesion, deadlineRecepcion) {
         super(tema, tipoSesion, deadlineRecepcion);
+        this._deadlineRecepcion = deadlineRecepcion;
         this._maximoArticulosAceptados = 0;
               //    this.metodoSeleccionPorTipo = {};
         //this.metodoSeleccionRegulares = null;
@@ -12,9 +13,9 @@ class SesionPoster extends Sesion{
     tipoArticuloPermitido(tipoArticulo) {
         return tipoArticulo === "POSTER";
     }
-    
+    /*
     agregarEvaluacion(articulo, revisor, comentario, puntaje) {
         return { articulo, revisor, comentario, puntaje, fecha: new Date() };
-    }
+    }*/
 }
 module.exports = SesionPoster;

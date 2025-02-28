@@ -10,5 +10,9 @@ class EstadoSesion{
     agregarArticulo(articulo, fechaActual) {
         throw new Error('Método no implementado en la clase actual');
     }
+
+    asignarEstado(){
+        throw new Error('Método no implementado en la clase actual');
+    }
 }
 module.exports = EstadoSesion;
