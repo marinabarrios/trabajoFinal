@@ -32,7 +32,8 @@ class Autor extends Usuario{
         sesion.recibirArticulo(articulo);
     }
 
-    recibe_notificacion(msg) {
+    //Similo la recepción de la notificación
+    recibeNotificacion(msg) {
         console.log(`Notificación para ${this._nombreUsuario}: ${msg}`);
     }
 

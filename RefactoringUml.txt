@@ -38,7 +38,7 @@ class Autor{
   +nombreUsuario(): String
   +cambiarRolUsuario(rol: String): Void
   +enviarArticulo(sesion: Sesion, articulo: Articulo): Void
-  +recibe_notification(msg: String): String
+  +recibeNotification(msg: String): String
 }
 class Revisor{
   +nombreUsuario(): String

@@ -46,7 +46,7 @@ class Articulo{
 
     notificar(msg){
         this._autorNotificacion.forEach(autor => {
-            autor.recibe_notificacion(msg);
+            autor.recibeNotificacion(msg);
         });
     }
 

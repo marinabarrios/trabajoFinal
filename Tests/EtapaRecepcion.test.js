@@ -109,7 +109,7 @@ describe('Notificación a los autores', () => {
         //console.log('Métodos del artículo:', Object.getOwnPropertyNames(Object.getPrototypeOf(articulo)));
         
         articulo._autorNotificacion.forEach(autor => {
-            autor.recibe_notificacion = jest.fn();
+            autor.recibeNotificacion = jest.fn();
           });
 
         expect(sesionP.estadoSesion().setEstado()).toBe('RECEPCION');
@@ -118,7 +118,7 @@ describe('Notificación a los autores', () => {
 
         //Verifico que cada autor recibió la notificación correcta
         articulo._autorNotificacion.forEach(autor => {
-            expect(autor.recibe_notificacion).toHaveBeenCalledWith('Su artículo fue aceptado');
+            expect(autor.recibeNotificacion).toHaveBeenCalledWith("Su artículo fue aceptado");
         });
     });
 });

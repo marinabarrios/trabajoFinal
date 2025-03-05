@@ -8,19 +8,20 @@ const _ = require("lodash");
 describe('Asignación de revisores', () => {
 
     let copiaSesion;
+    let articulo1;
+    let articulo2;
 
     beforeEach(() => {
-        //Usuario.usuariosRegistrados = [autor, revisor, revisor1];
         Usuario.usuariosRegistrados = [ autor, autor1, autor2, autor3,
                                         revisor, revisor1, revisor2, revisor3,
                                         revisor4, revisor5, revisor6,
                                         revisor7, revisor8, revisor9,
                                         revisor10, revisor11, revisor12 ];
-        //Creo copia de la sesión
-        copiaSesion = _.cloneDeep(sesionW);
+        //Creo copia de la sesión para hacer las pruebas sobre la copia y no alterar la original
+        copiaSesion = _.cloneDeep(require("../__fixtures__/sesionesFixture").sesionW);
         //Creo copias de los artículos
-        articulo1 = Object.create(articuloRegular);
-        articulo2 = Object.create(articuloPoster);
+        articulo1 = _.cloneDeep(require("../__fixtures__/articulosFixture").articuloRegular);
+        articulo2 = _.cloneDeep(require("../__fixtures__/articulosFixture").articuloPoster);
         //Los autores envían artículos a la sesion
         autor.enviarArticulo(copiaSesion, articulo1);
         autor1.enviarArticulo(copiaSesion, articulo2);
@@ -57,7 +58,7 @@ describe('Asignación de revisores', () => {
         copiaSesion.estadoSesion().procesarBidding(revisor5, articulo2, "QUIZAS");//Juan Gómez
         copiaSesion.estadoSesion().procesarBidding(revisor6, articulo2, "NO INTERESADO");//Raúl Arce
         copiaSesion.estadoSesion().procesarBidding(revisor7, articulo2, "NO INTERESADO");//Oscar Martín
-        copiaSesion.estadoSesion().procesarBidding(revisor9, articulo2, "INTERESADO");//Sonia Ruiz
+        copiaSesion.estadoSesion().procesarBidding(revisor9, articulo2, "NO INTERESADO");//Sonia Ruiz
         copiaSesion.estadoSesion().procesarBidding(revisor10, articulo2, "QUIZAS");//Pedro Jimenez
         copiaSesion.estadoSesion().procesarBidding(revisor11, articulo2, "QUIZAS");//Daniel Martinez
         copiaSesion.estadoSesion().procesarBidding(revisor12, articulo2, "NO INTERESADO");//Luis Iglesias        
@@ -66,15 +67,16 @@ describe('Asignación de revisores', () => {
     test('Se asignan revisores a los artículos según sus intereses', () => {
         //Cambio el estado a ASIGNACION
         copiaSesion.estadoSesion().asignarEstado();
+
         //Se asignan los revisores teniendo en cuenta el interés
         copiaSesion.estadoSesion().asignarRevisores();
-      /*  expect(articulo1.listRevisoresAsignados()).toContain(revisor);//Leonardo Rey
+        expect(articulo1.listRevisoresAsignados()).toContain(revisor);//Leonardo Rey
         expect(articulo1.listRevisoresAsignados()).toContain(revisor6);//Raúl Arce
         expect(articulo1.listRevisoresAsignados()).toContain(revisor9);//Sonia Ruiz
 
-       */ expect(articulo2.listRevisoresAsignados()).toContain(revisor1);//Carlos Lopez
+        expect(articulo2.listRevisoresAsignados()).toContain(revisor1);//Carlos Lopez
         expect(articulo2.listRevisoresAsignados()).toContain(revisor2);//Maria Gonzalez
-        expect(articulo2.listRevisoresAsignados()).toContain(revisor9);//Leonardo Rey pero tiene que ser Sonia
+        expect(articulo2.listRevisoresAsignados()).toContain(revisor5);//Juan Gómez
         
     });
 
@@ -82,7 +84,7 @@ describe('Asignación de revisores', () => {
         expect(() => copiaSesion.estadoSesion().asignarRevisores()).
             toThrow('El proceso de asignación de artículos sólo se puede realizar durante el estado de asignación');
     });
-/******************** */
+
     test("Cada artículo debe tener exactamente 3 revisores", () => {
         //Cambio el estado a ASIGNACION
         copiaSesion.estadoSesion().asignarEstado();
@@ -101,7 +103,7 @@ describe('Asignación de revisores', () => {
         copiaSesion.estadoSesion().asignarRevisores();
 
         copiaSesion._articulos.forEach((articulo) => {
-            const revisoresAsignados = articulo.listRevisoresAsignados();
+            const revisoresAsignados = articulo.listRevisoresAsignados();console.log('revisoresAsignados',revisoresAsignados);
             expect(revisoresAsignados.some((r) => r.interes === "INTERESADO")).toBeTruthy();
         });
     });
@@ -126,5 +128,26 @@ describe('Asignación de revisores', () => {
         const minRevisiones = Math.min(...valores);
 
         expect(maxRevisiones - minRevisiones).toBeLessThanOrEqual(1);
+    });
+
+    test("Lanza un error si no hay suficientes revisores", () => {
+        Usuario.usuariosRegistrados = [autor, autor1, revisor, revisor1];
+        copiaSesion._revisores = [revisor, revisor1];
+        copiaSesion.estadoSesion().asignarEstado();
+        expect(() => copiaSesion.estadoSesion().asignarRevisores()).toThrow("No hay suficientes revisores para asignar a cada artículo.");
+    });
+
+    test("Lanza un error si no se pueden asignar 3 revisores a un artículo", () => {
+        Usuario.usuariosRegistrados = [autor, autor1, revisor, revisor1, revisor2];
+        copiaSesion._revisores = [revisor, revisor1, revisor2];
+        copiaSesion.estadoSesion().asignarEstado();
+        expect(() => copiaSesion.estadoSesion().asignarRevisores()).toThrow("No se pudo asignar suficientes revisores para el artículo");
+    });
+
+    test("Lanza un error si el total de revisiones no coincide con el número esperado", () => {
+        // Reducir la cantidad de intereses para simular un error
+        copiaSesion.estadoSesion().procesarBidding(revisor12, articulo2, "SIN INTERES");
+        copiaSesion.estadoSesion().asignarEstado();
+        expect(() => copiaSesion.estadoSesion().asignarRevisores()).toThrow("Se han asignado");
     });
 });
