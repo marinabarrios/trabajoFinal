@@ -1,4 +1,4 @@
-const { autor, autor1 } = require("../__fixtures__/usuariosFixture");
+const { autor, autor1, autor2, autor3 } = require("../__fixtures__/usuariosFixture");
 const ArticuloRegular = require("../Articulo/ArticuloRegular");
 const ArticuloPoster = require("../Articulo/ArticuloPoster");
 
@@ -12,14 +12,14 @@ const articuloRegular = new ArticuloRegular(
 /***************** POSTER ***************** */
 const articuloPoster = new ArticuloPoster(
   "Artículo Poster 1",
-  "https://ieeexplore.ieee.org/document/9430234", [autor, autor1],
-  "https://ieeexplore.ieee.org/document/9430234", [autor1]
+  "https://ieeexplore.ieee.org/document/9430234", [autor1, autor2],
+  "https://ieeexplore.ieee.org/document/9430234", [autor2]
 );
 
 const artPosterCon2AutoresNotif = new ArticuloPoster(
   "Artículo Poster 2",
-  "https://ieeexplore.ieee.org/document/9430234", [autor, autor1],
-  "https://ieeexplore.ieee.org/document/9430234", [autor, autor1]
+  "https://ieeexplore.ieee.org/document/9430234", [autor, autor3],
+  "https://ieeexplore.ieee.org/document/9430234", [autor, autor3]
 );
 
 module.exports = { articuloRegular, articuloPoster, artPosterCon2AutoresNotif };

@@ -113,7 +113,7 @@ class EstadoAsignacion extends EstadoSesion {
             if (revisoresAsignados.size !== maxRevisionesPorArticulo) {
                 throw new Error(`No se pudo asignar suficientes revisores para el artículo ${articulo._tituloArticulo}`);
             }
-            console.log('revisoresAsignados ',revisoresAsignados);
+
             this._sesion.guardarAsignacion(articulo, Array.from(revisoresAsignados));
         });
 

@@ -19,7 +19,10 @@ describe("Conferencias", () => {
     
     test("Debe asignar correctamente los organizadores y comité de revisores", () => {
         const organizadoresEsperados = ['Matias Lei', 'Laura Díaz']; // CHAIR
-        const comiteEsperado = ['Leonardo Rey', 'Carlos Lopez']; // REVISORES
+        const comiteEsperado = ['Leonardo Rey', 'Carlos Lopez', 'Maria Gonzalez',
+                                'Juana Gómez', 'Mara Gonzalez', 'Juan Gómez',
+                                'Raúl Arce','Oscar Martín','Inés Martinez',
+                                'Sonia Ruiz','Pedro Jimenez','Daniel Martinez', 'Luis Iglesias']; // REVISORES
 
         expect(instanciaConf1._organizadores.map(o => o.nombre)).toEqual(organizadoresEsperados);
         expect(instanciaConf1._comite.map(c => c.nombre)).toEqual(comiteEsperado);
@@ -30,7 +33,10 @@ describe("Conferencias", () => {
 
         expect(listado).toEqual({
             organizadores: ['Matias Lei', 'Laura Díaz'],
-            comite: ['Leonardo Rey', 'Carlos Lopez']
+            comite: ['Leonardo Rey', 'Carlos Lopez', 'Maria Gonzalez',
+                     'Juana Gómez', 'Mara Gonzalez', 'Juan Gómez',
+                     'Raúl Arce','Oscar Martín','Inés Martinez',
+                     'Sonia Ruiz','Pedro Jimenez','Daniel Martinez', 'Luis Iglesias']
         });
     });
     
