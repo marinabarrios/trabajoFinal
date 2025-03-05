@@ -1,18 +1,18 @@
 @startuml
 class Comfychair{
   +crearConferencia(nombreConferencia: String, fechaInicio: Date, fechaFin: Date): Conferencia
-  +listConferencias(): List<conferencias>
+  +listConferencias(): List<Conferencia>
 }
 class Conferencia{
   nombreConferencia: String
   fechaInicio: Date
   fechaFin: Date
-  oganizadores: List<chairs>
-  comite: List<revisores>
-  sesiones: List<sesiones>
+  oganizadores: List<Chair>
+  comite: List<Revisor>
+  sesiones: List<Sesion>
   +nombreConferencia(): String
   +crearSesion(tema: String, tipoSesion: String, deadlineRecepdion: Date): Sesion
-  +listSesiones(): List<sesiones>
+  +listSesiones(): List<Sesion>
   +listarOrganizadoresYComite(): { organizadores: List<Usuario>, comite: List<Usuario> }
 }
 abstract class Usuario{
@@ -22,7 +22,7 @@ abstract class Usuario{
   contrasenia: String
   roles: Array
   +nombreUsuario(): String
-  +listarUsuariosPorRol(rol: String): List<usuarios>
+  +listarUsuariosPorRol(rol: String): List<Usuario>
   +agregarRol(rol: String): Void
   +cambiarRolUsuario(rol: String): Void
   +listarTodosLosUsuarios(): { nombreUsuario: List<String>, roles: List<String> }
@@ -58,12 +58,13 @@ abstract class Sesion{
   tipoSesion: String  
   estadoSesion: EstadoSesion
   estrategia: Estrategias
-  articulos: List<articulos>
-  +listArticulos(): List<articulos>
+  articulos: List<Articulo>
+  +listArticulos(): List<Articulo>
   +estadoSesion(estado: String): Void
   +recibirArticulo(articulo: Articulo): Void
   +agregarArticuloVerificado(articulo: Articulo): Void
   +tipoArticuloPermitido(tipoArticulo: String): Void
+  +guardarAsignacion(articulo: List<Articulo>, revisoresAsignados: List<Revisor>): Void
 }
 class SesionPoster{
   +tipoArticuloPermitido(tipoArticulo: String): Boolean
@@ -106,12 +107,6 @@ class EstadoAsignacion{
   +asignarEstado(): Void
   +agregarArticulo(articulo: Articulo, fechaActual: Date): Void
 }
-class EstadoRevision{
-  sesion: Sesion
-  +setEstado(): Void
-  +asignarEstado(): Void
-  +agregarArticulo(articulo: Articulo, fechaActual: Date): Void
-}
 class EstadoSeleccion{
   sesion: Sesion
   +setEstado(): Void
@@ -143,19 +138,24 @@ Estrategia <|-- PuntajeMinimo
 abstract class Articulo{
   tituloArticulo: String
   archivoAdjunto: String
-  autoresArticulo: List<Autores>
-  autorNotificacion: List<Autores>
-  tipoArticulo: String  
+  autoresArticulo: List<Autor>
+  autorNotificacion: List<Autor>
+  tipoArticulo: String 
+  revisoresAsignados: List<Revisor>
   +agregarTipoArticulo(tipoArticulo: String): Void
-  +notificacion(msg: String): Void
+  +notificar(msg: String): Void
+  +interesRevisores(revisor: Revisor, interes: String): Void
+  +listInteresRevisores(): List<Revisor>, List<String>
+  +agregarRevisorAsignado(revisor: Revisor): Void
+  +listRevisoresAsignados(): List<Revisor>
 }
 class ArticuloRegular{
   abstract: String
-  +notificacion(msg: String): Void
+  +notificar(msg: String): Void
 }
 class ArticuloPoster{
   archivoFuentes: String
-  +notificacion(msg: String): Void
+  +notificar(msg: String): Void
 }
 
 Sesion --> Articulo

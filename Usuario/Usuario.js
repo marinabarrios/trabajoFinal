@@ -1,5 +1,5 @@
 class Usuario {
-    // Lista estática de todos los usuarios
+    //Lista estática de todos los usuarios
     static usuariosRegistrados = [];
 
     constructor (nombreUsuario, afiliacion, email, contrasenia){

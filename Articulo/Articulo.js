@@ -32,7 +32,8 @@ class Articulo{
         this._autorNotificacion = autorNotificacion;
         
         this._tipoArticulo = null;
-        this._interesRevisores = [];
+        this._interesRevisores = new Map();
+        this._revisoresAsignados = [];
     }  
 
     //Defino el tipo de artículo
@@ -43,11 +44,67 @@ class Articulo{
         this._tipoArticulo = tipoArticulo;
     }
 
-    notificacion(msg){
+    notificar(msg){
         this._autorNotificacion.forEach(autor => {
             autor.recibe_notificacion(msg);
         });
     }
+
+    interesRevisores(revisor, interes) {
+        this._interesRevisores.set(revisor, interes);
+    }
+
+    listInteresRevisores(){
+        return this._interesRevisores;
+    }
+
+    agregarRevisorAsignado(revisor) {
+        if (this._revisoresAsignados.length < 3 && !this._revisoresAsignados.includes(revisor)) {
+            this._revisoresAsignados.push(revisor);
+        } else {
+            throw new Error("No se puede asignar más de 3 revisores a este artículo.");
+        }
+    }
+
+    listRevisoresAsignados() {
+        return this._revisoresAsignados;
+    }
+
+    addRevision(revision) {
+        if (this.revisiones.length >= 3) {
+          throw new Error("No se pueden añadir más de 3 revisiones.");
+        }
+        this.revisiones.push(revision);
+        this.calculatePuntaje();
+    }
+/*    
+    addRevision(revision) {
+        if (this.revisiones.length >= 3) {
+          throw new Error("No se pueden añadir más de 3 revisiones.");
+        }
+        this.revisiones.push(revision);
+        this.calculatePuntaje();
+      }
+    
+    calculatePuntaje() {
+        if (this.revisiones.length > 0) {
+          const totalPuntaje = this.revisiones.reduce(
+            (sum, rev) => sum + rev.puntaje,
+            0
+          );
+          this.puntaje = totalPuntaje / this.revisiones.length;
+        } else {
+          this.puntaje = null;
+        }
+    }*/
+/*
+  addRevision(revision) {
+    if (this.revisiones.length >= 3) {
+      throw new Error("No se pueden añadir más de 3 revisiones.");
+    }
+    this.revisiones.push(revision);
+    this.calculatePuntaje();
+  }*/
 /*
     agregarInteres(revisor, tipoInteres, temaSesion) {
         // Buscar si el revisor ya ha expresado interés previamente

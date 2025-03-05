@@ -1,309 +1,130 @@
-/** todos los tests para la Etapa de Asignacion */
-const ComfyChair = require('../ComfyChair.js');
-const PorcentajeDeAceptados = require('../PorcentajeDeAceptados.js');
-const PuntajeMinimo = require('../PuntajeMinimo.js');
+const { sesionP, sesionR, sesionW } = require("../__fixtures__/sesionesFixture");
+const { autor, autor1, autor2, autor3, revisor, revisor1, revisor2, revisor3, revisor4, revisor5, revisor6,
+        revisor7, revisor8, revisor9, revisor10, revisor11, revisor12 } = require("../__fixtures__/usuariosFixture");
+const { articuloPoster, articuloRegular, artPosterCon2AutoresNotif } = require("../__fixtures__/articulosFixture");
+const Usuario = require("../Usuario/Usuario");
+const _ = require("lodash");
 
-let empresa;
-let juan; let jose; let matias; let leo; let mariana; let mateo;
-let julian; let graciela; let maria; let juana; let mara; let juanG;
-let raul; let oscar; let ines; let sonia; let pedro; let daniel; let luis;
-let todosLosChairs; let todosLosRevisores; let todosLosAutores;
-let conferenciaInformatica; let estrategiaPorcentaja;
-let estrategiaPuntaje; let estrategiasPorTipo;
+describe('Asignación de revisores', () => {
 
-beforeEach( () => {
-    empresa = new ComfyChair();
+    let copiaSesion;
 
-    //Registro de usuarios
-    juan = empresa.registrarUsuario('chair', 'Juan Rodriguez', 'UNLP', 'juan_rodriguez@gmail.com', '123456');
-    jose = empresa.registrarUsuario('autor','José Gonzalez', 'UNNE', 'jose_gonzalez@gmail.com', '123456');
-    matias = empresa.registrarUsuario('autor','Matias Lei', 'UNAM', 'matias_lei@gmail.com', '123456');
-    leo = empresa.registrarUsuario('autor','Leonardo Rey', 'UNAM', 'leonardo_rey@gmail.com', '123456');
-    mariana = empresa.registrarUsuario('autor','Mariana Lei', 'UNAM', 'mariana_lei@gmail.com', '123456');
-    mateo = empresa.registrarUsuario('autor','Mateo Rey', 'UNAM', 'mateo_rey@gmail.com', '123456');
-    julian = empresa.registrarUsuario('autor','Julian Cotto', 'UBA', 'julian_cotto@gmail.com', '123456');
-    graciela = empresa.registrarUsuario('autor','Graciela Meza', 'UBA', 'graciela_meza@gmail.com', '123456');
-    maria = empresa.registrarUsuario('revisor','Maria Gonzalez', 'UNNE', 'maria_gonzalez@gmail.com', '123456');
-    juana = empresa.registrarUsuario('revisor','Juana Gómez', 'UNLP', 'juana_gomez@gmail.com', '123456');
-    mara = empresa.registrarUsuario('revisor','Mara Gonzalez', 'UNNE', 'mara_gonzalez@gmail.com', '123456');
-    juanG = empresa.registrarUsuario('revisor','Juan Gómez', 'UNLP', 'juan_gomez@gmail.com', '123456');
-    raul = empresa.registrarUsuario('revisor','Raúl Arce', 'UNNE', 'raul_arce@gmail.com', '123456');
-    oscar = empresa.registrarUsuario('revisor','Oscar Martín', 'UNLP', 'oscar_martin@gmail.com', '123456');
-    ines = empresa.registrarUsuario('revisor','Inés Martinez', 'UNNE', 'ines_martinez@gmail.com', '123456');
-    sonia = empresa.registrarUsuario('revisor','Sonia Ruiz', 'UNLP', 'sonia_ruiz@gmail.com', '123456');
-    pedro = empresa.registrarUsuario('revisor','Pedro Jimenez', 'UNLP', 'pedro_jimenez@gmail.com', '123456');
-    daniel = empresa.registrarUsuario('revisor','Daniel Martinez', 'UNNE', 'daniel_martinez@gmail.com', '123456');
-    luis = empresa.registrarUsuario('revisor','Luis Iglesias', 'UNLP', 'luis_iglesias@gmail.com', '123456');
-    todosLosChairs = empresa.listChairs();
-    todosLosRevisores = empresa.listRevisores();
-    todosLosAutores = empresa.listAutores();
-
-    //Creación de la Conferencia
-    conferenciaInformatica = empresa.crearConferencia('Conferencia Informática', '2024-12-28', '2024-12-31',
-                                   todosLosChairs, todosLosRevisores,todosLosAutores);
-    //defino valores para la estrategia de corte fijo/
-    estrategiaPorcentaja = new PorcentajeDeAceptados(0.3); //Acepta el 30% de los artículos
-
-    //defino valores para la estrategia de puntaje mínimo /
-    estrategiaPuntaje = new PuntajeMinimo(1); //Acepta artículos con puntaje promedio >= 1
-
-    //defino valores por tipo de articulo para cuando se trata de un workshop
-    estrategiasPorTipo = {
-        poster: new PorcentajeDeAceptados(0.2), // Acepta el 20% de los poster
-        regular: new PuntajeMinimo(0.5) // Puntaje mínimo de 0.5 para artículos regulares
-    };    
-}); 
-
-test("EL Chair cambia al estado de Asignación", () => {
-    //creo la sesión    
-    sesionInteligencia = conferenciaInformatica.crearSesion('Inteligencia Artificial', 'regular',
-                                                            '2024-09-12', 'recepcion', estrategiaPorcentaja);
-    const futureOfProjectManagement = jose.crearArticulo(1, 'An investigation into the Impact of Artificial Intelligence on the Future of Project Management',
-    'regular', 'The purpose of the study is to investigate the impact of Artificial Intelligence.',
-    'https://ieeexplore.ieee.org/document/9430234',[jose, matias], null, matias, new Date()
-    );
-    jose.enviarArticulo(sesionInteligencia, futureOfProjectManagement);
-    const verTodosLosArticulosAprobadosSesionInteligencia = sesionInteligencia.verArticulos();
-    maria.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'interesado');
-    juan.cambiarEstadoSesion(sesionInteligencia,'asignacion');
-    expect(sesionInteligencia._estadoSesion).toContain('asignacion');
-});
-
-test('El sistema debe asignar exactamente 3 revisores a cada artículo', () => {
-    //creo la sesión    
-    sesionInteligencia = conferenciaInformatica.crearSesion('Inteligencia Artificial', 'regular',
-                                                            '2024-09-12', 'recepcion', estrategiaPorcentaja);
-    //se crean articulos para la sesion de inteligencia artificial
-    const futureOfProjectManagement = jose.crearArticulo(1, 'An investigation into the Impact of Artificial Intelligence on the Future of Project Management',
-        'regular', 'The purpose of the study is to investigate the impact of Artificial Intelligence',
-        'https://ieeexplore.ieee.org/document/9430234',
-        [jose, matias], null, matias, new Date()
-       );
-    const creativeIA = leo.crearArticulo(2, 'Creative AI in Software Project Management',
-        'regular', 'Software project management (SPM), which comprises planning, supervising, and keeping track of software projects, is a sophisticated art. However, the complexity and needs of modern software development projects are usually impossible for existing SPM methodologies to handle. The research paper investigates how business process reengineering (BPR) and the strategic application of artificial intelligence (AI) may enhance the effectiveness, quality, and competitiveness of software development processes. The development of artificial intelligence (AI) has the potential to transform project management practices by automating operations, enabling project analytics, and offering intelligent recommendations. This paper proposes a framework for managing agile projects, which are gaining popularity due to their speedy value delivery and minimal risk of project failure. Just a few examples of how AI might be incorporated into project management include automating administrative tasks, providing data-driven risk predictions, simplifying project planning, and producing actionable insights. Software development is one of several businesses that has benefited from the popularity of Scrum and other agile project management methodologies.',
-        'https://ieeexplore.ieee.org/document/10425234',
-        [leo], null, leo, new Date()
-       );
-    const innovationManagement = mariana.crearArticulo(3, 'Artificial Intelligence in the Innovation Management Systems',
-        'regular', 'In this paper the management of innovation processes and projects is studied, which is the basis for analyzing of factors affecting the complexity of the management process.',
-        'https://ieeexplore.ieee.org/document/10479688',
-        [mariana], null, mariana, new Date()
-       );
-    const inclusiveness = mateo.crearArticulo(4, 'Evaluating the Inclusiveness of Artificial Intelligence Software',
-        'regular', 'The escalating integration of Artificial Intelligence (AI) in various domains, especially Project Management (PM).',
-        'https://ieeexplore.ieee.org/document/10467463',
-        [mateo], null, mateo, new Date()
-        );
-    const evaluating = matias.crearArticulo(5, 'Evaluating the Artificial Intelligence Software',
-        'regular', 'The escalating integration of Artificial Intelligence (AI) in various domains, especially Project Management (PM).',
-        'https://ieeexplore.ieee.org/document/10467463',
-        [matias], null, matias, new Date()
-        );
-    const escalating = julian.crearArticulo(6, 'Escalating the Artificial Intelligence Software',
-        'regular', 'The escalating integration of Artificial Intelligence (AI) in various domains, especially Project Management (PM).',
-        'https://ieeexplore.ieee.org/document/10467463',
-        [julian], null, julian, new Date()
-        );
-    const integration = graciela.crearArticulo(7, 'Integration the Artificial Intelligence Software',
-        'regular', 'The escalating integration of Artificial Intelligence (AI) in various domains, especially Project Management (PM).',
-        'https://ieeexplore.ieee.org/document/10467463',
-        [graciela], null, graciela, new Date()
-        );
-    //los autores envian los articulos
-    jose.enviarArticulo(sesionInteligencia, futureOfProjectManagement);
-    leo.enviarArticulo(sesionInteligencia, creativeIA);
-    mariana.enviarArticulo(sesionInteligencia, innovationManagement);
-    mateo.enviarArticulo(sesionInteligencia, inclusiveness);
-    matias.enviarArticulo(sesionInteligencia, evaluating);
-    julian.enviarArticulo(sesionInteligencia, escalating);
-    graciela.enviarArticulo(sesionInteligencia, integration);
-
-    const estadoDeLaSesionInt = sesionInteligencia.verificarDeadlineRecepcion();
-    const verTodosLosArticulosAprobadosSesionInteligencia = sesionInteligencia.verArticulos();
-
-    //los revisores expresan su interes
-    maria.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'interesado');
-    maria.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 3), 'no interesado');
-    maria.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4), 'quizas');
-    juana.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 2), 'no interesado');
-    juana.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 5), 'no interesado');
-    juana.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 6), 'quizas');
-    mara.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'quizas');
-    mara.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4), 'interesado');
-    mara.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 6), 'no interesado');
-    mara.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 7), 'quizas');
-    juanG.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'interesado');
-    juanG.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4), 'quizas');
-    juanG.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 6), 'interesado');
-    juanG.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 7), 'no interesado');
-    raul.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 3), 'interesado');
-    raul.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4), 'quizas');
-    raul.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 2), 'quizas');
-    raul.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 5), 'no interesado');
-    oscar.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'interesado');
-    oscar.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 2), 'quizas');
-    oscar.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 5), 'no interesado');
-    oscar.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 6), 'quizas');
-    ines.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'interesado');
-    ines.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 3), 'no interesado');
-    ines.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4), 'quizas');
-    ines.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 5), 'interesado');
-    ines.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 7), 'no interesado');
-    sonia.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 3), 'interesado');
-    sonia.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4), 'quizas');
-    sonia.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 6), 'quizas');
-    pedro.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'interesado');
-    daniel.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'quizas');
-    daniel.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4), 'quizas');
-    luis.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 2), 'no interesado');
-    luis.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 7), 'interesado');
-    //junto todos los intereses en una variable
-    const mostrarRevisorIntereses1 = verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1).mostrarRevisorInteres();
-    const mostrarRevisorIntereses2 = verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 2).mostrarRevisorInteres();
-    const mostrarRevisorIntereses3 = verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 3).mostrarRevisorInteres();
-    const mostrarRevisorIntereses4 = verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4).mostrarRevisorInteres();
-    const mostrarRevisorIntereses5 = verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 5).mostrarRevisorInteres();
-    const mostrarRevisorIntereses6 = verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 6).mostrarRevisorInteres();
-    const mostrarRevisorIntereses7 = verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 7).mostrarRevisorInteres();
-    const todosLosInteresesSesionInteligencia = mostrarRevisorIntereses1.concat(mostrarRevisorIntereses2, mostrarRevisorIntereses3, mostrarRevisorIntereses4, mostrarRevisorIntereses5, mostrarRevisorIntereses6, mostrarRevisorIntereses7);
-    //el chair cambia el estado de la sesión
-    juan.cambiarEstadoSesion(sesionInteligencia,'asignacion');
-    juan.asignarRevisores(sesionInteligencia, todosLosInteresesSesionInteligencia, todosLosRevisores);
-    const verAsignaciones = sesionInteligencia.verAsignaciones();
-
-    verAsignaciones.forEach(asignacion => {
-        const { revisor } = asignacion;
-        expect(revisor).toHaveLength(3);
+    beforeEach(() => {
+        //Usuario.usuariosRegistrados = [autor, revisor, revisor1];
+        Usuario.usuariosRegistrados = [ autor, autor1, autor2, autor3,
+                                        revisor, revisor1, revisor2, revisor3,
+                                        revisor4, revisor5, revisor6,
+                                        revisor7, revisor8, revisor9,
+                                        revisor10, revisor11, revisor12 ];
+        //Creo copia de la sesión
+        copiaSesion = _.cloneDeep(sesionW);
+        //Creo copias de los artículos
+        articulo1 = Object.create(articuloRegular);
+        articulo2 = Object.create(articuloPoster);
+        //Los autores envían artículos a la sesion
+        autor.enviarArticulo(copiaSesion, articulo1);
+        autor1.enviarArticulo(copiaSesion, articulo2);
+        //Cambio el estado a BIDDING
+        copiaSesion.estadoSesion().asignarEstado();
+        //Agrego revisores a la sesion
+        copiaSesion.agregarRevisores('Leonardo Rey');
+        copiaSesion.agregarRevisores('Carlos Lopez');
+        copiaSesion.agregarRevisores('Maria Gonzalez');
+        copiaSesion.agregarRevisores('Juana Gómez');
+        copiaSesion.agregarRevisores('Mara Gonzalez');
+        copiaSesion.agregarRevisores('Juan Gómez');
+        copiaSesion.agregarRevisores('Raúl Arce');
+        copiaSesion.agregarRevisores('Oscar Martín');
+        copiaSesion.agregarRevisores('Inés Martinez');
+        copiaSesion.agregarRevisores('Sonia Ruiz');
+        copiaSesion.agregarRevisores('Pedro Jimenez');
+        copiaSesion.agregarRevisores('Daniel Martinez');
+        copiaSesion.agregarRevisores('Luis Iglesias');
+        //Revisores expresan su interés por el artículo regular
+        copiaSesion.estadoSesion().procesarBidding(revisor, articulo1, "INTERESADO");//Leonardo Rey
+        copiaSesion.estadoSesion().procesarBidding(revisor1, articulo1, "QUIZAS");//Carlos Lopez
+        copiaSesion.estadoSesion().procesarBidding(revisor2, articulo1, "NO INTERESADO");//Maria Gonzalez
+        copiaSesion.estadoSesion().procesarBidding(revisor3, articulo1, "QUIZAS");//Juana Gómez
+        copiaSesion.estadoSesion().procesarBidding(revisor4, articulo1, "NO INTERESADO");//Mara Gonzalez
+        copiaSesion.estadoSesion().procesarBidding(revisor5, articulo1, "QUIZAS");//Juan Gómez
+        copiaSesion.estadoSesion().procesarBidding(revisor6, articulo1, "INTERESADO");//Raúl Arce
+        copiaSesion.estadoSesion().procesarBidding(revisor7, articulo1, "QUIZAS");//Oscar Martín
+        copiaSesion.estadoSesion().procesarBidding(revisor8, articulo1, "NO INTERESADO");//Inés Martinez
+        copiaSesion.estadoSesion().procesarBidding(revisor9, articulo1, "INTERESADO");//Sonia Ruiz
+        //Revisores expresan su interés por el artículo poster
+        copiaSesion.estadoSesion().procesarBidding(revisor1, articulo2, "INTERESADO");//Carlos Lopez
+        copiaSesion.estadoSesion().procesarBidding(revisor2, articulo2, "INTERESADO");//Maria Gonzalez
+        copiaSesion.estadoSesion().procesarBidding(revisor5, articulo2, "QUIZAS");//Juan Gómez
+        copiaSesion.estadoSesion().procesarBidding(revisor6, articulo2, "NO INTERESADO");//Raúl Arce
+        copiaSesion.estadoSesion().procesarBidding(revisor7, articulo2, "NO INTERESADO");//Oscar Martín
+        copiaSesion.estadoSesion().procesarBidding(revisor9, articulo2, "INTERESADO");//Sonia Ruiz
+        copiaSesion.estadoSesion().procesarBidding(revisor10, articulo2, "QUIZAS");//Pedro Jimenez
+        copiaSesion.estadoSesion().procesarBidding(revisor11, articulo2, "QUIZAS");//Daniel Martinez
+        copiaSesion.estadoSesion().procesarBidding(revisor12, articulo2, "NO INTERESADO");//Luis Iglesias        
     });
-});
 
-test('Todos los artículos evaluados deberían tener un puntaje mayor o igual a -3', () => {
-    //creo la sesión    
-    const sesionInteligencia = conferenciaInformatica.crearSesion('Inteligencia Artificial', 'workshop',
-                                                                  '2024-09-12', 'recepcion', estrategiaPuntaje, 
-                                                                  estrategiasPorTipo);
-    
-    const futureOfProjectManagement = jose.crearArticulo(1, 'An investigation into the Impact of Artificial Intelligence on the Future of Project Management',
-        'poster', null, 'https://ieeexplore.ieee.org/document/9430234',
-        [jose, matias], 'https://ieeexplore.ieee.org/document/9430234', matias, new Date()
-        );
-    const creativeIA = leo.crearArticulo(2, 'Creative AI in Software Project Management',
-        'poster', null, 'https://ieeexplore.ieee.org/document/10425234',
-        [leo], 'https://ieeexplore.ieee.org/document/10425234', leo, new Date()
-        );
-    const innovationManagement = mariana.crearArticulo(3, 'Artificial Intelligence in the Innovation Management Systems',
-        'poster', null, 'https://ieeexplore.ieee.org/document/10479688',
-        [mariana], 'https://ieeexplore.ieee.org/document/10479688', mariana, new Date()
-        );
-    const inclusiveness = mateo.crearArticulo(4, 'Evaluating the Inclusiveness of Artificial Intelligence Software',
-        'regular', 'The escalating integration of Artificial Intelligence (AI) in various domains, especially Project Management (PM).',
-        'https://ieeexplore.ieee.org/document/10467463',
-        [mateo], null, mateo, new Date()
-        );
-    const evaluating = matias.crearArticulo(5, 'Evaluating the Artificial Intelligence Software',
-        'regular', 'The escalating integration of Artificial Intelligence (AI) in various domains, especially Project Management (PM).',
-        'https://ieeexplore.ieee.org/document/10467463',
-        [matias], null, matias, new Date()
-        );
-    const escalating = julian.crearArticulo(6, 'Escalating the Artificial Intelligence Software',
-        'regular', 'The escalating integration of Artificial Intelligence (AI) in various domains, especially Project Management (PM).',
-        'https://ieeexplore.ieee.org/document/10467463',
-        [julian], null, julian, new Date()
-        );
-    const integration = graciela.crearArticulo(7, 'Integration the Artificial Intelligence Software',
-        'regular', 'The escalating integration of Artificial Intelligence (AI) in various domains, especially Project Management (PM).',
-        'https://ieeexplore.ieee.org/document/10467463',
-        [graciela], null, graciela, new Date()
-        );
-    //los autores envian los articulos
-    jose.enviarArticulo(sesionInteligencia, futureOfProjectManagement);
-    leo.enviarArticulo(sesionInteligencia, creativeIA);
-    mariana.enviarArticulo(sesionInteligencia, innovationManagement);
-    mateo.enviarArticulo(sesionInteligencia, inclusiveness);
-    matias.enviarArticulo(sesionInteligencia, evaluating);
-    julian.enviarArticulo(sesionInteligencia, escalating);
-    graciela.enviarArticulo(sesionInteligencia, integration);
+    test('Se asignan revisores a los artículos según sus intereses', () => {
+        //Cambio el estado a ASIGNACION
+        copiaSesion.estadoSesion().asignarEstado();
+        //Se asignan los revisores teniendo en cuenta el interés
+        copiaSesion.estadoSesion().asignarRevisores();
+      /*  expect(articulo1.listRevisoresAsignados()).toContain(revisor);//Leonardo Rey
+        expect(articulo1.listRevisoresAsignados()).toContain(revisor6);//Raúl Arce
+        expect(articulo1.listRevisoresAsignados()).toContain(revisor9);//Sonia Ruiz
 
-    const estadoDeLaSesionInt = sesionInteligencia.verificarDeadlineRecepcion();
-    const verTodosLosArticulosAprobadosSesionInteligencia = sesionInteligencia.verArticulos();
+       */ expect(articulo2.listRevisoresAsignados()).toContain(revisor1);//Carlos Lopez
+        expect(articulo2.listRevisoresAsignados()).toContain(revisor2);//Maria Gonzalez
+        expect(articulo2.listRevisoresAsignados()).toContain(revisor9);//Leonardo Rey pero tiene que ser Sonia
+        
+    });
 
-    //los revisores expresan su interes
-    maria.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'interesado');
-    maria.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 3), 'no interesado');
-    maria.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4), 'quizas');
-    juana.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 2), 'no interesado');
-    juana.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 5), 'no interesado');
-    juana.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 6), 'quizas');
-    mara.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'quizas');
-    mara.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4), 'interesado');
-    mara.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 6), 'no interesado');
-    mara.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 7), 'quizas');
-    juanG.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'interesado');
-    juanG.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4), 'quizas');
-    juanG.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 6), 'interesado');
-    juanG.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 7), 'no interesado');
-    raul.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 3), 'interesado');
-    raul.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4), 'quizas');
-    raul.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 2), 'quizas');
-    raul.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 5), 'no interesado');
-    oscar.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'interesado');
-    oscar.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 2), 'quizas');
-    oscar.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 5), 'no interesado');
-    oscar.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 6), 'quizas');
-    ines.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'interesado');
-    ines.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 3), 'no interesado');
-    ines.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4), 'quizas');
-    ines.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 5), 'interesado');
-    ines.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 7), 'no interesado');
-    sonia.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 3), 'interesado');
-    sonia.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4), 'quizas');
-    sonia.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 6), 'quizas');
-    pedro.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'interesado');
-    daniel.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'quizas');
-    daniel.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4), 'quizas');
-    luis.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 2), 'no interesado');
-    luis.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 7), 'interesado');
-    //junto todos los intereses en una variable
-    const mostrarRevisorIntereses1 = verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1).mostrarRevisorInteres();
-    const mostrarRevisorIntereses2 = verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 2).mostrarRevisorInteres();
-    const mostrarRevisorIntereses3 = verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 3).mostrarRevisorInteres();
-    const mostrarRevisorIntereses4 = verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 4).mostrarRevisorInteres();
-    const mostrarRevisorIntereses5 = verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 5).mostrarRevisorInteres();
-    const mostrarRevisorIntereses6 = verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 6).mostrarRevisorInteres();
-    const mostrarRevisorIntereses7 = verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 7).mostrarRevisorInteres();
-    const todosLosInteresesSesionInteligencia = mostrarRevisorIntereses1.concat(mostrarRevisorIntereses2, mostrarRevisorIntereses3, mostrarRevisorIntereses4, mostrarRevisorIntereses5, mostrarRevisorIntereses6, mostrarRevisorIntereses7);
-    //el chair cambia el estado de la sesión
-    juan.cambiarEstadoSesion(sesionInteligencia,'asignacion');
-    juan.asignarRevisores(sesionInteligencia, todosLosInteresesSesionInteligencia, todosLosRevisores);
-    const verAsignaciones = sesionInteligencia.verAsignaciones();
-    //los revisores evalúan los articulos
-    maria.realizarEvaluacion(sesionInteligencia,1,'Excelente artículo',3);
-    maria.realizarEvaluacion(sesionInteligencia,7,'Artículo incoherente',-3);
-    juana.realizarEvaluacion(sesionInteligencia,3,'Buen artículo',1);
-    juana.realizarEvaluacion(sesionInteligencia,6,'Buen artículo',2);
-    mara.realizarEvaluacion(sesionInteligencia,2,'Artículo incoherente',-2);
-    mara.realizarEvaluacion(sesionInteligencia,4,'Artículo básico',0);
-    mara.realizarEvaluacion(sesionInteligencia,7,'Artículo incoherente',-3);
-    juanG.realizarEvaluacion(sesionInteligencia,1,'Excelente artículo',3);
-    juanG.realizarEvaluacion(sesionInteligencia,6,'Artículo incoherente',-3);
-    raul.realizarEvaluacion(sesionInteligencia,2,'Buen artículo',1);
-    raul.realizarEvaluacion(sesionInteligencia,3,'Buen artículo',2);
-    oscar.realizarEvaluacion(sesionInteligencia,1,'Artículo incoherente',-2);
-    oscar.realizarEvaluacion(sesionInteligencia,2,'Artículo básico',0);
-    ines.realizarEvaluacion(sesionInteligencia,4,'Artículo incoherente',-3);
-    ines.realizarEvaluacion(sesionInteligencia,5,'Buen artículo',1);
-    sonia.realizarEvaluacion(sesionInteligencia,3,'Buen artículo',2);
-    sonia.realizarEvaluacion(sesionInteligencia,6,'Artículo incoherente',-2);
-    pedro.realizarEvaluacion(sesionInteligencia,5,'Artículo básico',0);
-    daniel.realizarEvaluacion(sesionInteligencia,4,'Artículo incoherente',-3);
-    luis.realizarEvaluacion(sesionInteligencia,5,'Excelente artículo',3);
-    luis.realizarEvaluacion(sesionInteligencia,7,'Artículo incoherente',4);
+    test('El proceso de asignación de revisores sólo se puede llevar acabo en el Estado de Asignacion', () => {
+        expect(() => copiaSesion.estadoSesion().asignarRevisores()).
+            toThrow('El proceso de asignación de artículos sólo se puede realizar durante el estado de asignación');
+    });
+/******************** */
+    test("Cada artículo debe tener exactamente 3 revisores", () => {
+        //Cambio el estado a ASIGNACION
+        copiaSesion.estadoSesion().asignarEstado();
 
-    juan.cambiarEstadoSesion(sesionInteligencia, 'seleccion');
-    const evaluacionesSesionInteligencia = sesionInteligencia.mostrarEvaluaciones();
+        copiaSesion.estadoSesion().asignarRevisores();
 
-    console.log('evaluacionesSesionInteligencia', evaluacionesSesionInteligencia);
-    evaluacionesSesionInteligencia.forEach(evaluacion => {
-        expect(evaluacion.puntaje).toBeGreaterThanOrEqual(-3);
+        copiaSesion._articulos.forEach((articulo) => {
+            expect(articulo.listRevisoresAsignados()).toHaveLength(3);
+        });
+    });
+
+    test("Se priorizan los revisores interesados y se asignan de forma equitativa", () => {
+        //Cambio el estado a ASIGNACION
+        copiaSesion.estadoSesion().asignarEstado();
+
+        copiaSesion.estadoSesion().asignarRevisores();
+
+        copiaSesion._articulos.forEach((articulo) => {
+            const revisoresAsignados = articulo.listRevisoresAsignados();
+            expect(revisoresAsignados.some((r) => r.interes === "INTERESADO")).toBeTruthy();
+        });
+    });
+
+    test("Se distribuyen las revisiones de manera balanceada", () => {
+        //Cambio el estado a ASIGNACION
+        copiaSesion.estadoSesion().asignarEstado();
+
+        copiaSesion.estadoSesion().asignarRevisores();
+
+        const conteoRevisiones = {};
+        copiaSesion._revisores.forEach(revisor => conteoRevisiones[revisor._nombreUsuario] = 0);
+
+        copiaSesion._articulos.forEach(articulo => {
+            articulo.listRevisoresAsignados().forEach(revisor => {
+                conteoRevisiones[revisor._nombreUsuario]++;
+            });
+        });
+
+        const valores = Object.values(conteoRevisiones);
+        const maxRevisiones = Math.max(...valores);
+        const minRevisiones = Math.min(...valores);
+
+        expect(maxRevisiones - minRevisiones).toBeLessThanOrEqual(1);
     });
 });

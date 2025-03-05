@@ -1,3 +1,4 @@
+const Usuario = require("../Usuario/Usuario");
 const EstadoRecepcion = require('../EstadoSesion/EstadoRecepcion');
 
 class Sesion{
@@ -9,21 +10,28 @@ class Sesion{
         this._tipoSesion = tipoSesion;
         this._estadoSesion = new EstadoRecepcion(this, deadlineRecepcion);
         this._articulos = [];
+        this._revisores = [];
     }
 
     listArticulos(){
         return this._articulos;
     }
 
-    estadoSesion(estado){
+    estadoSesion(){
+        return this._estadoSesion;
+    }
+
+    modificarEstadoSesion(estado) {
         this._estadoSesion = estado;
     }
 
+    //La sesion recibe el articulo y envía al estado para verificar si se lo recibe
     recibirArticulo(articulo){
         const fechaActual = new Date().toISOString().split('T')[0];
         this._estadoSesion.agregarArticulo(articulo, fechaActual);
     }
 
+    //Agrego los artículos que pasaron todas las verificaciones
     agregarArticuloVerificado(articulo){
         this._articulos.push(articulo);
     }
@@ -31,29 +39,44 @@ class Sesion{
     tipoArticuloPermitido(tipoArticulo) {
         throw new Error('Método no implementado en la clase actual');
     }
-  /*  recibirArticulo(articulo) {
-        if (this.validarArticulo(articulo)) {
-            this.articulos.push(articulo);
-        } else {
-            throw new Error("El artículo no cumple con los criterios de la sesión");
+
+    //Se agrega los revisores de la sesion
+    agregarRevisores(nombreUsuario) {
+        //Busco al usuario en la lista de usuarios registrados
+        const usuario = Usuario.usuariosRegistrados.find(u => u._nombreUsuario === nombreUsuario);
+
+        if (!usuario) {
+            throw new Error('El usuario no está registrado en el sistema');
         }
+    
+        //Verifico si el usuario ya tiene el rol de REVISOR
+        if (!usuario._roles.includes('REVISOR')) {
+            throw new Error('El usuario no tiene el rol de REVISOR');
+        }
+    
+        //Verifico si el usuario ya es revisor de la sesión
+        if (this._revisores.includes(usuario)) {
+            throw new Error('Este usuario ya es revisor de esta sesión');
+        }
+    
+        //Agrego el usuario como revisor de la sesión
+        this._revisores.push(usuario);
     }
 
-     //Método que permite verificar si se pasó la fecha del deadline
-     verificarDeadlineRecepcion(){
-        const fechaActual = new Date();
-        const fechaActualSinHora = fechaActual.toISOString().split('T')[0];
-        if (fechaActualSinHora > this._deadlineRecepcion) {
-            this._estadoSesion = 'bidding';
+    guardarAsignacion(articulo, revisoresAsignados) {
+        //Encuentro el artículo en la lista de artículos de la sesión
+        const articuloEnSesion = this._articulos.find(a => a === articulo);
+        if (articuloEnSesion) {
+            //Asigno los revisores al artículo usando el método del artículo
+            revisoresAsignados.forEach(revisor => {
+                articuloEnSesion.agregarRevisorAsignado(revisor);
+            });
         } else {
-            this._estadoSesion = 'recepcion';
+            throw new Error('No se encontró el artículo en esta sesión');
         }
-        return this._estadoSesion;
     }
-    
-    realizarNotificacion(autor, mensaje) {
-        autor.agregarNotificacion(mensaje);
-    }*/
+  /*  
+   
     /*constructor(tema, tipoSesion, deadlineRecepcion, estadoSesion, estrategiaPorDefecto, estrategiasPorTipoDeArticulo = {}) {
         this._tema = tema;
         this._tipoSesion = tipoSesion; // 'regular', 'workshop', 'posters'
@@ -72,66 +95,8 @@ class Sesion{
             this._estrategiasPorTipoDeArticulo.clear();
         }
     }
+   
 
-    //Método que recibe el artículo del autor
-    recibirArticulo(articulo) {
-        if (this.validarArticulo(articulo)) {
-            this._articulos.push(articulo);
-            const articuloGuardar = this.simplificarArticulo(articulo);
-            const gestor = new GestorDeArticulos();
-            gestor.agregarArticulo(this._tema, articuloGuardar);
-        } else {
-           // throw new Error('Artículo no válido para esta sesión');
-           console.log('El artículo '+ articulo._id +' no válido para esta sesión');
-        }
-    }
-
-    obtenerArticulos() {
-        return this._articulos;
-    }
-
-    modificarEstadoSesion(estadoSesion){
-        this._estadoSesion = estadoSesion;
-        return this._estadoSesion; 
-    }
-
-    
-    //Método que permite verificar si se pasó la fecha del deadline
-    verificarDeadlineRecepcion(){
-        const fechaActual = new Date();
-        const fechaActualSinHora = fechaActual.toISOString().split('T')[0];
-        if (fechaActualSinHora > this._deadlineRecepcion) {
-            this._estadoSesion = 'bidding';
-        } else {
-            this._estadoSesion = 'recepcion';
-        }
-        return this._estadoSesion;
-    }
-
-    //Método que envía la notificación de que no pasó la validación al autorNotificacion
-    realizarNotificacion(autores, mensaje){
-        autores.agregarNotificacion(mensaje);
-    }
-
-    //Método que busca los artículos de la sesión en archivo .json que se generó
-    verArticulos(){
-        const gestor = new GestorDeArticulos();
-        const articulosAlmacenados = gestor.leerArticulos(this._tema);console.log('articulosAlmacenados',articulosAlmacenados);
-        const articulosDeLaSesion = this.desdeObjetoPlano(articulosAlmacenados);
-        return articulosDeLaSesion;
-    }
-
-    //Método que guarda a que revisor se le asignó el artículo
-    guardarAsignacion(articuloId, revisoresAsignados) {
-        if (!this._asignaciones) {
-          //Inicializo el array de revisores asignados si no existe para el artículo dado
-          this._asignaciones= [];
-        }
-    
-        //Agrego los revisores asignados para el artículo
-        this._asignaciones.push({sesion: this._tema, articulo: articuloId, revisor: revisoresAsignados});    
-        console.log(`Asignación guardada para el artículo ${articuloId} de la Sesion ${this._tema}:`, revisoresAsignados);
-    } 
 
     //Método que guarda la evaluación del revisor a cada artículo
     agregarEvaluacion(articuloId, nombreRevisor, comentario, puntaje) {

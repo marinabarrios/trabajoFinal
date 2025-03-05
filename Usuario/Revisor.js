@@ -4,7 +4,7 @@ class Revisor extends Usuario{
     constructor (nombreUsuario, afiliacion, email, contrasenia){
         super(nombreUsuario, afiliacion, email, contrasenia);
         this.agregarRol('REVISOR');
-        this._intereses = [];
+        //this._intereses = [];
     }
 
     nombreUsuario() {

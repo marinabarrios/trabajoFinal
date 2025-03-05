@@ -1,166 +1,153 @@
-/** todos los tests para la etapa de bidding */
-const ComfyChair = require('../ComfyChair.js');
-const Conferencias = require('../Conferencias.js');
-const Autores = require('../Autores.js');
-const Sesiones = require('../Sesiones.js');
+const { sesionP, sesionR, sesionW } = require("../__fixtures__/sesionesFixture");
+const { autor, revisor, revisor1 } = require("../__fixtures__/usuariosFixture");
+const { articuloPoster, articuloRegular, artPosterCon2AutoresNotif } = require("../__fixtures__/articulosFixture");
+const Usuario = require("../Usuario/Usuario");
+const _ = require("lodash");
 
-let empresa;
-let conferencia;
-let autores;
-let sesion;
+describe('Revisores', () => {
 
-beforeEach( () => {
-    empresa = new ComfyChair();
-    conferencia = new Conferencias();
-    autores = new Autores();
-    sesion = new Sesiones();
-
-    // Mocks de métodos
-    empresa.registrarUsuario = jest.fn().mockImplementation((tipo, nombre, afiliacion, email, contrasenia) => {
-        const usuario = {
-            _nombreUsuario: nombre,
-            tipo,
-            afiliacion,
-            email,
-            contrasenia,
-            intereses: [], 
-            crearArticulo: jest.fn().mockReturnValue({
-                _id: 1,
-                _titulo: 'An investigation into the Impact of Artificial Intelligence on the Future of Project Management',
-                _tipo: 'regular',
-                _resumen: 'The purpose of the study is to investigate the impact of Artificial Intelligence.',
-                _url: 'https://ieeexplore.ieee.org/document/9430234',
-                _autores: [{ nombre: 'José Gonzalez' }, { nombre: 'Matias Lei' }],
-                _coautor: 'Matias Lei',
-                _fechaCreacion: new Date()
-            }),
-            enviarArticulo: jest.fn(),
-
-            // Mock de expresarInteres con lógica para agregar o modificar intereses
-            expresarInteres: jest.fn(function(sesion, articulo, tipoInteres) {
-                // Buscar si ya existe un interés para ese artículo
-                const existente = this.intereses.find(interes => interes.articuloId === articulo._id);
-                if (existente) {
-                    // Si existe, actualizar el tipo de interés
-                    existente.tipoInteres = tipoInteres;
-                } else {
-                    // Si no existe, agregar un nuevo interés
-                    this.intereses.push({ articuloId: articulo._id, tipoInteres });
-                }
-            }),
-
-            // Mock de mostrarIntereses para devolver los intereses actuales
-            mostrarIntereses: jest.fn(function() {
-                return this.intereses;
-            })
-        };
-
-        return usuario;
+    beforeEach(() => {
+        Usuario.usuariosRegistrados = [autor, revisor, revisor1];
     });
 
-    empresa.listChairs = jest.fn().mockReturnValue([{ _nombreUsuario: 'Juan Rodriguez' }]);
-    empresa.listRevisores = jest.fn().mockReturnValue([{ _nombreUsuario: 'Maria Gonzalez' }, { _nombreUsuario: 'Juana Gómez' }]);
-    empresa.listAutores = jest.fn().mockReturnValue([{ _nombreUsuario: 'José Gonzalez' }, { _nombreUsuario: 'Matias Lei' }, { _nombreUsuario: 'Leonardo Rey' }]);
-
-    empresa.crearConferencia = jest.fn().mockImplementation((nombreConferencia, fechaInicio, fechaFin, chairs, revisores, autores) => {
-        return {
-            _nombreConferencia: nombreConferencia,
-            fechaInicio,
-            fechaFin,
-            _chairs: chairs,
-            _revisores: revisores,
-            _autores: autores,
-            crearSesion: jest.fn((tema, tipoSesion, deadlineRecepcion, estadoSesion) => {
-                return {
-                    _tema: tema,
-                    tipoSesion,
-                    deadlineRecepcion,
-                    _estadoSesion: estadoSesion,
-                    verificarDeadlineRecepcion: jest.fn(function () {
-                        // Implementación de la verificación del deadline
-                        if (new Date() > new Date(this.deadlineRecepcion)) {
-                            this._estadoSesion = 'bidding';
-                        }
-                    }),
-                    recibirArticulo: jest.fn(),
-                    verArticulos: jest.fn().mockReturnValue([{
-                        _id: 1,
-                        _titulo: 'An investigation into the Impact of Artificial Intelligence on the Future of Project Management',
-                        _tipo: 'regular'
-                    }])
-                };
-            })
-        };
+    test('Agregar un revisor correctamente', () => {
+        sesionP.agregarRevisores('Leonardo Rey');
+        
+        expect(sesionP._revisores).toHaveLength(1);
+        expect(sesionP._revisores[0]._nombreUsuario).toBe('Leonardo Rey');
     });
-});        
 
-test("La fecha actual es superior al deadline, la Sesión pasa al estado de Bidding", () => {
-    const jose = empresa.registrarUsuario('autor','José Gonzalez', 'UNNE', 'jose_gonzalez@gmail.com', '123456');
-    const matias = empresa.registrarUsuario('autor','Matias Lei', 'UNAM', 'matias_lei@gmail.com', '123456');
-    const leo = empresa.registrarUsuario('autor','Leonardo Rey', 'UNAM', 'leonardo_rey@gmail.com', '123456');
-    const maria = empresa.registrarUsuario('revisor','Maria Gonzalez', 'UNNE', 'maria_gonzalez@gmail.com', '123456');
-    const juana = empresa.registrarUsuario('revisor','Juana Gómez', 'UNLP', 'juana_gomez@gmail.com', '123456');
-    const todosLosChairs = empresa.listChairs();
-    const todosLosRevisores = empresa.listRevisores();
-    const todosLosAutores = empresa.listAutores();
-    const conferenciaInformatica = empresa.crearConferencia('Conferencia Informática', '2024-12-28', '2024-12-31',
-                                                            todosLosChairs, todosLosRevisores,todosLosAutores);
-    const sesionInteligencia = conferenciaInformatica.crearSesion('Inteligencia Artificial', 'regular',
-                                                                  '2024-09-11', 'recepcion');
-    /*const futureOfProjectManagement = jose.crearArticulo(1, 'An investigation into the Impact of Artificial Intelligence on the Future of Project Management',
-    'regular', 'The purpose of the study is to investigate the impact of Artificial Intelligence.',
-    'https://ieeexplore.ieee.org/document/9430234',[jose, matias], null, matias, new Date()
-    );
-    jose.enviarArticulo(sesionInteligencia, futureOfProjectManagement);*/
-    sesionInteligencia.verificarDeadlineRecepcion();
-    expect(sesionInteligencia._estadoSesion).toBe('bidding');
+    test('Error cuando el usuario no está registrado', () => {
+        expect(() => sesionP.agregarRevisores('Pedro Zeta'))
+            .toThrow('El usuario no está registrado en el sistema');
+    });
+
+    test('Error cuando el usuario no tiene el rol de REVISOR', () => {
+        expect(() => sesionP.agregarRevisores('Juan Rodriguez'))
+            .toThrow('El usuario no tiene el rol de REVISOR');
+    });
+
+    test('Error cuando el usuario ya es revisor de la sesión', () => {
+        sesionP.agregarRevisores('Carlos Lopez'); // Primera vez, éxito
+        expect(() => sesionP.agregarRevisores('Carlos Lopez'))
+            .toThrow('Este usuario ya es revisor de esta sesión');
+    });
 });
+describe('Etapa de Bidding', () => {
 
-test("Un revisor expresa su interés por un artículo", () => {
-    const jose = empresa.registrarUsuario('autor','José Gonzalez', 'UNNE', 'jose_gonzalez@gmail.com', '123456');
-    const matias = empresa.registrarUsuario('autor','Matias Lei', 'UNAM', 'matias_lei@gmail.com', '123456');
-    const leo = empresa.registrarUsuario('autor','Leonardo Rey', 'UNAM', 'leonardo_rey@gmail.com', '123456');
-    const maria = empresa.registrarUsuario('revisor','Maria Gonzalez', 'UNNE', 'maria_gonzalez@gmail.com', '123456');
-    const juana = empresa.registrarUsuario('revisor','Juana Gómez', 'UNLP', 'juana_gomez@gmail.com', '123456');
-    const todosLosChairs = empresa.listChairs();
-    const todosLosRevisores = empresa.listRevisores();
-    const todosLosAutores = empresa.listAutores();
-    const conferenciaInformatica = empresa.crearConferencia('Conferencia Informática', '2024-07-28', '2024-07-31',
-                                                            todosLosChairs, todosLosRevisores,todosLosAutores);
-    const sesionInteligencia = conferenciaInformatica.crearSesion('Inteligencia Artificial', 'regular',
-                                                                  '2024-08-15', 'recepcion');
-    const futureOfProjectManagement = jose.crearArticulo(1, 'An investigation into the Impact of Artificial Intelligence on the Future of Project Management',
-    'regular', 'The purpose of the study is to investigate the impact of Artificial Intelligence.',
-    'https://ieeexplore.ieee.org/document/9430234',[jose, matias], null, matias, new Date()
-    );
-    jose.enviarArticulo(sesionInteligencia, futureOfProjectManagement);
-    const verTodosLosArticulosAprobadosSesionInteligencia = sesionInteligencia.verArticulos();
-    maria.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'interesado');
-    const mostrarIntereses = maria.mostrarIntereses();
-    expect(mostrarIntereses[0].tipoInteres).toBe('interesado');
-});
+    let copiaSesion;
+    beforeEach(() => {
+        Usuario.usuariosRegistrados = [autor, revisor, revisor1];
+        
+        copiaSesion = _.cloneDeep(require("../__fixtures__/sesionesFixture").sesionR);
+    });
 
-test("Un revisor cambia su interés", () => {
-    const jose = empresa.registrarUsuario('autor','José Gonzalez', 'UNNE', 'jose_gonzalez@gmail.com', '123456');
-    const matias = empresa.registrarUsuario('autor','Matias Lei', 'UNAM', 'matias_lei@gmail.com', '123456');
-    const leo = empresa.registrarUsuario('autor','Leonardo Rey', 'UNAM', 'leonardo_rey@gmail.com', '123456');
-    const maria = empresa.registrarUsuario('revisor','Maria Gonzalez', 'UNNE', 'maria_gonzalez@gmail.com', '123456');
-    const juana = empresa.registrarUsuario('revisor','Juana Gómez', 'UNLP', 'juana_gomez@gmail.com', '123456');
-    const todosLosChairs = empresa.listChairs();
-    const todosLosRevisores = empresa.listRevisores();
-    const todosLosAutores = empresa.listAutores();
-    const conferenciaInformatica = empresa.crearConferencia('Conferencia Informática', '2024-07-28', '2024-07-31',
-                                                            todosLosChairs, todosLosRevisores,todosLosAutores);
-    const sesionInteligencia = conferenciaInformatica.crearSesion('Inteligencia Artificial', 'regular',
-                                                                  '2024-08-15', 'recepcion');
-    const futureOfProjectManagement = jose.crearArticulo(1, 'An investigation into the Impact of Artificial Intelligence on the Future of Project Management',
-    'regular', 'The purpose of the study is to investigate the impact of Artificial Intelligence.',
-    'https://ieeexplore.ieee.org/document/9430234',[jose, matias], null, matias, new Date()
-    );
-    jose.enviarArticulo(sesionInteligencia, futureOfProjectManagement);
-    const verTodosLosArticulosAprobadosSesionInteligencia = sesionInteligencia.verArticulos();
-    maria.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'interesado');
-    maria.expresarInteres(sesionInteligencia, verTodosLosArticulosAprobadosSesionInteligencia.find(articulo => articulo._id === 1), 'quizas');
-    const mostrarIntereses = maria.mostrarIntereses();
-    expect(mostrarIntereses[0].tipoInteres).toEqual('quizas');
+    test("Cambiar estado de una sesión de Recepción a Bidding", () => {
+        //Verifico que el estado inicial es RECEPCION
+        expect(copiaSesion.estadoSesion().setEstado()).toBe("RECEPCION");
+        
+        //asignarEstado() cambia el estado a BIDDING
+        copiaSesion.estadoSesion().asignarEstado();
+
+        //Verifico que ahora el estado es BIDDING
+        expect(copiaSesion.estadoSesion().setEstado()).toBe('BIDDING');
+    });
+
+    test('Un revisor expresa su interés', () => {
+        const articulo = Object.create(articuloRegular);//copia del articulo
+
+        //asignarEstado() cambia el estado a BIDDING
+        copiaSesion.estadoSesion().asignarEstado();
+
+        //Verifico que ahora el estado es BIDDING
+        expect(copiaSesion.estadoSesion().setEstado()).toBe('BIDDING');
+
+        //Agrego un revisor a la sesion
+        copiaSesion.agregarRevisores('Leonardo Rey');
+
+        //El revisor expresa su interés
+        copiaSesion.estadoSesion().procesarBidding(revisor, articulo, "INTERESADO")
+
+        const intereses = Array.from(articulo.listInteresRevisores());
+        
+        //Verifico si el interés quedó registrado
+        intereses.forEach(([r, i]) => {
+            expect(revisor._nombreUsuario).toBe(revisor._nombreUsuario);
+            expect(i).toBe("INTERESADO");  
+        });
+    });
+
+    test('Varios revisores pueden expresar interés en el mismo artículo', () => {
+        const articulo = Object.create(articuloRegular);
+    
+        //La sesión pasa a estado BIDDING
+        copiaSesion.estadoSesion().asignarEstado();
+        expect(copiaSesion.estadoSesion().setEstado()).toBe('BIDDING');
+
+        //Agrego un revisor a la sesion
+        copiaSesion.agregarRevisores('Leonardo Rey');
+        copiaSesion.agregarRevisores('Carlos Lopez');
+    
+        //Revisores expresan interés
+        copiaSesion.estadoSesion().procesarBidding(revisor, articulo, "INTERESADO");
+        copiaSesion.estadoSesion().procesarBidding(revisor1, articulo, "QUIZAS");
+
+        //Se verifica que los intereses se registraron correctamente
+        expect(articulo.listInteresRevisores().get(revisor)).toBe("INTERESADO");
+        expect(articulo.listInteresRevisores().get(revisor1)).toBe("QUIZAS");
+    });
+    
+    test('Un revisor puede cambiar su interés en un artículo', () => {
+        const articulo = Object.create(articuloRegular);
+    
+        //La sesión pasa a estado BIDDING
+        copiaSesion.estadoSesion().asignarEstado();
+        expect(copiaSesion.estadoSesion().setEstado()).toBe('BIDDING');
+
+        //Agrego un revisor a la sesion
+        copiaSesion.agregarRevisores('Leonardo Rey');
+    
+        //Revisor expresa su interés y lo cambia luego
+        copiaSesion.estadoSesion().procesarBidding(revisor, articulo, "INTERESADO");
+        copiaSesion.estadoSesion().procesarBidding(revisor, articulo, "NO INTERESADO");
+
+        //Se verifica que el cambio se haya registrado correctamente
+        expect(articulo.listInteresRevisores().get(revisor)).toBe("NO INTERESADO");
+    });
+
+    test('No se puede procesar los intereses si la sesión no está en Estado Bidding', () => {
+        const articulo = Object.create(articuloRegular);
+        
+        //Cambio el estado a ASIGNACION
+        copiaSesion.estadoSesion().asignarEstado();
+        expect(copiaSesion.estadoSesion().setEstado()).toBe('BIDDING');
+        copiaSesion.estadoSesion().asignarEstado();
+        expect(copiaSesion.estadoSesion().setEstado()).toBe('ASIGNACION');
+
+        expect(() => copiaSesion.estadoSesion().procesarBidding(revisor, articulo, 'INTERESADO'))
+            .toThrow('En esta estapa no se procesan los intereses');
+    });
+
+    test('No se puede agregar un tipo de interés que no sea válido', () => {
+        const articulo = Object.create(articuloRegular);
+
+        //Cambio el estado a BIDDING
+        copiaSesion.estadoSesion().asignarEstado();
+        expect(copiaSesion.estadoSesion().setEstado()).toBe('BIDDING');
+
+        expect(() => copiaSesion.estadoSesion().procesarBidding(revisor, articulo, 'INTERESADISIMO'))
+            .toThrow('No se reconoce este tipo de interés');
+    });
+    
+    test('Lanza un error si el revisor no es revisor de la sesión', () => {
+        const articulo = Object.create(articuloRegular);
+
+        //Cambio el estado a BIDDING
+        sesionW.estadoSesion().asignarEstado();
+        expect(sesionW.estadoSesion().setEstado()).toBe('BIDDING');
+
+        expect(() => sesionW.estadoSesion().procesarBidding(revisor, articulo, 'INTERESADO')).
+        toThrow('El revisor no es revisor de la sesión donde se presentó el artículo');
+    });
+
 });

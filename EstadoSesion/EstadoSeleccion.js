@@ -3,19 +3,22 @@ const EstadoSesion = require("./EstadoSesion");
 class EstadoSeleccion extends EstadoSesion {
     constructor(sesion) {
         super(sesion);
-        this._sesion = sesion; 
     }
 
     setEstado(){
         return 'SELECCION';
     }
 
-    asignarEstado() {
-       // this._session.estadoSesion(new EstadoAsignacion(this._session));
+    agregarArticulo(articulo, fechaActual){
+        throw new Error('En esta estapa ya no se aceptan artículos');
     }
 
-    agregarArticulo(articulo, fechaActual){
-        throw new Error('Durante esta instancia, ya no se aceptan más articulos');
+    procesarBidding(revisor, articulo, tipoDeInteres){
+        throw new Error('En esta estapa no se procesan los intereses');
+    }
+
+    asignarRevisores() {
+        throw new Error('El proceso de asignación de artículos sólo se puede realizar durante el estado de asignación');
     }
     /*  una vez finalizado el proceso de bidding, los artículos se 
 asignan a los revisores. Cada revisor emite una revisión con una recomendación que es 

@@ -14,5 +14,13 @@ class EstadoSesion{
     asignarEstado(){
         throw new Error('Método no implementado en la clase actual');
     }
+
+    procesarBidding(revisor, articulo, tipoDeInteres){
+        throw new Error('Método no implementado en la clase actual');
+    }
+
+    asignarRevisores() {
+        throw new Error('Método no implementado en la clase actual');
+    }
 }
 module.exports = EstadoSesion;
