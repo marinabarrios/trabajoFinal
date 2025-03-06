@@ -42,6 +42,17 @@ describe('Etapa de Bidding', () => {
         copiaSesion = _.cloneDeep(require("../__fixtures__/sesionesFixture").sesionR);
     });
 
+    test('No se puede recibir artículos si la sesión está en Etapa de Bidding', () => {
+        const articulo = Object.create(articuloRegular);
+        
+        //Cambio el estado a ASIGNACION
+        copiaSesion.estadoSesion().asignarEstado();
+        expect(copiaSesion.estadoSesion().setEstado()).toBe('BIDDING');
+
+        expect(() => copiaSesion.estadoSesion().agregarArticulo(articulo, '2025-03-10'))
+            .toThrow('Durante esta instancia, ya no se aceptan más articulos');
+    });
+
     test("Cambiar estado de una sesión de Recepción a Bidding", () => {
         //Verifico que el estado inicial es RECEPCION
         expect(copiaSesion.estadoSesion().setEstado()).toBe("RECEPCION");
@@ -115,7 +126,7 @@ describe('Etapa de Bidding', () => {
         expect(articulo.listInteresRevisores().get(revisor)).toBe("NO INTERESADO");
     });
 
-    test('No se puede procesar los intereses si la sesión no está en Estado Bidding', () => {
+    test('No se puede procesar los intereses si la sesión no está en Etapa de Bidding', () => {
         const articulo = Object.create(articuloRegular);
         
         //Cambio el estado a ASIGNACION

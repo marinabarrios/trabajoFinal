@@ -1,6 +1,6 @@
-const Estrategias = require("./Estrategias/Estrategias.js");
+const Estrategia = require("./Estrategia/Estrategia.js");
 
-class PorcentajeDeAceptados extends Estrategias{
+class PorcentajeDeAceptados extends Estrategia{
     constructor(porcentajeAceptacion) {
       super();
       this._porcentajeAceptacion = porcentajeAceptacion;
@@ -39,5 +39,22 @@ class PorcentajeDeAceptados extends Estrategias{
 
         return { articulosAceptados, articulosRechazados };
     }
+
+    /* constructor(porcentaje) {
+        super();
+        this.porcentaje = porcentaje; // Valor entre 0 y 100
+    }
+
+    seleccionar(articulos) {
+        if (!Array.isArray(articulos) || articulos.length === 0) return [];
+
+        // Ordenar artículos por puntaje de mayor a menor
+        articulos.sort((a, b) => b.obtenerPuntajePromedio() - a.obtenerPuntajePromedio());
+
+        // Determinar cuántos artículos se aceptan según el porcentaje
+        const cantidadAceptados = Math.ceil((this.porcentaje / 100) * articulos.length);
+
+        return articulos.slice(0, cantidadAceptados); // Retorna los seleccionados
+    }*/
 }
 module.exports = PorcentajeDeAceptados;

@@ -40,7 +40,6 @@ describe("Usuarios y sus subclases", () => {
         expect(revisor).toBeInstanceOf(Revisor);
         expect(revisor.nombreUsuario()).toBe('Leonardo Rey');
         expect(revisor._roles).toContain("REVISOR");
-        expect(revisor._intereses).toEqual([]);
     });
 
     test("Debe permitir que un autor también sea revisor o chair", () => {

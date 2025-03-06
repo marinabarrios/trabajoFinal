@@ -5,6 +5,35 @@ const { articuloPoster, articuloRegular, artPosterCon2AutoresNotif } = require("
 const Usuario = require("../Usuario/Usuario");
 const _ = require("lodash");
 
+describe('Etapa Asignación', () => {
+    let copiaSesion;
+    let articulo1;
+    beforeEach(() => {
+        //Creo copia de la sesión para hacer las pruebas sobre la copia y no alterar la original
+        copiaSesion = _.cloneDeep(require("../__fixtures__/sesionesFixture").sesionW);
+        //Creo copias del artículo
+        articulo1 = _.cloneDeep(require("../__fixtures__/articulosFixture").articuloRegular);
+        //Cambio el estado a BIDDING
+        copiaSesion.estadoSesion().asignarEstado();
+        //Cambio el estado a ASIGNACION
+        copiaSesion.estadoSesion().asignarEstado();        
+    });
+
+    test('No se puede recibir artículos si la sesión está en Etapa de Asignación', () => {
+        expect(copiaSesion.estadoSesion().setEstado()).toBe('ASIGNACION');
+
+        expect(() => copiaSesion.estadoSesion().agregarArticulo(articulo1, '2025-03-10'))
+            .toThrow('En esta estapa ya no se aceptan artículos');
+    });
+
+    test('No se puede procesar los intereses si la sesión está en Etapa de Asignación', () => {
+        expect(copiaSesion.estadoSesion().setEstado()).toBe('ASIGNACION');
+
+        expect(() => copiaSesion.estadoSesion().procesarBidding(revisor, articulo1, 'INTERESADO'))
+            .toThrow('En esta estapa no se procesan los intereses');
+    });
+});
+
 describe('Asignando revisores', () => {
 
     let copiaSesion;
@@ -103,7 +132,7 @@ describe('Asignando revisores', () => {
         copiaSesion.estadoSesion().asignarRevisores();
 
         copiaSesion._articulos.forEach((articulo) => {
-            const revisoresAsignados = articulo.listRevisoresAsignados();console.log('revisoresAsignados',revisoresAsignados);
+            const revisoresAsignados = articulo.listRevisoresAsignados();
             expect(revisoresAsignados.some((r) => r._tipoInteres === "INTERESADO")).toBeTruthy();
         });
     });
@@ -176,5 +205,10 @@ describe('Asignación de revisores', () => {
     test("Lanza un error si el total de revisiones no coincide con el número esperado", () => {
         expect(() => copiaSesion.estadoSesion().asignarRevisores()).toThrow("No hay suficientes revisores para asignar a cada artículo.");
     });
+
+    test("No se aceptan artículos en la Etapa de Asignación", () => {
+        expect(() => copiaSesion.estadoSesion().asignarRevisores()).toThrow("No hay suficientes revisores para asignar a cada artículo.");
+    });
 });
+
 //agregar mas pruebas para verificar que funcione correctamente

@@ -69,13 +69,19 @@ class Articulo{
     listRevisoresAsignados() {
         return this._revisoresAsignados;
     }
-
+/*
     addRevision(revision) {
         if (this.revisiones.length >= 3) {
           throw new Error("No se pueden añadir más de 3 revisiones.");
         }
         this.revisiones.push(revision);
         this.calculatePuntaje();
+    }*/
+
+    obtenerPuntajePromedio() {
+        if (this._puntajes.length === 0) return 0;
+        const suma = this._puntajes.reduce((acc, p) => acc + p, 0);
+        return suma / this._puntajes.length;
     }
 /*    
     addRevision(revision) {

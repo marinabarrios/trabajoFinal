@@ -1,6 +1,7 @@
 const EstadoSesion = require("./EstadoSesion");
 const EstadoRevision = require("./EstadoRevision");
 //En la asignacion se define a que revisores se le va a asignar el artículo
+
 class EstadoAsignacion extends EstadoSesion {
     constructor(sesion) {
         super(sesion);
@@ -11,7 +12,7 @@ class EstadoAsignacion extends EstadoSesion {
     }
 
     asignarEstado() {
-        this._session.estadoSesion(new EstadoRevision(this._session));
+        this._sesion.modificarEstadoSesion(new EstadoRevision(this._sesion));
     }
 
     agregarArticulo(articulo, fechaActual){
