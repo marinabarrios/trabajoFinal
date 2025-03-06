@@ -103,7 +103,7 @@ describe('Asignación de revisores', () => {
         copiaSesion.estadoSesion().asignarRevisores();
 
         copiaSesion._articulos.forEach((articulo) => {
-            const revisoresAsignados = articulo.listRevisoresAsignados();console.log('revisoresAsignados',revisoresAsignados);
+            const revisoresAsignados = articulo.listRevisoresAsignados();
             expect(revisoresAsignados.some((r) => r.interes === "INTERESADO")).toBeTruthy();
         });
     });

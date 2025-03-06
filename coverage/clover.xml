@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1741256657575" clover="3.2.0">
+  <project timestamp="1741256657575" name="All files">
+    <metrics statements="145" coveredstatements="96" conditionals="73" coveredconditionals="29" methods="35" coveredmethods="10" elements="253" coveredelements="135" complexity="0" loc="145" ncloc="145" packages="3" files="9" classes="9"/>
+    <package name="Articulo">
+      <metrics statements="57" coveredstatements="38" conditionals="31" coveredconditionals="22" methods="16" coveredmethods="5"/>
+      <file name="Articulo.js" path="C:\proyectos\trabajoFinal\Articulo\Articulo.js">
+        <metrics statements="36" coveredstatements="21" conditionals="24" coveredconditionals="15" methods="10" coveredmethods="3"/>
+        <line num="3" count="13" type="cond" truecount="1" falsecount="1"/>
+        <line num="4" count="0" type="stmt"/>
+        <line num="7" count="13" type="cond" truecount="5" falsecount="0"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="10" count="11" type="stmt"/>
+        <line num="12" count="11" type="stmt"/>
+        <line num="13" count="11" type="stmt"/>
+        <line num="14" count="9" type="stmt"/>
+        <line num="16" count="2" type="stmt"/>
+        <line num="19" count="9" type="cond" truecount="5" falsecount="0"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="22" count="7" type="stmt"/>
+        <line num="24" count="7" type="cond" truecount="1" falsecount="1"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="28" count="8" type="cond" truecount="1" falsecount="1"/>
+        <line num="29" count="0" type="stmt"/>
+        <line num="32" count="7" type="stmt"/>
+        <line num="34" count="7" type="stmt"/>
+        <line num="35" count="7" type="stmt"/>
+        <line num="36" count="7" type="stmt"/>
+        <line num="41" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="42" count="2" type="stmt"/>
+        <line num="44" count="6" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="49" count="0" type="stmt"/>
+        <line num="54" count="0" type="stmt"/>
+        <line num="58" count="0" type="stmt"/>
+        <line num="62" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="63" count="0" type="stmt"/>
+        <line num="65" count="0" type="stmt"/>
+        <line num="70" count="0" type="stmt"/>
+        <line num="74" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="75" count="0" type="stmt"/>
+        <line num="77" count="0" type="stmt"/>
+        <line num="78" count="0" type="stmt"/>
+        <line num="126" count="1" type="stmt"/>
+      </file>
+      <file name="ArticuloPoster.js" path="C:\proyectos\trabajoFinal\Articulo\ArticuloPoster.js">
+        <metrics statements="10" coveredstatements="8" conditionals="0" coveredconditionals="0" methods="3" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="5" count="6" type="stmt"/>
+        <line num="7" count="3" type="stmt"/>
+        <line num="8" count="3" type="stmt"/>
+        <line num="9" count="2" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="18" count="0" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+      </file>
+      <file name="ArticuloRegular.js" path="C:\proyectos\trabajoFinal\Articulo\ArticuloRegular.js">
+        <metrics statements="11" coveredstatements="9" conditionals="7" coveredconditionals="7" methods="3" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="5" count="7" type="stmt"/>
+        <line num="7" count="4" type="stmt"/>
+        <line num="9" count="4" type="cond" truecount="5" falsecount="0"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="12" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="20" count="0" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="Usuario">
+      <metrics statements="55" coveredstatements="25" conditionals="42" coveredconditionals="7" methods="19" coveredmethods="5"/>
+      <file name="Autor.js" path="C:\proyectos\trabajoFinal\Usuario\Autor.js">
+        <metrics statements="12" coveredstatements="4" conditionals="8" coveredconditionals="0" methods="5" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="13" count="0" type="stmt"/>
+        <line num="18" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="19" count="0" type="stmt"/>
+        <line num="23" count="0" type="cond" truecount="0" falsecount="6"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="27" count="0" type="stmt"/>
+        <line num="32" count="0" type="stmt"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="69" count="1" type="stmt"/>
+      </file>
+      <file name="Chair.js" path="C:\proyectos\trabajoFinal\Usuario\Chair.js">
+        <metrics statements="10" coveredstatements="4" conditionals="8" coveredconditionals="0" methods="3" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="10" count="0" type="stmt"/>
+        <line num="14" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="15" count="0" type="stmt"/>
+        <line num="19" count="0" type="cond" truecount="0" falsecount="6"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="143" count="1" type="stmt"/>
+      </file>
+      <file name="Revisor.js" path="C:\proyectos\trabajoFinal\Usuario\Revisor.js">
+        <metrics statements="10" coveredstatements="4" conditionals="8" coveredconditionals="0" methods="3" coveredmethods="1"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="5" count="13" type="stmt"/>
+        <line num="6" count="13" type="stmt"/>
+        <line num="11" count="0" type="stmt"/>
+        <line num="15" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="16" count="0" type="stmt"/>
+        <line num="20" count="0" type="cond" truecount="0" falsecount="6"/>
+        <line num="22" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="127" count="1" type="stmt"/>
+      </file>
+      <file name="Usuario.js" path="C:\proyectos\trabajoFinal\Usuario\Usuario.js">
+        <metrics statements="23" coveredstatements="13" conditionals="18" coveredconditionals="7" methods="8" coveredmethods="2"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="6" count="19" type="cond" truecount="1" falsecount="1"/>
+        <line num="7" count="0" type="stmt"/>
+        <line num="9" count="19" type="stmt"/>
+        <line num="10" count="19" type="stmt"/>
+        <line num="11" count="19" type="stmt"/>
+        <line num="12" count="19" type="stmt"/>
+        <line num="13" count="19" type="stmt"/>
+        <line num="14" count="19" type="stmt"/>
+        <line num="17" count="19" type="stmt"/>
+        <line num="21" count="0" type="stmt"/>
+        <line num="25" count="19" type="cond" truecount="1" falsecount="1"/>
+        <line num="26" count="19" type="cond" truecount="5" falsecount="1"/>
+        <line num="28" count="0" type="stmt"/>
+        <line num="30" count="19" type="stmt"/>
+        <line num="35" count="0" type="stmt"/>
+        <line num="39" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="44" count="0" type="cond" truecount="0" falsecount="6"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="48" count="0" type="stmt"/>
+        <line num="53" count="0" type="stmt"/>
+        <line num="59" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="__fixtures__">
+      <metrics statements="33" coveredstatements="33" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="articulosFixture.js" path="C:\proyectos\trabajoFinal\__fixtures__\articulosFixture.js">
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+      </file>
+      <file name="usuariosFixture.js" path="C:\proyectos\trabajoFinal\__fixtures__\usuariosFixture.js">
+        <metrics statements="26" coveredstatements="26" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="19" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="25" count="1" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="33" count="1" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>
