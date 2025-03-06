@@ -1,9 +1,11 @@
 const EstadoSesion = require("./EstadoSesion");
 const EstadoSeleccion = require("./EstadoSeleccion");
 //En la Revision los revisores puntuan los artículos que le asignaron
+
 class EstadoRevision extends EstadoSesion {
     constructor(sesion) {
         super(sesion);
+        this._puntuaciones = new Map(); //Almacena { articulo: [{ revisor, puntaje, comentario }] }
     }
 
     setEstado(){
@@ -11,7 +13,7 @@ class EstadoRevision extends EstadoSesion {
     }
 
     asignarEstado() {
-        this._session.estadoSesion(new EstadoSeleccion(this._session));
+        this._sesion.modificarEstadoSesion(new EstadoSeleccion(this._sesion));
     }
 
     agregarArticulo(articulo, fechaActual){
@@ -26,7 +28,7 @@ class EstadoRevision extends EstadoSesion {
         throw new Error('El proceso de asignación de artículos sólo se puede realizar durante el estado de asignación');
     }
 
-    agregarRevision(articulo, revisor, revision) {
+    /*agregarRevision(articulo, revisor, revision) {
         if (!(this._sesion.estadoSesion() instanceof EstadoRevision)) {
           throw new Error(
             "El proceso de revisión solo se puede realizar durante el estado de revisión."
@@ -36,6 +38,26 @@ class EstadoRevision extends EstadoSesion {
           throw new Error("El revisor no está asignado a este artículo.");
         }
         articulo.addRevision(revision);
+    }*/
+
+    puntuarArticulo(revisor, articulo, puntaje, comentario) {
+        if (!(this._sesion.estadoSesion() instanceof EstadoRevision)) {
+            throw new Error(
+              "El proceso de revisión solo se puede realizar durante el estado de revisión."
+            );
+          }
+        if (!articulo.listRevisoresAsignados().includes(revisor)) {
+            throw new Error("El revisor no está asignado a este artículo");
+        }
+        if (puntaje < -3 || puntaje > 3) {
+            throw new Error("El puntaje debe estar entre -3 y 3");
+        }
+
+        if (!this._puntuaciones.has(articulo)) {
+            this._puntuaciones.set(articulo, []);
+        }
+        
+        this._puntuaciones.get(articulo).push({ revisor, puntaje, comentario });
     }
     /*  una vez finalizado el proceso de bidding, los artículos se 
 asignan a los revisores. Cada revisor emite una revisión con una recomendación que es 

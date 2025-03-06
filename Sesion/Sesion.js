@@ -11,6 +11,7 @@ class Sesion{
         this._estadoSesion = new EstadoRecepcion(this, deadlineRecepcion);
         this._articulos = [];
         this._revisores = [];
+        this._estrategia = null;
     }
 
     listArticulos(){
@@ -74,6 +75,15 @@ class Sesion{
         } else {
             throw new Error('No se encontró el artículo en esta sesión');
         }
+    }
+
+    setEstrategia(estrategia) {
+        this._estrategia = estrategia;
+    }
+
+    seleccionarArticulos() {
+        if (!this._estrategia) throw new Error("No se ha definido una estrategia de selección.");
+        return this._estrategia.seleccionar(this._articulos);
     }
   /*  
    

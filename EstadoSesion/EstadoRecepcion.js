@@ -1,5 +1,6 @@
 const EstadoSesion = require("./EstadoSesion");
 const EstadoBidding = require("./EstadoBidding");
+//En la recepción se reciben los articulos y se verifican que sean correctos
 
 class EstadoRecepcion extends EstadoSesion {
     constructor(sesion, deadlineRecepcion) {

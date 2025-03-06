@@ -24,31 +24,6 @@ class Revisor extends Usuario{
         this._roles = nuevosRoles;
     }
 /*
-    expresarInteres(sesion, articulo, tipoInteres){
-
-        if(sesion._estadoSesion === 'bidding') {
-            if (!articulo) {
-                //throw new Error("El artículo no existe.");
-                console.log("El artículo no existe.");
-            }
-    
-            if (tipoInteres !== 'interesado' && tipoInteres !== 'no interesado' && tipoInteres !== 'quizas') {
-                throw new Error("El tipo de interés debe ser 'interesado' o 'no interesado' o 'quizás'.");
-            }
-    
-            //Verifico si ya existe un interés para el artículo
-            const interesExistente = this._intereses.find(interes => interes.articulo === articulo._id);
-            if (interesExistente) {
-                interesExistente.tipoInteres = tipoInteres;
-            } else {
-                this._intereses.push({ revisor: this._nombreUsuario, articulo: articulo._id, tipoInteres: tipoInteres });
-            }
-    
-            articulo.agregarInteres(this, tipoInteres, sesion._tema);
-        } else {
-            console.log(`No puede expresar su interés ya que la Sesión se encuentra en el estado de: ${sesion._estadoSesion}.`);
-        }      
-    }
 
     verArticulosAsignados(sesion) {
         const asignaciones = sesion._asignaciones.filter(asignacion =>

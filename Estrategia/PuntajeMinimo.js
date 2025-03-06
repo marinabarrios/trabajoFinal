@@ -1,6 +1,6 @@
-const Estrategias = require("./Estrategias/Estrategias");
+const Estrategia = require("./Estrategia/Estrategia");
 
-class PuntajeMinimo extends Estrategias {
+class PuntajeMinimo extends Estrategia {
     constructor(puntajeMinimo) {
       super();
       this._puntajeMinimo = puntajeMinimo;
@@ -29,5 +29,16 @@ class PuntajeMinimo extends Estrategias {
 
       return { articulosAceptados, articulosRechazados};  
     }
+    /* constructor(puntajeMinimo) {
+        super();
+        this.puntajeMinimo = puntajeMinimo;
+    }
+
+    seleccionar(articulos) {
+        if (!Array.isArray(articulos) || articulos.length === 0) return [];
+
+        // Filtrar los artículos que cumplen con el puntaje mínimo
+        return articulos.filter(articulo => articulo.obtenerPuntajePromedio() >= this.puntajeMinimo);
+    }*/
   }
   module.exports = PuntajeMinimo;

@@ -1,5 +1,6 @@
 const EstadoSesion = require("./EstadoSesion");
 const EstadoAsignacion = require("./EstadoAsignacion");
+//En el bidding los revisores expresan su interés por los artículos
 
 class EstadoBidding extends EstadoSesion {
     constructor(sesion) {
