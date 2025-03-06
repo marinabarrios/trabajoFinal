@@ -22,6 +22,10 @@ class Chair extends Usuario{
         }
         this._roles = nuevosRoles;
     }
+
+    definirMaxDeArticulosAceptados(sesion, maxAceptados){
+        sesion.setMaxDeArticulosAceptados(maxAceptados);
+    }
 /*
     verBidds(articulo){
         return articulo.mostrarRevisorInteres();

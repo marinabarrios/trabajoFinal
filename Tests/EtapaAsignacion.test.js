@@ -1,7 +1,5 @@
-const { sesionP, sesionR, sesionW } = require("../__fixtures__/sesionesFixture");
 const { autor, autor1, autor2, autor3, revisor, revisor1, revisor2, revisor3, revisor4, revisor5, revisor6,
         revisor7, revisor8, revisor9, revisor10, revisor11, revisor12 } = require("../__fixtures__/usuariosFixture");
-const { articuloPoster, articuloRegular, artPosterCon2AutoresNotif } = require("../__fixtures__/articulosFixture");
 const Usuario = require("../Usuario/Usuario");
 const _ = require("lodash");
 

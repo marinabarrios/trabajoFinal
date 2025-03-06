@@ -11,6 +11,7 @@ class Sesion{
         this._estadoSesion = new EstadoRecepcion(this, deadlineRecepcion);
         this._articulos = [];
         this._revisores = [];
+        this._maxArticulosAceptados = null;
         this._estrategia = null;
     }
 
@@ -24,6 +25,10 @@ class Sesion{
 
     modificarEstadoSesion(estado) {
         this._estadoSesion = estado;
+    }
+
+    maxArticulosAceptados(){
+        return this._maxArticulosAceptados;
     }
 
     //La sesion recibe el articulo y envía al estado para verificar si se lo recibe
@@ -75,6 +80,10 @@ class Sesion{
         } else {
             throw new Error('No se encontró el artículo en esta sesión');
         }
+    }
+
+    setMaxDeArticulosAceptados(maxAceptados){
+        this._maxArticulosAceptados = maxAceptados;
     }
 
     setEstrategia(estrategia) {
