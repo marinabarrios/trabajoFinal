@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">52% </span>
+                <span class="strong">76% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>13/25</span>
+                <span class='fraction'>19/25</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">38.88% </span>
+                <span class="strong">55.55% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>7/18</span>
+                <span class='fraction'>10/18</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/8</span>
+                <span class='fraction'>6/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">56.52% </span>
+                <span class="strong">73.91% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>13/23</span>
+                <span class='fraction'>17/23</span>
             </div>
         
             
@@ -126,8 +126,8 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">19x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">19x</span>
 <span class="cline-any cline-yes">19x</span>
@@ -145,35 +145,35 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">22x</span>
+<span class="cline-any cline-yes">21x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">20x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">57x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">19x</span>
-<span class="cline-any cline-yes">19x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">19x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -184,8 +184,8 @@
     static usuariosRegistrados = [];
 &nbsp;
     constructor (nombreUsuario, afiliacion, email, contrasenia){
-        <span class="missing-if-branch" title="if path not taken" >I</span>if (this.constructor === Usuario) {
-<span class="cstat-no" title="statement not covered" >            throw new Error("No se puede instanciar una clase abstracta");</span>
+        if (this.constructor === Usuario) {
+            throw new Error("No se puede instanciar una clase abstracta");
         }
         this._nombreUsuario = nombreUsuario;
         this._afiliacion = afiliacion;
@@ -203,17 +203,17 @@
     }
 &nbsp;
     agregarRol(rol){
-        <span class="missing-if-branch" title="else path not taken" >E</span>if (!this._roles.includes(rol)) {
-            <span class="missing-if-branch" title="if path not taken" >I</span>if ((rol === "CHAIR" &amp;&amp; this._roles.includes("REVISOR")) || 
+        if (!this._roles.includes(rol)) {
+            if ((rol === "CHAIR" &amp;&amp; this._roles.includes("REVISOR")) || 
                 (rol === "REVISOR" &amp;&amp; this._roles.includes("CHAIR"))) {
-<span class="cstat-no" title="statement not covered" >                throw new Error("Un usuario no puede ser CHAIR y REVISOR al mismo tiempo.");</span>
+                throw new Error("Un usuario no puede ser CHAIR y REVISOR al mismo tiempo.");
             }
             this._roles.push(rol);
         }
     }
 &nbsp;
-<span class="fstat-no" title="function not covered" >    st</span>atic listarUsuariosPorRol(rol) {
-<span class="cstat-no" title="statement not covered" >        return Usuario.usuariosRegistrados.filter(<span class="fstat-no" title="function not covered" >us</span>uario =&gt; <span class="cstat-no" title="statement not covered" >usuario._roles.includes(rol))</span>;</span>
+    static listarUsuariosPorRol(rol) {
+        return Usuario.usuariosRegistrados.filter(usuario =&gt; usuario._roles.includes(rol));
     }
 &nbsp;
 <span class="fstat-no" title="function not covered" >    ca</span>mbiarRolUsuario(nuevosRoles) {
@@ -230,8 +230,8 @@
     }
 &nbsp;
     // Lista todos los usuarios con sus roles
-<span class="fstat-no" title="function not covered" >    st</span>atic listarTodosLosUsuarios() {
-<span class="cstat-no" title="statement not covered" >        return Usuario.usuariosRegistrados.map(<span class="fstat-no" title="function not covered" >us</span>uario =&gt; (<span class="cstat-no" title="statement not covered" >{</span></span>
+    static listarTodosLosUsuarios() {
+        return Usuario.usuariosRegistrados.map(usuario =&gt; ({
             nombre: usuario._nombreUsuario,
             roles: usuario._roles
         }));
@@ -244,7 +244,7 @@ module.exports = Usuario;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-03-06T11:20:20.388Z
+                at 2025-03-07T14:32:33.595Z
             </div>
         <script src="../prettify.js"></script>
         <script>

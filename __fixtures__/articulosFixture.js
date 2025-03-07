@@ -29,7 +29,7 @@ const articuloPoster = new ArticuloPoster(
 );
 
 const artPosterCon2AutoresNotif = new ArticuloPoster(
-  "Artículo Poster 2",
+  "Artículo Poster con 2 autores",
   "https://ieeexplore.ieee.org/document/9430234", [autor, autor3],
   "https://ieeexplore.ieee.org/document/9430234", [autor, autor3]
 );

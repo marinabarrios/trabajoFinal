@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">72.72% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>4/12</span>
+                <span class='fraction'>8/11</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">62.5% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/8</span>
+                <span class='fraction'>5/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">20% </span>
+                <span class="strong">60% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/5</span>
+                <span class='fraction'>3/5</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">33.33% </span>
+                <span class="strong">72.72% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>4/12</span>
+                <span class='fraction'>8/11</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line medium'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -131,7 +131,8 @@
 <a name='L66'></a><a href='#L66'>66</a>
 <a name='L67'></a><a href='#L67'>67</a>
 <a name='L68'></a><a href='#L68'>68</a>
-<a name='L69'></a><a href='#L69'>69</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -143,31 +144,32 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -210,22 +212,22 @@ class Autor extends Usuario{
         //this._notificaciones = []; // Lista de notificaciones recibidas
     }
 &nbsp;
-<span class="fstat-no" title="function not covered" >    no</span>mbreUsuario() {
-<span class="cstat-no" title="statement not covered" >        return this._nombreUsuario;</span>
+    nombreUsuario() {
+        return this._nombreUsuario;
     }
 &nbsp;
     // Método que permite a los usuarios cambiar de rol
-<span class="fstat-no" title="function not covered" >    ca</span>mbiarRolUsuario(nuevosRoles) {
-<span class="cstat-no" title="statement not covered" >        if (!this._roles) {</span>
+    cambiarRolUsuario(nuevosRoles) {
+        <span class="missing-if-branch" title="if path not taken" >I</span>if (!this._roles) {
 <span class="cstat-no" title="statement not covered" >            throw new Error("El usuario no tiene un rol asignado.");</span>
         }
 &nbsp;
         // Si el usuario es "CHAIR" o "REVISOR", no puede cambiar a su opuesto
-<span class="cstat-no" title="statement not covered" >        if ((nuevosRoles === "CHAIR" &amp;&amp; this._roles.includes("REVISOR")) || </span>
-            (nuevosRoles === "REVISOR" &amp;&amp; this._roles.includes("CHAIR"))) {
+        <span class="missing-if-branch" title="if path not taken" >I</span>if ((nuevosRoles === "CHAIR" &amp;&amp; this._roles.includes("REVISOR")) || 
+            (nuevosRoles === "REVISOR" &amp;&amp; <span class="branch-3 cbranch-no" title="branch not covered" >this._roles.includes("CHAIR"))</span>) {
 <span class="cstat-no" title="statement not covered" >            throw new Error("No se puede cambiar directamente entre CHAIR y REVISOR.");</span>
         }
-<span class="cstat-no" title="statement not covered" >        this._roles = nuevosRoles;</span>
+        this._roles = nuevosRoles;
     }
 &nbsp;
     // Método para enviar artículos a la sesion
@@ -235,7 +237,8 @@ class Autor extends Usuario{
 &nbsp;
     //Similo la recepción de la notificación
 <span class="fstat-no" title="function not covered" >    re</span>cibeNotificacion(msg) {
-<span class="cstat-no" title="statement not covered" >        console.log(`Notificación para ${this._nombreUsuario}: ${msg}`);</span>
+        //comento para que no me moleste en las pruebas
+        //console.log(`Notificación para ${this._nombreUsuario}: ${msg}`);
     }
 &nbsp;
 /*
@@ -274,7 +277,7 @@ module.exports = Autor;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-03-06T11:20:20.388Z
+                at 2025-03-07T14:32:33.595Z
             </div>
         <script src="../prettify.js"></script>
         <script>

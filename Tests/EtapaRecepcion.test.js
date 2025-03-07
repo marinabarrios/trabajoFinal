@@ -2,15 +2,29 @@ const { sesionW, sesionR, sesionRfD, sesionP } = require("../__fixtures__/sesion
 const { autor } = require("../__fixtures__/usuariosFixture");
 const { articuloPoster, articuloRegular, artPosterCon2AutoresNotif } = require("../__fixtures__/articulosFixture");
 const Sesion = require('../Sesion/Sesion');
+const EstadoSesion = require('../EstadoSesion/EstadoSesion');
 
 describe('Sesiones', () => {
 
     test("La clase Sesión es abstracta, no se puede instanciar", () => {
-        expect(
-          () => new Sesion('Inteligencia Artificial', 'WORKSHOP', '2025-02-21')
-        ).toThrow("No se puede instanciar una clase abstracta");
-      });
-      //agreagar mas test
+        expect(() => new Sesion('Inteligencia Artificial', 'WORKSHOP', '2025-02-21')
+              ).toThrow("No se puede instanciar una clase abstracta");
+    });
+    
+    test("No se puede instanciar la clase EstadoSesion para setear el estado", () => {
+        const estadoSesion = new EstadoSesion();
+        expect(() => estadoSesion.setEstado()).toThrow("Método no implementado en la clase actual");
+    });
+
+    test("No se puede instanciar la clase EstadoSesion para agregar artículos a la sesión", () => {
+        const estadoSesion = new EstadoSesion();
+        expect(() => estadoSesion.agregarArticulo()).toThrow("Método no implementado en la clase actual");
+    });
+
+    test("No se puede instanciar la clase EstadoSesion para asignar estados", () => {
+        const estadoSesion = new EstadoSesion();
+        expect(() => estadoSesion.asignarEstado()).toThrow("Método no implementado en la clase actual");
+    });
 });
 
 describe('Gestión de envío de artículos', () => {
@@ -122,6 +136,7 @@ describe('Notificación a los autores', () => {
         });
     });
 });
+
 describe('Revisión', () => {
     
     test('No se puede procesar intereses en etapa de Recepción', () => {

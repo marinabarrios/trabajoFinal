@@ -23,9 +23,9 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">60% </span>
+                <span class="strong">76% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>15/25</span>
+                <span class='fraction'>19/25</span>
             </div>
         
             
@@ -37,16 +37,16 @@
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">25% </span>
+                <span class="strong">75% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>2/8</span>
+                <span class='fraction'>6/8</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">65.21% </span>
+                <span class="strong">73.91% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>15/23</span>
+                <span class='fraction'>17/23</span>
             </div>
         
             
@@ -126,18 +126,18 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">105x</span>
+<span class="cline-any cline-yes">129x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">104x</span>
-<span class="cline-any cline-yes">104x</span>
-<span class="cline-any cline-yes">104x</span>
-<span class="cline-any cline-yes">104x</span>
-<span class="cline-any cline-yes">104x</span>
-<span class="cline-any cline-yes">104x</span>
+<span class="cline-any cline-yes">128x</span>
+<span class="cline-any cline-yes">128x</span>
+<span class="cline-any cline-yes">128x</span>
+<span class="cline-any cline-yes">128x</span>
+<span class="cline-any cline-yes">128x</span>
+<span class="cline-any cline-yes">128x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">104x</span>
+<span class="cline-any cline-yes">128x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -145,35 +145,35 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">107x</span>
-<span class="cline-any cline-yes">107x</span>
+<span class="cline-any cline-yes">131x</span>
+<span class="cline-any cline-yes">131x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">105x</span>
+<span class="cline-any cline-yes">129x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">32x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -212,8 +212,8 @@
         }
     }
 &nbsp;
-<span class="fstat-no" title="function not covered" >    st</span>atic listarUsuariosPorRol(rol) {
-<span class="cstat-no" title="statement not covered" >        return Usuario.usuariosRegistrados.filter(<span class="fstat-no" title="function not covered" >us</span>uario =&gt; <span class="cstat-no" title="statement not covered" >usuario._roles.includes(rol))</span>;</span>
+    static listarUsuariosPorRol(rol) {
+        return Usuario.usuariosRegistrados.filter(usuario =&gt; usuario._roles.includes(rol));
     }
 &nbsp;
 <span class="fstat-no" title="function not covered" >    ca</span>mbiarRolUsuario(nuevosRoles) {
@@ -230,8 +230,8 @@
     }
 &nbsp;
     // Lista todos los usuarios con sus roles
-<span class="fstat-no" title="function not covered" >    st</span>atic listarTodosLosUsuarios() {
-<span class="cstat-no" title="statement not covered" >        return Usuario.usuariosRegistrados.map(<span class="fstat-no" title="function not covered" >us</span>uario =&gt; (<span class="cstat-no" title="statement not covered" >{</span></span>
+    static listarTodosLosUsuarios() {
+        return Usuario.usuariosRegistrados.map(usuario =&gt; ({
             nombre: usuario._nombreUsuario,
             roles: usuario._roles
         }));
@@ -244,7 +244,7 @@ module.exports = Usuario;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-03-06T11:20:35.619Z
+                at 2025-03-07T15:06:07.993Z
             </div>
         <script src="prettify.js"></script>
         <script>

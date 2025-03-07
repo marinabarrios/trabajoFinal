@@ -2,6 +2,7 @@ const { sesionW } = require("../__fixtures__/sesionesFixture");
 const { autor, autor1, autor2, autor3, revisor, revisor1, revisor2, revisor3, revisor4, revisor5, revisor6,
     revisor7, revisor8, revisor9, revisor10, revisor11, revisor12 } = require("../__fixtures__/usuariosFixture");
 const { articuloRegular } = require("../__fixtures__/articulosFixture");
+const { agregarRevisores } = require("../TestUtils");
 const _ = require("lodash");
 
 describe('Etapa Revisión', () => {
@@ -17,20 +18,8 @@ describe('Etapa Revisión', () => {
         autor.enviarArticulo(copiaSesion, articulo1);
         //Cambio el estado a BIDDING
         copiaSesion.estadoSesion().asignarEstado();
-        //Agrego revisores a la sesion
-        copiaSesion.agregarRevisores('Leonardo Rey');
-        copiaSesion.agregarRevisores('Carlos Lopez');
-        copiaSesion.agregarRevisores('Maria Gonzalez');
-        copiaSesion.agregarRevisores('Juana Gómez');
-        copiaSesion.agregarRevisores('Mara Gonzalez');
-        copiaSesion.agregarRevisores('Juan Gómez');
-        copiaSesion.agregarRevisores('Raúl Arce');
-        copiaSesion.agregarRevisores('Oscar Martín');
-        copiaSesion.agregarRevisores('Inés Martinez');
-        copiaSesion.agregarRevisores('Sonia Ruiz');
-        copiaSesion.agregarRevisores('Pedro Jimenez');
-        copiaSesion.agregarRevisores('Daniel Martinez');
-        copiaSesion.agregarRevisores('Luis Iglesias');
+        //Se agregan revisores a la sesion
+        agregarRevisores(copiaSesion);
         //Revisores expresan su interés por el artículo regular
         copiaSesion.estadoSesion().procesarBidding(revisor, articulo1, "INTERESADO");//Leonardo Rey
         copiaSesion.estadoSesion().procesarBidding(revisor1, articulo1, "QUIZAS");//Carlos Lopez
@@ -79,7 +68,29 @@ describe('Etapa Revisión', () => {
         expect(() => copiaSesion.estadoSesion().puntuarArticulo(revisoresAsignados[0], articulo1, 5, "Increíble"))
             .toThrow("El puntaje debe estar entre -3 y 3");
     });
+
+    test('El puntaje debe ser entre -3 y 3', () => {
+        const revisoresAsignados = articulo1.listRevisoresAsignados();
+    
+        //Verifico que un puntaje válido, por ejemplo 0, funciona correctamente
+        copiaSesion.estadoSesion().puntuarArticulo(revisoresAsignados[0], articulo1, 0, "Comentario");
+        expect(copiaSesion.estadoSesion()._puntuaciones.get(articulo1)).toEqual([
+            { revisor: revisoresAsignados[0], puntaje: 0, comentario: "Comentario" }
+        ]);
+    });
+
+    test('No se pueden agregar artículos en el estado de revisión', () => {
+        expect(() => copiaSesion.estadoSesion().agregarArticulo(articulo1, new Date()))
+            .toThrow('En esta estapa ya no se aceptan artículos');
+    });
+
+    test('No se pueden procesar intereses en el estado de revisión', () => {
+        expect(() => copiaSesion.estadoSesion().procesarBidding(revisor, articulo1, "INTERESADO"))
+            .toThrow('En esta estapa no se procesan los intereses');
+    });
+
+    test('No se pueden asignar revisores en el estado de revisión', () => {
+        expect(() => copiaSesion.estadoSesion().asignarRevisores())
+            .toThrow('El proceso de asignación de artículos sólo se puede realizar durante el estado de asignación');
+    });
 });
-
-
-//comentario nuevo

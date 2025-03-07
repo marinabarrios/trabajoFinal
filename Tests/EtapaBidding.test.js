@@ -1,13 +1,19 @@
-const { sesionP, sesionR, sesionW } = require("../__fixtures__/sesionesFixture");
+const { sesionP, sesionW } = require("../__fixtures__/sesionesFixture");
 const { autor, revisor, revisor1 } = require("../__fixtures__/usuariosFixture");
-const { articuloPoster, articuloRegular, artPosterCon2AutoresNotif } = require("../__fixtures__/articulosFixture");
+const { articuloRegular } = require("../__fixtures__/articulosFixture");
 const Usuario = require("../Usuario/Usuario");
+const EstadoSesion = require('../EstadoSesion/EstadoSesion');
 const _ = require("lodash");
 
 describe('Revisores', () => {
 
     beforeEach(() => {
         Usuario.usuariosRegistrados = [autor, revisor, revisor1];
+    });
+
+    test("No se puede instanciar la clase EstadoSesion para asignar estados", () => {
+        const estadoSesion = new EstadoSesion();
+        expect(() => estadoSesion.procesarBidding()).toThrow("Método no implementado en la clase actual");
     });
 
     test('Agregar un revisor correctamente', () => {
