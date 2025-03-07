@@ -29,9 +29,9 @@ abstract class Usuario{
   +cambiarRolUsuario(rol: String): Void
   +listarTodosLosUsuarios(): { nombreUsuario: List<String>, roles: List<String> }
 }
-
-Comfychair --> Conferencias
-
+ 
+Comfychair --> Conferencia
+ 
 class Chair{
   +nombreUsuario(): String
   +cambiarRolUsuario(rol: String): Void
@@ -47,16 +47,16 @@ class Revisor{
   +nombreUsuario(): String
   +cambiarRolUsuario(rol: String): Void
 }
-
-Conferencias --> Chairs
-Conferencias --> Revisores
-Usuarios --> Chairs
-Usuarios --> Autores
-Usuarios --> Revisores  
-
+ 
+Conferencia --> Chair
+Conferencia --> Revisor
+Usuario <|-- Chair
+Usuario <|-- Autor
+Usuario <|-- Revisor 
+ 
 abstract class Sesion{
-  tema: String  
-  tipoSesion: String  
+  tema: String 
+  tipoSesion: String 
   estadoSesion: EstadoSesion
   estrategia: Estrategia
   articulos: List<Articulo>
@@ -91,12 +91,12 @@ class SesionWorkshop{
   deadlineRecepcion: Date
   +tipoArticuloPermitido(tipoArticulo: String): Boolean
 }
-
+ 
 Conferencia --> Sesion
 Sesion <|-- SesionPoster
 Sesion <|-- SesionRegular
 Sesion <|-- SesionWorkshop
-
+ 
 abstract class EstadoSesion{
   sesion: Sesion
   +setEstado(): Void
@@ -149,14 +149,14 @@ class EstadoSeleccion{
   +agregarArticulo(articulo: Articulo, fechaActual: Date): Void
   +seleccionandoArticulos(): Void
 }
-
+ 
 Sesion --> EstadoSesion
 EstadoSesion <|-- EstadoRecepcion
 EstadoSesion <|-- EstadoBidding
 EstadoSesion <|-- EstadoRevision
 EstadoSesion <|-- EstadoAsignacion
 EstadoSesion <|-- EstadoSeleccion
-
+ 
 abstract class Estrategia{
   +seleccionar(sesion: Sesion): Void
 }
@@ -168,14 +168,14 @@ class PuntajeMinimo{
   puntajeMinimo: Integer
   +seleccionar(sesion: Sesion): Void
 }
-
+ 
 Sesion --> Estrategia
 SesionPoster --> Estrategia
 SesionRegular --> Estrategia
 SesionWorkshop --> Estrategia
 Estrategia <|-- PorcetajeDeAceptados
 Estrategia <|-- PuntajeMinimo
-
+ 
 abstract class Articulo{
   tituloArticulo: String
   archivoAdjunto: String
@@ -199,9 +199,7 @@ class ArticuloPoster{
   archivoFuentes: String
   +notificar(msg: String): Void
 }
-
 Sesion --> Articulo
 Articulo <|-- ArticuloRegular
 Articulo <|-- ArticuloPoster
-Articulo --> Revision
 @enduml
