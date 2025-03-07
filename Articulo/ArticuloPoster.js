@@ -14,14 +14,10 @@ class ArticuloPoster extends Articulo{
         this.agregarTipoArticulo('POSTER');
     }
 
-    notificacion(msg){
+    notificar(msg){
         this._autorNotificacion.forEach(autor => {
-            autor.recibe_notificacion(msg);
+            autor.recibeNotificacion(msg);
         });
     }
-    
-    /*calcularPuntajeFinal(evaluaciones) {
-        return evaluaciones.length > 2 ? "Aceptado" : "Rechazado";
-    }*/
 }
 module.exports = ArticuloPoster;

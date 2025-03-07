@@ -69,50 +69,5 @@ class Articulo{
     listRevisoresAsignados() {
         return this._revisoresAsignados;
     }
-/*    
-    addRevision(revision) {
-        if (this.revisiones.length >= 3) {
-          throw new Error("No se pueden añadir más de 3 revisiones.");
-        }
-        this.revisiones.push(revision);
-        this.calculatePuntaje();
-      }
-    
-    calculatePuntaje() {
-        if (this.revisiones.length > 0) {
-          const totalPuntaje = this.revisiones.reduce(
-            (sum, rev) => sum + rev.puntaje,
-            0
-          );
-          this.puntaje = totalPuntaje / this.revisiones.length;
-        } else {
-          this.puntaje = null;
-        }
-    }*/
-/*
-  addRevision(revision) {
-    if (this.revisiones.length >= 3) {
-      throw new Error("No se pueden añadir más de 3 revisiones.");
-    }
-    this.revisiones.push(revision);
-    this.calculatePuntaje();
-  }*/
-/*
-    agregarInteres(revisor, tipoInteres, temaSesion) {
-        // Buscar si el revisor ya ha expresado interés previamente
-        const interesExistente = this._interesRevisores.find(interes => interes.revisor === revisor._nombreUsuario);
-
-        if (interesExistente) {
-            // Si ya existe un interés del mismo revisor, modificar el tipo de interés
-            interesExistente.tipoInteres = tipoInteres;
-        } else {
-            // Si no existe, agregar el nuevo interés
-            this._interesRevisores.push({ revisor: revisor._nombreUsuario, articulo: this._id, tipoInteres: tipoInteres, sesion: temaSesion});
-        }
-    }
-
-    mostrarRevisorInteres(){
-        return this._interesRevisores;
-    }    */
 }
 module.exports = Articulo;

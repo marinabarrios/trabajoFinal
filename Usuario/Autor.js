@@ -4,9 +4,6 @@ class Autor extends Usuario{
     constructor (nombreUsuario, afiliacion, email, contrasenia){
         super(nombreUsuario, afiliacion, email, contrasenia);
         this.agregarRol('AUTOR');
-        
-        //this._articulosCreados = []; //Lista de articulos enviados
-        //this._notificaciones = []; // Lista de notificaciones recibidas
     }
 
     nombreUsuario() {
@@ -34,37 +31,7 @@ class Autor extends Usuario{
 
     //Similo la recepción de la notificación
     recibeNotificacion(msg) {
-        //comento para que no me moleste en las pruebas
-        //console.log(`Notificación para ${this._nombreUsuario}: ${msg}`);
+        console.log(`Notificación para ${this._nombreUsuario}: ${msg}`);
     }
-
-/*
-    crearArticulo(id, tituloArticulo, tipoArticulo, abstract = null, archivoAdjunto, autoresArticulo, archivoFuentes = null, autorNotificacion, fechaEntrega){
-        const nuevoArticulo = new Articulos (id, tituloArticulo, tipoArticulo, abstract, archivoAdjunto, autoresArticulo, archivoFuentes, autorNotificacion, fechaEntrega);
-        //Cuando se crea el articulo se crea en el estado enProceso, eso quiere decir que aun no esta aceptado ni rechazado//
-        nuevoArticulo._estadoArticulo = 'enProceso';
-        this._articulosCreados.push(nuevoArticulo);
-        return nuevoArticulo;
-    }
-
-    // Método para enviar artículos
-    enviarArticulo(sesion, articulo) { 
-        //le paso a la sesion el estado del articulo// 
-        articulo._estadoArticulo = 'enProceso';
-        sesion.recibirArticulo(articulo);
-        console.log(`El artículo con ID ${articulo._id} fue enviado a la Sesion.`);
-    }
-
-    listArticulosCreados(){
-        return this._articulosCreados;
-    }
-
-    agregarNotificacion(mensaje) {
-        this._notificaciones.push(mensaje);
-    }
-
-    obtenerNotificaciones() {
-        return this._notificaciones;
-    }*/
 }
 module.exports = Autor;

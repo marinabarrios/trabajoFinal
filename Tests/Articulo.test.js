@@ -16,7 +16,7 @@ describe("Pruebas Artículos Regulares", () => {
         expect(articuloRegular._autorNotificacion[0]._nombreUsuario).toBe('Sofia Perez');
     });
 
-    test('No se le puede asignar a un artículo regular un tipo de artículo poster', () => {
+    test('No se puede cambiar el tipo de artículo a POSTER después de ser asignado como REGULAR', () => {
       expect(() => articuloRegular.agregarTipoArticulo("POSTER"))
           .toThrow("El artículo ya tiene un tipo asignado: REGULAR");
     });
@@ -84,7 +84,7 @@ describe("Pruebas Artículos Poster", () => {
       expect(articuloPoster._autorNotificacion[0]._nombreUsuario).toBe('José Gonzalez');
     });
 
-    test('No se le puede asignar a un artículo poster un tipo de artículo regular', () => {
+    test('No se puede cambiar el tipo de artículo a REGULAR después de ser asignado como POSTER', () => {
       expect(() => articuloPoster.agregarTipoArticulo("REGULAR"))
           .toThrow("El artículo ya tiene un tipo asignado: POSTER");
     });
