@@ -8,10 +8,13 @@
 
 //en la sesion se debe definir un max de articulos, eso me olvide de pasarle a la sesion. 
 //quizás el chair pueda definir la cantidad max de articulos a aceptar
-const EstadoSeleccion = require("../EstadoSesion/EstadoSeleccion");
+
 const { autor, autor1, autor2, autor3, revisor, revisor1, revisor2, revisor3, revisor4, revisor5, revisor6,
     revisor7, revisor8, revisor9, revisor10, revisor11, revisor12 } = require("../__fixtures__/usuariosFixture");
 const Usuario = require("../Usuario/Usuario");
+const EstadoSeleccion = require("../EstadoSesion/EstadoSeleccion");
+const PorcentajeDeAceptados = require("../Estrategia/PorcentajeDeAceptados");
+const PuntajeMinimo = require("../Estrategia/PuntajeMinimo");
 const _ = require("lodash");
 
 describe('Etapa Asignación', () => {
@@ -146,7 +149,7 @@ describe('Etapa Asignación', () => {
                 copiaSesion.estadoSesion().puntuarArticulo(revisoresAsignados7[0], articulo7, -2, "Buen artículo, pero puede mejorar.");
                 copiaSesion.estadoSesion().puntuarArticulo(revisoresAsignados7[1], articulo7, -1, "La redacción es confusa.");
                 copiaSesion.estadoSesion().puntuarArticulo(revisoresAsignados7[2], articulo7, 2, "Buen artículo.");
-
+                
                 //Cambio el estado a SELECCION                
                 copiaSesion.modificarEstadoSesion(new EstadoSeleccion(copiaSesion));
     });
@@ -168,4 +171,71 @@ describe('Etapa Asignación', () => {
         copiaSesion.setMaxDeArticulosAceptados(3)
         expect(copiaSesion._maxArticulosAceptados).not.toBeNull()
     });
+
+    test('Se define correctamente la estrategia Porcentaje de aceptados para de la sesión', () => {
+        estrategiaPorcentaje = new PorcentajeDeAceptados(50); // Acepta el 50% de los artículos
+        copiaSesion.setEstrategia(estrategiaPorcentaje);
+        expect(copiaSesion._estrategia).not.toBeNull()
+    });
+
+    test('Se define correctamente la estrategia Puntaje mínimo para de la sesión', () => {
+        estrategiaPuntaje = new PuntajeMinimo(1); // Acepta artículos con puntaje >= 1
+        copiaSesion.setEstrategia(estrategiaPuntaje);
+        expect(copiaSesion._estrategia).not.toBeNull()
+    });
+
+    test('Se inicia el proceso de selección de artículos', () => {
+        copiaSesion.setMaxDeArticulosAceptados(3);
+        estrategiaPorcentaje = new PorcentajeDeAceptados(50); // Acepta el 50% de los artículos
+        copiaSesion.setEstrategia(estrategiaPorcentaje);
+
+        copiaSesion.seleccionarArticulos = jest.fn();
+
+        copiaSesion.estadoSesion().seleccionandoArticulos();
+        expect(copiaSesion.seleccionarArticulos).toHaveBeenCalled();
+    });
+
+    test('Se define un porcentaje de artículos que la sesión debe aceptar', () => {
+        copiaSesion.setMaxDeArticulosAceptados(6);
+        //Determino la estrategia de seleccion
+        estrategiaPorcentaje = new PorcentajeDeAceptados(50); // Acepta el 50% de los artículos
+        copiaSesion.setEstrategia(estrategiaPorcentaje);
+
+        const articulosSeleccionados = copiaSesion.seleccionarArticulos();
+        //console.log('articulosSeleccionados ',articulosSeleccionados); //ver si esta seleccionando bien
+        expect(articulosSeleccionados.length).toBe(4);
+    });
+
+    test('Debe aceptar artículos con puntaje mayor o igual al mínimo', () => {
+        copiaSesion.setMaxDeArticulosAceptados(6);
+        //Determino la estrategia de seleccion
+        estrategiaPuntaje = new PuntajeMinimo(1); // Acepta artículos con puntaje >= 1
+        copiaSesion.setEstrategia(estrategiaPuntaje);
+
+        const articulosSeleccionados = copiaSesion.seleccionarArticulos();
+        console.log('articulosSeleccionados ',articulosSeleccionados);//ver si es correcto
+        expect(articulosSeleccionados).toContain(articulo2);
+        expect(articulosSeleccionados).toContain(articulo3);
+        expect(articulosSeleccionados).toContain(articulo6);
+        expect(articulosSeleccionados).not.toContain(articulo1);
+    });
+
+    test('Debe permitir cambiar de estrategia y afectar la selección', () => {
+        copiaSesion.setMaxDeArticulosAceptados(3);
+        //Determino la estrategia de seleccion
+        estrategiaPuntaje = new PuntajeMinimo(1); // Acepta artículos con puntaje >= 1
+        copiaSesion.setEstrategia(estrategiaPuntaje);
+
+        const articulosSeleccionados = copiaSesion.seleccionarArticulos();
+        expect(articulosSeleccionados.length).toBe(3);
+
+        //Cambio la estrategia de seleccion
+        estrategiaPorcentaje = new PorcentajeDeAceptados(50); // Acepta el 50% de los artículos
+        copiaSesion.setEstrategia(estrategiaPorcentaje);
+
+        resultado = copiaSesion.seleccionarArticulos();
+        expect(resultado.length).toBe(3);
+    });
+    //probar enviar un número max negativo throw new Error("El número máximo de artículos aceptados debe ser un número positivo.");
+    //probar que el porcentaje esté entre 0 y 100 throw new Error("El porcentaje de aceptación debe estar entre 1 y 100.");
 });

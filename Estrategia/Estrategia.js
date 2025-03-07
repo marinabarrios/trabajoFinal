@@ -5,7 +5,7 @@ class Estrategias {
       }
     }
 
-    seleccionarTipoDeEvaluacion(articulosConPuntaje) {
+    seleccionar(sesion) {
         throw new Error("Debe implementar el método en una subclase concreta.");
     }
 }

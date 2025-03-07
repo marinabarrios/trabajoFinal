@@ -20,6 +20,10 @@ class EstadoSeleccion extends EstadoSesion {
     asignarRevisores() {
         throw new Error('El proceso de asignación de artículos sólo se puede realizar durante el estado de asignación');
     }
+
+    seleccionandoArticulos(){
+        this._sesion.seleccionarArticulos();
+    }
     /*  una vez finalizado el proceso de bidding, los artículos se 
 asignan a los revisores. Cada revisor emite una revisión con una recomendación que es 
 una calificación entre -3 y +3 (incluyendo el 0). Durante esta instancia, no se aceptan 

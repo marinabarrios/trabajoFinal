@@ -12,7 +12,7 @@ class EstadoRevision extends EstadoSesion {
         return 'REVISION';
     }
 
-    asignarEstado() {
+    asignarEstado() {     
         this._sesion.modificarEstadoSesion(new EstadoSeleccion(this._sesion));
     }
 
@@ -27,18 +27,6 @@ class EstadoRevision extends EstadoSesion {
     asignarRevisores() {
         throw new Error('El proceso de asignación de artículos sólo se puede realizar durante el estado de asignación');
     }
-
-    /*agregarRevision(articulo, revisor, revision) {
-        if (!(this._sesion.estadoSesion() instanceof EstadoRevision)) {
-          throw new Error(
-            "El proceso de revisión solo se puede realizar durante el estado de revisión."
-          );
-        }
-        if (!articulo.listRevisoresAsignados().includes(revisor)) {
-          throw new Error("El revisor no está asignado a este artículo.");
-        }
-        articulo.addRevision(revision);
-    }*/
 
     puntuarArticulo(revisor, articulo, puntaje, comentario) {
         if (!(this._sesion.estadoSesion() instanceof EstadoRevision)) {
@@ -56,7 +44,8 @@ class EstadoRevision extends EstadoSesion {
         if (!this._puntuaciones.has(articulo)) {
             this._puntuaciones.set(articulo, []);
         }
-        
+        //Guardo las puntuaciones en la sesion para poder usarla en la etapa de seleccion
+        this._sesion._puntuacionesRevision = this._puntuaciones;
         this._puntuaciones.get(articulo).push({ revisor, puntaje, comentario });
     }
     /*  una vez finalizado el proceso de bidding, los artículos se 

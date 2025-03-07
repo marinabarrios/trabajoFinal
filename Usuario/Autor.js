@@ -34,7 +34,8 @@ class Autor extends Usuario{
 
     //Similo la recepción de la notificación
     recibeNotificacion(msg) {
-        console.log(`Notificación para ${this._nombreUsuario}: ${msg}`);
+        //comento para que no me moleste en las pruebas
+        //console.log(`Notificación para ${this._nombreUsuario}: ${msg}`);
     }
 
 /*

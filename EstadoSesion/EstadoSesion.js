@@ -22,5 +22,9 @@ class EstadoSesion{
     asignarRevisores() {
         throw new Error('Método no implementado en la clase actual');
     }
+
+    seleccionandoArticulos(){
+        throw new Error('Método no implementado en la clase actual');
+    }
 }
 module.exports = EstadoSesion;

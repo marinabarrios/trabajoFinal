@@ -1,5 +1,6 @@
 const Usuario = require("../Usuario/Usuario");
 const EstadoRecepcion = require('../EstadoSesion/EstadoRecepcion');
+const Estrategia = require('../Estrategia/Estrategia');
 
 class Sesion{
     constructor(tema, tipoSesion, deadlineRecepcion) {
@@ -13,6 +14,8 @@ class Sesion{
         this._revisores = [];
         this._maxArticulosAceptados = null;
         this._estrategia = null;
+        this._articulosSeleccionados = [];
+        this._puntuacionesRevision = new Map(); //Guardo las puntuaciones hechas en el estado de revisión
     }
 
     listArticulos(){
@@ -83,16 +86,43 @@ class Sesion{
     }
 
     setMaxDeArticulosAceptados(maxAceptados){
+        if (typeof maxAceptados !== "number" || maxAceptados <= 0) {
+            throw new Error("El número máximo de artículos aceptados debe ser un número positivo.");
+        }
         this._maxArticulosAceptados = maxAceptados;
     }
 
     setEstrategia(estrategia) {
+        if (!(estrategia instanceof Estrategia)) {
+            throw new Error("La estrategia debe ser una instancia válida de Estrategia.");
+        }
         this._estrategia = estrategia;
     }
 
     seleccionarArticulos() {
         if (!this._estrategia) throw new Error("No se ha definido una estrategia de selección.");
-        return this._estrategia.seleccionar(this._articulos);
+        if (!this._maxArticulosAceptados) throw new Error("No esta definido el número máximo a aceptar de esta sesión");
+        
+        // Aplicar estrategia para obtener los artículos seleccionados
+        const articulosPreseleccionados = this._estrategia.seleccionar(this);
+        
+        // Limitar la cantidad de artículos seleccionados
+        this._articulosSeleccionados = articulosPreseleccionados.slice(0, this._maxArticulosAceptados);
+        return this._articulosSeleccionados;
+    }
+
+    obtenerPuntajePromedio(articulo) {
+        if (!this._puntuacionesRevision || !this._puntuacionesRevision.has(articulo)) {
+            return 0; // Si no hay puntuaciones, el promedio es 0
+        }
+    
+        const puntuaciones = this._puntuacionesRevision.get(articulo).map(p => p.puntaje);
+        const suma = puntuaciones.reduce((acc, p) => acc + p, 0);
+        return suma / puntuaciones.length;
+    }
+
+    articulosSeleccionados(){
+        return this._articulosSeleccionados;
     }
   /*  
    
