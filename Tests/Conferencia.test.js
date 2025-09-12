@@ -12,8 +12,8 @@ describe("Conferencias", () => {
 
     test("Debe crear una conferencia correctamente", () => {
         expect(instanciaConf1.nombreConferencia()).toBe('Conferencia Informática');
-        expect(instanciaConf1._fechaInicio).toBe('2025-02-20');
-        expect(instanciaConf1._fechaFin).toBe('2025-02-28');
+        expect(instanciaConf1._fechaInicio).toBe('2025-09-10');
+        expect(instanciaConf1._fechaFin).toBe('2025-09-25');
     });
 
     
